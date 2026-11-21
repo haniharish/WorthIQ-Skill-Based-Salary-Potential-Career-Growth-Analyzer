@@ -1,0 +1,31 @@
+dataset,column_name,dtype,non_null_count,missing_count,missing_percentage,unique_values_count,sample_value
+Salary_Dataset_with_Extra_Features.csv,Rating,float64,22770,0,0.0,41,3.8
+Salary_Dataset_with_Extra_Features.csv,Company Name,str,22769,1,0.0,11260,Sasken
+Salary_Dataset_with_Extra_Features.csv,Job Title,str,22770,0,0.0,1080,Android Developer
+Salary_Dataset_with_Extra_Features.csv,Salary,int64,22770,0,0.0,316,400000
+Salary_Dataset_with_Extra_Features.csv,Salaries Reported,int64,22770,0,0.0,82,3
+Salary_Dataset_with_Extra_Features.csv,Location,str,22770,0,0.0,10,Bangalore
+Salary_Dataset_with_Extra_Features.csv,Employment Status,str,22770,0,0.0,4,Full Time
+Salary_Dataset_with_Extra_Features.csv,Job Roles,str,22770,0,0.0,11,Android
+ds_salaries.csv,work_year,int64,3755,0,0.0,4,2023
+ds_salaries.csv,experience_level,str,3755,0,0.0,4,SE
+ds_salaries.csv,employment_type,str,3755,0,0.0,4,FT
+ds_salaries.csv,job_title,str,3755,0,0.0,93,Principal Data Scientist
+ds_salaries.csv,salary,int64,3755,0,0.0,815,80000
+ds_salaries.csv,salary_currency,str,3755,0,0.0,20,EUR
+ds_salaries.csv,salary_in_usd,int64,3755,0,0.0,1035,85847
+ds_salaries.csv,employee_residence,str,3755,0,0.0,78,ES
+ds_salaries.csv,remote_ratio,int64,3755,0,0.0,3,100
+ds_salaries.csv,company_location,str,3755,0,0.0,72,ES
+ds_salaries.csv,company_size,str,3755,0,0.0,3,L
+devops_salaries.csv,work_year,int64,728,0,0.0,3,2022
+devops_salaries.csv,experience_level,str,728,0,0.0,4,MI
+devops_salaries.csv,employment_type,str,728,0,0.0,4,FT
+devops_salaries.csv,job_title,str,728,0,0.0,52,DevOps Engineer
+devops_salaries.csv,salary,int64,728,0,0.0,261,52000
+devops_salaries.csv,salary_currency,str,728,0,0.0,22,EUR
+devops_salaries.csv,salary_in_usd,int64,728,0,0.0,415,58942
+devops_salaries.csv,employee_residence,str,728,0,0.0,60,CZ
+devops_salaries.csv,remote_ratio,int64,728,0,0.0,3,100
+devops_salaries.csv,company_location,str,728,0,0.0,52,CZ
+devops_salaries.csv,company_size,str,728,0,0.0,3,L

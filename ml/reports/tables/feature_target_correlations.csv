@@ -1,0 +1,56 @@
+feature,pearson_correlation
+skill__pandas,0.4810967113481625
+skill__numpy,0.46788664403501257
+skill__data_analysis,0.42766360206263077
+num__years_of_experience,0.4250034347189888
+job_role_Data Analyst,0.3610218165598595
+skill__machine_learning,0.31153427881683493
+skill__scikit-learn,0.31153427881683493
+skill__python,0.28137917501608817
+job_role_Data Scientist,0.268971082891006
+skill__postgresql,0.1993884220427621
+skill__fastapi,0.19758832336669815
+skill__aws,0.16972494954654999
+job_role_Machine Learning Engineer,0.15114013143742777
+skill__kubernetes,0.12995223871573514
+job_role_DevOps Engineer,0.12995223871573514
+location_Mumbai,0.12813028101634943
+skill__docker,0.11896915381472156
+num__company_rating,0.07453051967124565
+location_Bengaluru,0.048655528677118295
+location_Pune,0.039625264913049026
+skill__express_js,0.017417552201305156
+skill__redis,0.008860370956345167
+education_Diploma,0.004955324470929501
+skill__sql,0.0025768482082715737
+education_Bachelor's Degree,0.0007309265687405637
+education_Master's Degree,-0.0021311897154804916
+education_PhD,-0.0024305559158781524
+skill__microservices,-0.002641287906848717
+skill__mongodb,-0.0028731691869152867
+skill__node_js,-0.004174495510722718
+location_Hyderabad,-0.005734276203322374
+skill__ci/cd,-0.010500111892868194
+job_role_Backend Developer,-0.01293780417291343
+skill__django,-0.015785491396967957
+skill__go,-0.02361596115876328
+job_role_Full Stack Developer,-0.024604471166583448
+skill__cpp,-0.05736361919838652
+skill__spring_boot,-0.059290781709574365
+location_Chennai,-0.08425378381833203
+skill__graphql,-0.08498995987977583
+skill__tailwind_css,-0.08500446419184898
+skill__next_js,-0.08697725626581433
+skill__typescript,-0.08813341795265567
+location_Delhi NCR,-0.0959104069682276
+skill__java,-0.11370501265172513
+job_role_Frontend Developer,-0.15527559012526296
+skill__html5,-0.15527559012526296
+skill__css3,-0.15527559012526296
+skill__react_js,-0.15780623042020897
+skill__javascript,-0.15780623042020897
+skill__rest_apis,-0.18194520274821246
+skill__git,-0.19331952263032567
+skill__linux,-0.21750604892599668
+job_role_Software Developer,-0.2776766923586317
+skill__flutter,

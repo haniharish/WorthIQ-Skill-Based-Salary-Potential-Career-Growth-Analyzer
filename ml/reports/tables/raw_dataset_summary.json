@@ -1,0 +1,206 @@
+{
+  "Salary_Dataset_with_Extra_Features.csv": {
+    "file_name": "Salary_Dataset_with_Extra_Features.csv",
+    "row_count": 22770,
+    "column_count": 8,
+    "columns": [
+      "Rating",
+      "Company Name",
+      "Job Title",
+      "Salary",
+      "Salaries Reported",
+      "Location",
+      "Employment Status",
+      "Job Roles"
+    ],
+    "duplicate_rows": 0,
+    "missing_summary": {
+      "Rating": 0,
+      "Company Name": 1,
+      "Job Title": 0,
+      "Salary": 0,
+      "Salaries Reported": 0,
+      "Location": 0,
+      "Employment Status": 0,
+      "Job Roles": 0
+    },
+    "sample_rows": [
+      {
+        "Rating": 3.8,
+        "Company Name": "Sasken",
+        "Job Title": "Android Developer",
+        "Salary": 400000,
+        "Salaries Reported": 3,
+        "Location": "Bangalore",
+        "Employment Status": "Full Time",
+        "Job Roles": "Android"
+      },
+      {
+        "Rating": 4.5,
+        "Company Name": "Advanced Millennium Technologies",
+        "Job Title": "Android Developer",
+        "Salary": 400000,
+        "Salaries Reported": 3,
+        "Location": "Bangalore",
+        "Employment Status": "Full Time",
+        "Job Roles": "Android"
+      },
+      {
+        "Rating": 4.0,
+        "Company Name": "Unacademy",
+        "Job Title": "Android Developer",
+        "Salary": 1000000,
+        "Salaries Reported": 3,
+        "Location": "Bangalore",
+        "Employment Status": "Full Time",
+        "Job Roles": "Android"
+      }
+    ]
+  },
+  "ds_salaries.csv": {
+    "file_name": "ds_salaries.csv",
+    "row_count": 3755,
+    "column_count": 11,
+    "columns": [
+      "work_year",
+      "experience_level",
+      "employment_type",
+      "job_title",
+      "salary",
+      "salary_currency",
+      "salary_in_usd",
+      "employee_residence",
+      "remote_ratio",
+      "company_location",
+      "company_size"
+    ],
+    "duplicate_rows": 1171,
+    "missing_summary": {
+      "work_year": 0,
+      "experience_level": 0,
+      "employment_type": 0,
+      "job_title": 0,
+      "salary": 0,
+      "salary_currency": 0,
+      "salary_in_usd": 0,
+      "employee_residence": 0,
+      "remote_ratio": 0,
+      "company_location": 0,
+      "company_size": 0
+    },
+    "sample_rows": [
+      {
+        "work_year": 2023,
+        "experience_level": "SE",
+        "employment_type": "FT",
+        "job_title": "Principal Data Scientist",
+        "salary": 80000,
+        "salary_currency": "EUR",
+        "salary_in_usd": 85847,
+        "employee_residence": "ES",
+        "remote_ratio": 100,
+        "company_location": "ES",
+        "company_size": "L"
+      },
+      {
+        "work_year": 2023,
+        "experience_level": "MI",
+        "employment_type": "CT",
+        "job_title": "ML Engineer",
+        "salary": 30000,
+        "salary_currency": "USD",
+        "salary_in_usd": 30000,
+        "employee_residence": "US",
+        "remote_ratio": 100,
+        "company_location": "US",
+        "company_size": "S"
+      },
+      {
+        "work_year": 2023,
+        "experience_level": "MI",
+        "employment_type": "CT",
+        "job_title": "ML Engineer",
+        "salary": 25500,
+        "salary_currency": "USD",
+        "salary_in_usd": 25500,
+        "employee_residence": "US",
+        "remote_ratio": 100,
+        "company_location": "US",
+        "company_size": "S"
+      }
+    ]
+  },
+  "devops_salaries.csv": {
+    "file_name": "devops_salaries.csv",
+    "row_count": 728,
+    "column_count": 11,
+    "columns": [
+      "work_year",
+      "experience_level",
+      "employment_type",
+      "job_title",
+      "salary",
+      "salary_currency",
+      "salary_in_usd",
+      "employee_residence",
+      "remote_ratio",
+      "company_location",
+      "company_size"
+    ],
+    "duplicate_rows": 11,
+    "missing_summary": {
+      "work_year": 0,
+      "experience_level": 0,
+      "employment_type": 0,
+      "job_title": 0,
+      "salary": 0,
+      "salary_currency": 0,
+      "salary_in_usd": 0,
+      "employee_residence": 0,
+      "remote_ratio": 0,
+      "company_location": 0,
+      "company_size": 0
+    },
+    "sample_rows": [
+      {
+        "work_year": 2022,
+        "experience_level": "MI",
+        "employment_type": "FT",
+        "job_title": "DevOps Engineer",
+        "salary": 52000,
+        "salary_currency": "EUR",
+        "salary_in_usd": 58942,
+        "employee_residence": "CZ",
+        "remote_ratio": 100,
+        "company_location": "CZ",
+        "company_size": "L"
+      },
+      {
+        "work_year": 2022,
+        "experience_level": "EN",
+        "employment_type": "FT",
+        "job_title": "Site Reliability Engineer",
+        "salary": 105000,
+        "salary_currency": "USD",
+        "salary_in_usd": 105000,
+        "employee_residence": "US",
+        "remote_ratio": 100,
+        "company_location": "US",
+        "company_size": "L"
+      },
+      {
+        "work_year": 2022,
+        "experience_level": "MI",
+        "employment_type": "PT",
+        "job_title": "DevOps Manager",
+        "salary": 2000,
+        "salary_currency": "USD",
+        "salary_in_usd": 2000,
+        "employee_residence": "US",
+        "remote_ratio": 0,
+        "company_location": "US",
+        "company_size": "S"
+      }
+    ]
+  }
+}

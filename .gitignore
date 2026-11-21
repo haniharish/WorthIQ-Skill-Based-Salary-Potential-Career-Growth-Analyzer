@@ -48,4 +48,6 @@ database/.env
 Thumbs.db
 
 # Docker
+.pytest_cache/
+
 .docker/

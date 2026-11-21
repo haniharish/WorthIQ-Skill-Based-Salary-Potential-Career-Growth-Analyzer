@@ -1,0 +1,46 @@
+{
+  "total_records": 25332,
+  "primary_records": 21309,
+  "secondary_records": 4061,
+  "duplicates_removed": 38,
+  "target_roles_distribution": {
+    "Software Developer": 16107,
+    "Frontend Developer": 2989,
+    "Backend Developer": 2044,
+    "Data Analyst": 1882,
+    "Data Scientist": 1012,
+    "DevOps Engineer": 730,
+    "Machine Learning Engineer": 444,
+    "Full Stack Developer": 124
+  },
+  "target_locations_distribution": {
+    "Bengaluru": 9504,
+    "Hyderabad": 5142,
+    "Delhi NCR": 4212,
+    "Pune": 2658,
+    "Chennai": 2571,
+    "Mumbai": 1245
+  },
+  "education_distribution": {
+    "Bachelor's Degree": 18883,
+    "Master's Degree": 5094,
+    "Diploma": 817,
+    "PhD": 538
+  },
+  "salary_statistics": {
+    "min": 120000.0,
+    "max": 8000000.0,
+    "mean": 878462.17,
+    "median": 600000.0,
+    "std": 731829.73,
+    "p25": 348000.0,
+    "p75": 1188000.0,
+    "p90": 2000000.0
+  },
+  "experience_statistics": {
+    "min": 0.1,
+    "max": 14.0,
+    "mean": 3.6,
+    "median": 3.5
+  }
+}
