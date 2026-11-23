@@ -24,7 +24,7 @@ export const Footer = () => {
     }
     const el = document.getElementById(sectionId);
     if (el) {
-      const yOffset = -80;
+      const yOffset = -90;
       const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
       window.scrollTo({ top: y, behavior: 'smooth' });
       window.history.pushState(null, '', `#${sectionId}`);
@@ -32,19 +32,19 @@ export const Footer = () => {
   };
 
   return (
-    <footer className="bg-[#0f172a] text-slate-300 pt-16 pb-12 border-t border-slate-800 relative overflow-hidden font-sans">
-      {/* Subtle background glow */}
-      <div className="absolute top-0 right-1/4 w-96 h-96 bg-indigo-500/5 blur-[120px] rounded-full pointer-events-none" />
-      <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-blue-500/5 blur-[120px] rounded-full pointer-events-none" />
+    <footer className="bg-black text-slate-300 pt-16 pb-12 border-t border-slate-900 relative overflow-hidden font-sans">
+      {/* Subtle monochrome ambient glow */}
+      <div className="absolute top-0 right-1/4 w-96 h-96 bg-indigo-500/5 blur-[140px] rounded-full pointer-events-none" />
+      <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-slate-800/10 blur-[140px] rounded-full pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Main 5-Column Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-8 pb-12 border-b border-slate-800/80">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-8 pb-12 border-b border-slate-900">
           
           {/* Column 1: Brand & Bio (3 cols) */}
           <div className="lg:col-span-3 space-y-4">
-            <Link to="/" className="inline-flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-600 via-indigo-500 to-blue-500 flex items-center justify-center shadow-lg shadow-indigo-600/30 text-white font-black text-lg tracking-wider">
+            <Link to="/" className="inline-flex items-center gap-2.5 group">
+              <div className="w-8 h-8 rounded-full bg-white text-black flex items-center justify-center font-black text-sm shadow-md group-hover:scale-105 transition-transform">
                 W
               </div>
               <span className="text-xl font-black tracking-tight text-white flex items-center">
@@ -64,13 +64,13 @@ export const Footer = () => {
 
           {/* Column 2: Get in Touch (3 cols) */}
           <div className="lg:col-span-3 space-y-3.5">
-            <h4 className="text-sm font-bold text-indigo-400 tracking-wider uppercase">
+            <h4 className="text-xs font-bold text-white uppercase tracking-wider">
               Get in Touch
             </h4>
 
             <ul className="space-y-3 text-xs text-slate-300">
               <li className="flex items-start gap-3 group">
-                <div className="w-7 h-7 rounded-lg bg-indigo-950/70 border border-indigo-800/50 flex items-center justify-center shrink-0 mt-0.5 text-indigo-400">
+                <div className="w-7 h-7 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center shrink-0 mt-0.5 text-indigo-400">
                   <MapPin className="w-3.5 h-3.5" />
                 </div>
                 <div>
@@ -80,7 +80,7 @@ export const Footer = () => {
               </li>
 
               <li className="flex items-start gap-3 group">
-                <div className="w-7 h-7 rounded-lg bg-indigo-950/70 border border-indigo-800/50 flex items-center justify-center shrink-0 mt-0.5 text-indigo-400">
+                <div className="w-7 h-7 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center shrink-0 mt-0.5 text-indigo-400">
                   <Mail className="w-3.5 h-3.5" />
                 </div>
                 <div>
@@ -92,7 +92,7 @@ export const Footer = () => {
               </li>
 
               <li className="flex items-start gap-3 group">
-                <div className="w-7 h-7 rounded-lg bg-indigo-950/70 border border-indigo-800/50 flex items-center justify-center shrink-0 mt-0.5 text-indigo-400">
+                <div className="w-7 h-7 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center shrink-0 mt-0.5 text-indigo-400">
                   <Phone className="w-3.5 h-3.5" />
                 </div>
                 <div>
@@ -103,9 +103,9 @@ export const Footer = () => {
             </ul>
           </div>
 
-          {/* Column 3: Intelligence & Services (2 cols) */}
+          {/* Column 3: Intelligence & Capabilities (2 cols) */}
           <div className="lg:col-span-2 space-y-3.5">
-            <h4 className="text-sm font-bold text-indigo-400 tracking-wider uppercase">
+            <h4 className="text-xs font-bold text-white uppercase tracking-wider">
               Capabilities
             </h4>
 
@@ -145,7 +145,7 @@ export const Footer = () => {
 
           {/* Column 4: Platform & Links (2 cols) */}
           <div className="lg:col-span-2 space-y-3.5">
-            <h4 className="text-sm font-bold text-indigo-400 tracking-wider uppercase">
+            <h4 className="text-xs font-bold text-white uppercase tracking-wider">
               Platform
             </h4>
 
@@ -201,14 +201,14 @@ export const Footer = () => {
 
           {/* Column 5: Social Pills & Tech Note (2 cols) */}
           <div className="lg:col-span-2 space-y-4">
-            {/* Blue Circular Icon Buttons (matching screenshot styling) */}
+            {/* Circular Icon Buttons matching Black & White aesthetic */}
             <div className="flex items-center gap-2.5">
               <a
                 href="https://github.com/haniharish/WorthIQ-Skill-Based-Salary-Potential-Career-Growth-Analyzer"
                 target="_blank"
                 rel="noreferrer"
                 aria-label="GitHub Repository"
-                className="w-9 h-9 rounded-full bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs flex items-center justify-center shadow-md shadow-blue-600/30 transition-transform hover:-translate-y-0.5"
+                className="w-9 h-9 rounded-full bg-slate-900 hover:bg-white hover:text-black text-white border border-slate-800 font-bold text-xs flex items-center justify-center shadow-md transition-all hover:-translate-y-0.5"
               >
                 Gh
               </a>
@@ -217,7 +217,7 @@ export const Footer = () => {
                 target="_blank"
                 rel="noreferrer"
                 aria-label="LinkedIn Profile"
-                className="w-9 h-9 rounded-full bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs flex items-center justify-center shadow-md shadow-blue-600/30 transition-transform hover:-translate-y-0.5"
+                className="w-9 h-9 rounded-full bg-slate-900 hover:bg-white hover:text-black text-white border border-slate-800 font-bold text-xs flex items-center justify-center shadow-md transition-all hover:-translate-y-0.5"
               >
                 In
               </a>
@@ -226,7 +226,7 @@ export const Footer = () => {
                 target="_blank"
                 rel="noreferrer"
                 aria-label="Twitter Profile"
-                className="w-9 h-9 rounded-full bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs flex items-center justify-center shadow-md shadow-blue-600/30 transition-transform hover:-translate-y-0.5"
+                className="w-9 h-9 rounded-full bg-slate-900 hover:bg-white hover:text-black text-white border border-slate-800 font-bold text-xs flex items-center justify-center shadow-md transition-all hover:-translate-y-0.5"
               >
                 X
               </a>
@@ -236,7 +236,7 @@ export const Footer = () => {
               Trained on 25,332 verified Indian tech compensation records using calibrated Quantile Random Forest and TreeSHAP explainability.
             </p>
 
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-800/80 border border-slate-700/60 text-[11px] text-emerald-400">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-[11px] text-emerald-400">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
               <span>Random Forest ML 2.0 Live</span>
             </div>
