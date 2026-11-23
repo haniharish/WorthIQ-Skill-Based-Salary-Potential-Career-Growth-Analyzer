@@ -1,14 +1,14 @@
 # WorthIQ — Skill-Based Salary Potential & Career Growth Analyzer
 
-> **Final-Year B.Tech Project** &middot; **Phase 1, Phase 2 & Phase 3: Complete Implementation**
+> **Final-Year B.Tech Project** &middot; **Phase 1, Phase 2, Phase 3 & Phase 4: Complete Implementation**
 
 WorthIQ is a full-stack, data-driven web application designed to help students, freshers, and working professionals understand their estimated market salary, analyze the valuation and ROI of their skill stack, discover matching roles, and plan their career trajectory.
 
 ---
 
-## 1. Project Overview
+## 1. Project Overview & Development Phases
 
-WorthIQ is being engineered across strategic development phases:
+WorthIQ is engineered across strategic development phases:
 
 1. **Phase 1: Foundation** *(Fully Implemented)*:
    - Full-stack project structure, React + Vite frontend, Tailwind CSS design system.
@@ -17,10 +17,11 @@ WorthIQ is being engineered across strategic development phases:
    - Normalized PostgreSQL database containerized via Docker on port `5432`.
    - Complete User Profile & Skills management endpoints with full frontend integration.
    - DBeaver visual database administration setup.
+
 2. **Phase 2: Salary Potential Prediction Engine** *(Fully Implemented)*:
    - **Part 1: Data Engineering & Feature Pipeline**:
      - Acquisition of 3 authentic Indian tech compensation datasets (25,332 records).
-     - Cleaning, deduplication, monthly stipend annualization, and outlier filtering (1.2L to 80L).
+     - Cleaning, deduplication, monthly stipend annualization, and outlier filtering (₹1.2L to ₹80L).
      - Scikit-learn ColumnTransformer feature pipeline outputting 55 engineered features.
      - Automated test suite with 6 passing unit/integration tests in `ml/tests/`.
    - **Part 2: Model Training, Comparison, Django API & UI Integration**:
@@ -30,13 +31,22 @@ WorthIQ is being engineered across strategic development phases:
      - Django ML service app `backend/apps/predictions` with REST endpoints and PostgreSQL history tracking.
      - Empirical 4-factor confidence scoring engine (High, Medium, Low).
      - React frontend integration in `SalaryAnalysisPage.jsx` and `SavedReportsPage.jsx` with Recharts distribution charts.
+
 3. **Phase 3: AI Intelligence Engine** *(Fully Implemented)*:
    - **Module A: Explainable AI with SHAP**: TreeExplainer on Random Forest, baseline log value $13.368$ (₹6.39L), local waterfall decomposition into additive Rupee impacts, and Recharts waterfall visualizer in `PredictionExplanationPage.jsx`.
    - **Module B: Skill Intelligence & Co-occurrence**: Canonical skill taxonomy (35 skills, 81 aliases), empirical co-occurrence matrix mined from 25,332 records, marginal single-skill ablation valuation, and interactive What-If simulation sandbox in `SkillImpactPage.jsx`.
-   - **Module C: AI Job Role Matching**: 9 curated technology roles, composite scoring (40% mandatory coverage, 15% preferred coverage, 25% TF-IDF cosine similarity, 20% experience tenure compatibility), match tiers, and gap analysis in `JobMatchingPage.jsx`.
+   - **Module C: AI Job Role Matching**: Curated technology roles, composite scoring (40% mandatory coverage, 15% preferred coverage, 25% TF-IDF cosine similarity, 20% experience tenure compatibility), match tiers, and gap analysis in `JobMatchingPage.jsx`.
    - **Module D: Personalized Career Growth Roadmaps**: Non-circular DAG prerequisite milestones, practical software capstone project briefs, PostgreSQL relational persistence, and interactive completion tracking in `CareerRoadmapPage.jsx`.
-   - **Automated Test Suite**: 45 passed Django backend tests, 13 passed ML pytest tests, and production Vite frontend build.
-4. **Phase 4**: Advanced Career Intelligence & Resume Extraction *(Upcoming)*.
+
+4. **Phase 4: Complete Frontend Dashboard, UI/UX Integration & Design System** *(Fully Implemented)*:
+   - **Centralized Dashboard Overhaul**: Replaced Phase 1 heuristic calculations with live data aggregations from `dashboardService.js`. Implemented Welcome Banner with profile completeness %, real KPI StatCards (P50 Salary, P10–P90 Range, Role Matches, Roadmap Progress), Salary Valuation Distribution Chart (Recharts), Evaluation History Timeline, Compatible Roles Shortlist with gap badges, and Active Career Roadmap Progress.
+   - **Production Design System**: Comprehensive UI component primitives in `frontend/src/components/ui/` (`StatCard`, `EmptyState`, `ErrorState`, `LoadingSkeleton`, `Modal`, `ConfidenceIndicator`, `Breadcrumbs`, `Tabs`, `SelectInput`, `SkillTagInput`) and accessible global `ToastContext` (`useToast`).
+   - **Application Layout & Navigation**: Categorized sidebar navigation in `DashboardLayout.jsx` (Main, Intelligence Engine, Account & Settings), topbar with dynamic route breadcrumbs, quick action CTA, user profile summary pill with logout dropdown, and mobile navigation drawer with backdrop overlay.
+   - **What-If Counterfactual Simulator**: Live interactive simulation lab connected to `POST /api/intelligence/skills/compare/` calculating net salary impact in INR and LPA with comparison bar charts.
+   - **Saved Reports & Explainability Integration**: Filterable historical prediction catalog with direct "Explain with SHAP" transitions connecting predictions to `PredictionExplanationPage.jsx`.
+   - **Accessibility & Responsive Polish**: WCAG 2.1 AA compliant color contrast, ARIA landmarks, mobile collapse, and smooth dark SaaS aesthetics.
+   - **Verification**: 45 passed Django backend tests, 13 passed ML pytest tests, and clean Vite production build (2,082 modules, 0 errors).
+
 5. **Phase 5**: Real-Time Industry Trends & Benchmark Aggregation *(Upcoming)*.
 6. **Phase 6**: Enterprise Architecture & Production Cloud Deployment *(Upcoming)*.
 
@@ -46,9 +56,10 @@ WorthIQ is being engineered across strategic development phases:
 
 ### Frontend
 - **Framework**: React 18
-- **Build Tool / Bundler**: Vite 6 (Configured strictly on port **5180**)
+- **Build Tool / Bundler**: Vite 6.4 (Configured strictly on port **5180**)
 - **Language**: JavaScript (ES Modules)
-- **Styling**: Tailwind CSS v4 (SaaS theme, light-mode first)
+- **Styling**: Tailwind CSS (SaaS theme, dark slate aesthetic)
+- **Data Visualization**: Recharts 2.x
 - **Routing**: React Router DOM v6
 - **HTTP Client**: Axios with automatic JWT interceptors & token rotation
 - **Icons**: Lucide React
@@ -57,9 +68,9 @@ WorthIQ is being engineered across strategic development phases:
 - **Framework**: Python 3.14 & Django 5.2
 - **API Engine**: Django REST Framework (DRF) 3.18
 - **Authentication**: DRF SimpleJWT with token blacklist support
-- **CORS Handling**: `django-cors-headers` (allowing `http://localhost:5180`)
+- **CORS Handling**: `django-cors-headers` (configured for `http://localhost:5180`)
 - **Database Driver**: `psycopg` 3.3 (PostgreSQL adapter)
-- **Configuration**: `python-dotenv`
+- **Machine Learning**: Scikit-Learn, LightGBM, XGBoost, SHAP, Joblib
 
 ### Database
 - **Database**: PostgreSQL 16 Alpine
@@ -79,7 +90,7 @@ WorthIQ is being engineered across strategic development phases:
 
 ---
 
-## 4. Project Folder Structure
+## 4. Project Directory Structure
 
 ```text
 WorthIQ/
@@ -87,246 +98,156 @@ WorthIQ/
 ├── frontend/                     # React + Vite application
 │   ├── public/                   # Static assets & favicon
 │   ├── src/
-│   │   ├── assets/               # Local icons and branding
 │   │   ├── components/
-│   │   │   ├── common/           # Logo, ProtectedRoute, PublicRoute
-│   │   │   ├── layout/           # DashboardLayout, Navbar
-│   │   │   └── ui/               # Button, Input, Card, Badge
-│   │   ├── context/              # AuthContext (state & session management)
-│   │   ├── hooks/                # useAuth hook
-│   │   ├── pages/                # Landing, Login, Register, ProfileSetup, Dashboard, FeaturePlaceholders
-│   │   ├── services/             # Axios API client, authService, profileService
-│   │   ├── utils/                # Helper utilities
-│   │   ├── App.jsx               # Route definitions
-│   │   ├── main.jsx              # React DOM entry point
-│   │   └── index.css             # Tailwind CSS & typography
-│   ├── vite.config.js            # Port 5180 & strictPort configuration
-│   ├── package.json              # Frontend dependencies
-│   ├── .env                      # Local environment configuration
-│   └── .env.example              # Safe placeholder template
+│   │   │   ├── common/           # ProtectedRoute, PublicRoute, BrandLogo
+│   │   │   ├── layout/           # DashboardLayout, Navbar, Topbar
+│   │   │   └── ui/               # StatCard, EmptyState, ErrorState, LoadingSkeleton, Modal,
+│   │   │                         # ConfidenceIndicator, Breadcrumbs, Tabs, SelectInput, SkillTagInput
+│   │   ├── context/              # AuthContext, ToastContext
+│   │   ├── hooks/                # useAuth, useToast
+│   │   ├── pages/                # DashboardPage, SalaryAnalysisPage, PredictionExplanationPage,
+│   │   │                         # SkillImpactPage, WhatIfSimulatorPage, JobMatchingPage,
+│   │   │                         # CareerRoadmapPage, SavedReportsPage, SettingsPage, LandingPage
+│   │   ├── services/             # api.js, authService, profileService, predictionService,
+│   │   │                         # intelligenceService, dashboardService
+│   │   ├── utils/                # formatting, math helpers
+│   │   ├── App.jsx               # Routes & Providers
+│   │   ├── main.jsx              # Entry point
+│   │   └── index.css             # Tailwind CSS & design tokens
+│   ├── vite.config.js            # Port 5180 strict configuration
+│   └── package.json
 │
 ├── backend/                      # Django REST Framework application
 │   ├── config/                   # Project settings, root URLs, WSGI, ASGI
-│   │   ├── settings.py           # CORS, JWT, PostgreSQL settings
-│   │   └── urls.py               # Main routing table
 │   ├── apps/
 │   │   ├── accounts/             # Custom User model, JWT views, serializers
-│   │   │   ├── models.py         # Email-based User model
-│   │   │   ├── serializers.py    # Registration, Login, User details
-│   │   │   ├── views.py          # Auth endpoints
-│   │   │   ├── urls.py           # /api/auth/ routes
-│   │   │   └── tests.py          # Auth unit tests (8 tests)
-│   │   └── profiles/             # User Profile & normalized Skills
-│   │       ├── models.py         # UserProfile & Skill models (M2M)
-│   │       ├── serializers.py    # Profile serializers with skill syncing
-│   │       ├── views.py          # Profile CRUD & Skills catalog
-│   │       ├── urls.py           # /api/profile/ routes
-│   │       └── tests.py          # Profile unit tests (8 tests)
+│   │   ├── profiles/             # User Profile & normalized Skills
+│   │   ├── predictions/          # Salary prediction engine, quantiles & history
+│   │   └── intelligence/         # SHAP, Skill Intelligence, Role Matching, Roadmaps
 │   ├── manage.py
-│   ├── requirements.txt          # Python dependencies
-│   ├── .env                      # Local environment configuration
-│   └── .env.example              # Safe placeholder template
+│   └── requirements.txt
+│
+├── ml/                           # Machine Learning Pipeline & Artifacts
+│   ├── data/                     # Raw, interim, and processed compensation data
+│   ├── models/                   # Serialized models (.joblib), metadata, preprocessors
+│   ├── src/                      # Acquisition, cleaning, features, training scripts
+│   ├── reports/                  # EDA figures and statistical tables
+│   └── tests/                    # 13 pytest tests for data, models, quantiles, SHAP
 │
 ├── database/                     # Docker PostgreSQL orchestration
 │   ├── docker-compose.yml        # PostgreSQL 16 container definition & healthcheck
-│   ├── .env                      # Database credentials
-│   └── .env.example              # Safe placeholder template
+│   └── .env                      # Database credentials
 │
-├── docs/                         # Detailed documentation
-│   ├── API_DOCUMENTATION.md      # Full REST endpoint schemas
-│   └── DBEAVER_SETUP.md          # Visual DB configuration guide
+├── docs/                         # Comprehensive project documentation
+│   ├── API_DOCUMENTATION.md      # Phase 1 REST endpoint documentation
+│   ├── DBEAVER_SETUP.md          # Visual DB configuration guide
+│   ├── DATASET_SOURCES.md        # Authentic dataset provenance
+│   ├── DATA_CLEANING_REPORT.md   # Data sanitization methodology
+│   ├── EDA_REPORT.md             # Exploratory Data Analysis findings
+│   ├── FEATURE_ENGINEERING.md    # 55-feature pipeline documentation
+│   ├── ML_MODEL_REPORT.md        # Regression model comparison & benchmark
+│   ├── SHAP_EXPLAINABILITY_GUIDE.md # TreeSHAP mathematical formulation & waterfall
+│   ├── SKILL_INTELLIGENCE_METHODOLOGY.md # Skill taxonomy & ablation valuation
+│   ├── ROLE_MATCHING_METHODOLOGY.md # Composite scoring & gap analysis
+│   ├── CAREER_ROADMAP_METHODOLOGY.md # Directed acyclic graphs & learning paths
+│   ├── PHASE_3_TEST_REPORT.md    # Phase 3 test verification report
+│   ├── PHASE_4_TEST_REPORT.md    # Phase 4 test execution & regression report
+│   ├── PHASE_4_API_INTEGRATION_REPORT.md # Frontend-backend service contracts
+│   ├── PHASE_4_UI_UX_GUIDE.md    # Design system, components & accessibility
+│   └── PHASE_4_SETUP_GUIDE.md    # Developer environment & orchestration guide
 │
+├── PHASE_4_AUDIT_REPORT.md       # Phase 4 gap analysis & initial audit
+├── PHASE_4_IMPLEMENTATION_PLAN.md # Phase 4 6-checkpoint execution plan
+├── PHASE_4_IMPLEMENTATION_REPORT.md # Comprehensive Phase 4 deliverables report
 ├── test_complete_integration.py  # 12-step end-to-end integration test runner
-├── .gitignore
-├── README.md
-└── PHASE_1_REPORT.md
+└── README.md
 ```
 
 ---
 
-## 5. Prerequisites
-
-Before running the application, ensure the following are installed on your Windows machine:
-
-1. **Docker Desktop**:
-   - Download & install: [https://www.docker.com/products/docker-desktop/](https://www.docker.com/products/docker-desktop/)
-   - Ensure WSL 2 backend is enabled.
-2. **Python**: Python 3.11+ (Python 3.14 verified).
-3. **Node.js**: Node 18+ (v22.13 verified) with `npm`.
-4. **DBeaver** (Optional for visual DB inspection): [https://dbeaver.io/download/](https://dbeaver.io/download/)
-
----
-
-## 6. Getting Started — Step-by-Step Instructions
-
-Execute the following commands in **Windows PowerShell**:
+## 5. Prerequisites & Local Setup
 
 ### Step 1: Start PostgreSQL via Docker
-
 ```powershell
-cd C:\Users\Lenovo\Desktop\WorthIQ\database
-docker compose up -d
-docker compose ps
+docker start worthiq_postgres
 ```
-*Expected status: `worthiq_postgres` container is `Up (healthy)` on port `0.0.0.0:5432`.*
+*Port: `5432` | DB: `worthiq_db` | User: `postgres`*
 
----
-
-### Step 2: Configure and Start Django Backend
-
-In a PowerShell terminal:
-
+### Step 2: Start Django REST Framework Backend
 ```powershell
-cd C:\Users\Lenovo\Desktop\WorthIQ\backend
+# Activate Python Virtual Environment
+.\backend\venv\Scripts\Activate.ps1
 
-# Activate the virtual environment
-.\venv\Scripts\Activate.ps1
+# Run Migrations
+python backend\manage.py migrate
 
-# Run database migrations
-python manage.py migrate
-
-# (Optional) Run automated test suite (16 tests)
-python manage.py test
-
-# Start the Django development server on port 8000
-python manage.py runserver 0.0.0.0:8000
+# Start Server
+python backend\manage.py runserver --noreload 0.0.0.0:8000
 ```
-*Backend is accessible at: `http://localhost:8000/`*
+*Backend is accessible at: `http://127.0.0.1:8000/`*
 
----
-
-### Step 3: Configure and Start React Frontend
-
-In a second PowerShell terminal:
-
+### Step 3: Start React Frontend
 ```powershell
-cd C:\Users\Lenovo\Desktop\WorthIQ\frontend
-
-# Start Vite dev server on strict port 5180
+cd frontend
+npm install
 npm run dev
 ```
 *Frontend is accessible at: `http://localhost:5180/`*
 
 ---
 
-## 7. Connecting DBeaver to PostgreSQL
+## 6. Running Automated Verification Suites
 
-1. Open **DBeaver**.
-2. Click **Database** &rarr; **New Database Connection** &rarr; select **PostgreSQL**.
-3. Enter connection parameters:
-   - **Host**: `localhost`
-   - **Port**: `5432`
-   - **Database**: `worthiq_db`
-   - **Username**: `worthiq_user`
-   - **Password**: `worthiq_password`
-4. Click **Test Connection ...** to confirm, then click **Finish**.
-5. Detailed guidance on viewing tables, querying records, and inspecting relationships is provided in [`docs/DBEAVER_SETUP.md`](file:///c:/Users/Lenovo/Desktop/WorthIQ/docs/DBEAVER_SETUP.md).
-
----
-
-## 8. Automated Integration Testing
-
-To run the automated 12-suite end-to-end integration test against live running services:
-
+### Frontend Production Build
 ```powershell
-cd C:\Users\Lenovo\Desktop\WorthIQ
-.\backend\venv\Scripts\python.exe test_complete_integration.py
+npm --prefix frontend run build
 ```
+*Result: 2,082 modules transformed, 0 errors, production bundle generated in `frontend/dist/`.*
 
-This script verifies:
-1. Frontend HTTP response on port 5180 (Status 200).
-2. User Registration (`POST /api/auth/register/`).
-3. User Authentication (`POST /api/auth/login/`).
-4. Authenticated identity check (`GET /api/auth/me/`).
-5. Profile 404 detection for unconfigured profiles.
-6. Profile creation with normalized M2M skills (`POST /api/profile/`).
-7. Profile retrieval (`GET /api/profile/`).
-8. Profile partial update (`PATCH /api/profile/`).
-9. JWT token refresh & rotation (`POST /api/auth/token/refresh/`).
-10. Logout and refresh token blacklisting (`POST /api/auth/logout/`).
-11. Rejection of blacklisted refresh tokens (Status 401).
-12. Denial of unauthorized access to protected routes (Status 401).
-
----
-
-## 9. API Endpoints Overview
-
-Full schemas are documented in [`docs/API_DOCUMENTATION.md`](file:///c:/Users/Lenovo/Desktop/WorthIQ/docs/API_DOCUMENTATION.md).
-
-| Method | Endpoint | Description | Permissions |
-| :--- | :--- | :--- | :--- |
-| `POST` | `/api/auth/register/` | Register new user account | AllowAny |
-| `POST` | `/api/auth/login/` | Authenticate user & return JWT tokens | AllowAny |
-| `POST` | `/api/auth/token/refresh/` | Refresh expired access token | AllowAny |
-| `POST` | `/api/auth/logout/` | Blacklist refresh token & terminate session | IsAuthenticated |
-| `GET` | `/api/auth/me/` | Retrieve current user profile status | IsAuthenticated |
-| `GET` | `/api/profile/` | Retrieve logged-in user's profile & skills | IsAuthenticated |
-| `POST` | `/api/profile/` | Create profile with skills array | IsAuthenticated |
-| `PUT` | `/api/profile/` | Full update of profile | IsAuthenticated |
-| `PATCH` | `/api/profile/` | Partial update of profile | IsAuthenticated |
-| `GET` | `/api/profile/skills/` | Search and retrieve skills catalog | AllowAny |
-
----
-
-## 10. Phase 1 Verification Checklist
-
-- [x] React + Vite configured strictly on port `5180`.
-- [x] Django REST Framework configured on port `8000`.
-- [x] PostgreSQL 16 running inside Docker container on port `5432`.
-- [x] Named persistent volume `worthiq_pgdata` preserves database records across container restarts.
-- [x] DBeaver connection enabled and verified on `localhost:5432`.
-- [x] Custom User model using email as unique identifier.
-- [x] User Profile and Skill models with normalized Many-to-Many relationship.
-- [x] Real JWT authentication with rotation and token blacklisting.
-- [x] Axios client configured with automatic token refresh interceptor.
-- [x] Responsive SaaS dashboard with KPI cards, salary distribution charts, skill matrix, and role compatibility.
-- [x] 16 Django backend unit tests passing (100%).
-- [x] 12 end-to-end integration tests passing (100%).
-- [x] Production build (`npm run build`) passing with zero errors.
-
----
-
-## 11. Phase 2 Part 1: Data Engineering & Machine Learning Foundation
-
-### Directory Structure (`ml/`)
-- `ml/data/raw/`: Verified immutable raw compensation datasets (`Salary_Dataset_with_Extra_Features.csv`, `ds_salaries.csv`, `devops_salaries.csv`).
-- `ml/data/processed/`: Normalized feature store (`salary_features_dataset.csv`, 25,332 records) and disjoint train/test splits.
-- `ml/src/data/`: Automated acquisition and SHA-256 inspection scripts.
-- `ml/src/preprocessing/`: Robust cleaning and standardization pipeline.
-- `ml/src/features/`: Scikit-learn ColumnTransformer (`MultiLabelSkillsEncoder`, `OneHotEncoder`, `StandardScaler`).
-- `ml/reports/figures/`: 7 publication-quality EDA figures.
-- `ml/reports/tables/`: 8 statistical summary tables.
-- `ml/tests/`: Automated test suite for data pipeline and leakage prevention.
-
-### Running ML Pipeline & Tests
+### Full Backend Django Test Suite (45 Tests)
 ```powershell
-# 1. Acquire raw datasets
-.\backend\venv\Scripts\python.exe ml/src/data/download_datasets.py
-
-# 2. Inspect raw data
-.\backend\venv\Scripts\python.exe ml/src/data/inspect_datasets.py
-
-# 3. Clean and standardize dataset
-.\backend\venv\Scripts\python.exe ml/src/preprocessing/clean_data.py
-
-# 4. Generate EDA visualizations
-.\backend\venv\Scripts\python.exe ml/notebooks/01_exploratory_data_analysis.py
-
-# 5. Execute feature pipeline & train/test split
-.\backend\venv\Scripts\python.exe ml/src/features/prepare_train_test.py
-
-# 6. Run unit & integration tests
-.\backend\venv\Scripts\pytest.exe ml/tests/test_data_pipeline.py -v
+backend\venv\Scripts\python.exe backend\manage.py test apps.accounts apps.profiles apps.predictions apps.intelligence
 ```
+*Result: 45 passed in ~100s, 0 failures.*
 
-### Phase 2 Part 1 Checklist
-- [x] 3 real, open-access compensation datasets acquired and verified with SHA-256 hashes.
-- [x] 25,332 records cleaned, standardized into annual INR, deduplicated, and outlier-trimmed.
-- [x] 8 standard roles and 6 major Indian tech hubs mapped.
-- [x] 35 canonical skills aligned with Phase 1 database schema.
-- [x] 7 EDA visualization charts and 8 statistical summary tables generated.
-- [x] 55 engineered features produced by custom ColumnTransformer pipeline.
-- [x] Zero-leakage 80/20 train/test split ($N_{train} = 20,265$, $N_{test} = 5,067$).
-- [x] `preprocessor.joblib` and `feature_metadata.json` serialized for Part 2.
-- [x] 6/6 automated pytest tests passing (100%).
-- [x] Complete documentation suite (`DATASET_SOURCES.md`, `DATA_DICTIONARY.md`, `DATA_CLEANING_REPORT.md`, `EDA_REPORT.md`, `FEATURE_ENGINEERING.md`, `DATA_QUALITY_REPORT.md`, `PHASE_2_PART_1_SETUP.md`, `PHASE_2_PART_1_REPORT.md`, `PHASE_2_PART_2_HANDOFF.md`).
+### Machine Learning Test Suite (13 Tests)
+```powershell
+backend\venv\Scripts\python.exe -m pytest ml/tests/ -v
+```
+*Result: 13 passed in ~33s, 0 failures.*
+
+---
+
+## 7. Key Application URLs
+
+- **Landing Page**: `http://localhost:5180/`
+- **Dashboard**: `http://localhost:5180/dashboard`
+- **Salary Valuation**: `http://localhost:5180/salary-analysis`
+- **What-If Simulator**: `http://localhost:5180/what-if`
+- **Skill Intelligence**: `http://localhost:5180/skill-intelligence`
+- **Role Matching**: `http://localhost:5180/role-matching`
+- **Career Roadmaps**: `http://localhost:5180/roadmaps`
+- **Saved Reports**: `http://localhost:5180/reports`
+- **Settings**: `http://localhost:5180/settings`
+- **Backend API Root**: `http://127.0.0.1:8000/api/`
+
+---
+
+## 8. Phase 4 Implementation Checklist
+
+- [x] Comprehensive Phase 4 UI/UX and API audit (`PHASE_4_AUDIT_REPORT.md`).
+- [x] 6-checkpoint execution plan (`PHASE_4_IMPLEMENTATION_PLAN.md`).
+- [x] Design system UI primitives (`StatCard`, `EmptyState`, `ErrorState`, `LoadingSkeleton`, `Modal`, `ConfidenceIndicator`, `Breadcrumbs`, `Tabs`, `SelectInput`, `SkillTagInput`).
+- [x] Global accessible Toast provider (`ToastContext.jsx`).
+- [x] Categorized sidebar layout with topbar breadcrumbs and profile dropdown (`DashboardLayout.jsx`).
+- [x] Live aggregated dashboard replacing mock data (`dashboardService.js`, `DashboardPage.jsx`).
+- [x] What-If Counterfactual simulation lab connected to live comparison API (`WhatIfSimulatorPage.jsx`).
+- [x] Seamless SHAP explainability transitions from predictions and saved reports (`/explanations/:id`).
+- [x] Filterable and searchable saved reports catalog with modal detail breakdown (`SavedReportsPage.jsx`).
+- [x] High-converting SaaS landing page with feature cards, trust metrics, and workflow (`LandingPage.jsx`).
+- [x] User settings page with profile management, security indicators, and system status (`SettingsPage.jsx`).
+- [x] Responsive layout optimization across mobile (<640px), tablet, and desktop viewports.
+- [x] 45 backend Django unit/integration tests passing (100%).
+- [x] 13 ML pipeline pytest tests passing (100%).
+- [x] Production Vite build passing cleanly with zero errors.
+- [x] Complete documentation suite (`PHASE_4_TEST_REPORT.md`, `PHASE_4_API_INTEGRATION_REPORT.md`, `PHASE_4_UI_UX_GUIDE.md`, `PHASE_4_SETUP_GUIDE.md`).

@@ -35,6 +35,7 @@ export const SavedReportsPage = () => {
   const [error, setError] = useState(null);
   const [selectedReport, setSelectedReport] = useState(null);
   const [modalLoading, setModalLoading] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
 
   const fetchHistory = async (page = 1) => {
     setLoading(true);
@@ -83,6 +84,12 @@ export const SavedReportsPage = () => {
   };
 
   const totalPages = Math.ceil((historyData.count || 0) / 10) || 1;
+
+  const filteredResults = (historyData.results || []).filter(
+    (item) =>
+      (item.job_role || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
+      (item.location || '').toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <div className="space-y-6 max-w-6xl mx-auto pb-12">
@@ -176,6 +183,31 @@ export const SavedReportsPage = () => {
       ) : (
         // History List / Table
         <div className="space-y-4">
+          {/* Search Filter Bar */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3 bg-white rounded-xl border border-slate-200 shadow-2xs">
+            <div className="relative flex-1 max-w-sm">
+              <input
+                type="text"
+                placeholder="Filter by role or location..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full pl-3 pr-8 py-1.5 text-xs bg-slate-50 border border-slate-200 rounded-lg focus:bg-white focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/10 outline-none transition-all placeholder:text-slate-400"
+              />
+              {searchTerm && (
+                <button
+                  type="button"
+                  onClick={() => setSearchTerm('')}
+                  className="absolute inset-y-0 right-0 pr-2.5 flex items-center text-slate-400 hover:text-slate-600"
+                >
+                  <X className="w-3.5 h-3.5" />
+                </button>
+              )}
+            </div>
+            <span className="text-[11px] text-slate-500">
+              Showing {filteredResults.length} of {historyData.count} reports
+            </span>
+          </div>
+
           <div className="overflow-hidden bg-white rounded-xl border border-slate-200/90 shadow-xs">
             <div className="overflow-x-auto">
               <table className="w-full text-left text-sm">
@@ -205,7 +237,7 @@ export const SavedReportsPage = () => {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100 text-slate-700">
-                  {historyData.results.map((item) => (
+                  {filteredResults.map((item) => (
                     <tr
                       key={item.id}
                       className="hover:bg-slate-50/80 transition-colors"
