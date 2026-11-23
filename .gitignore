@@ -57,5 +57,11 @@ PHASE_*.md
 docs/
 *.md
 !README.md
+testing/reports/
+EXTENDED_*.md
+PRE_DEPLOYMENT_*.md
+RELEASE_*.md
+.coverage
+htmlcov/
 
 
