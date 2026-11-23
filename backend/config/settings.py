@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     # Local apps
     'apps.accounts.apps.AccountsConfig',
     'apps.profiles.apps.ProfilesConfig',
+    'apps.predictions.apps.PredictionsConfig',
 ]
 
 MIDDLEWARE = [

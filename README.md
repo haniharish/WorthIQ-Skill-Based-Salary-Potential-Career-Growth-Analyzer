@@ -1,6 +1,6 @@
 # WorthIQ — Skill-Based Salary Potential & Career Growth Analyzer
 
-> **Final-Year B.Tech Project** &middot; **Phase 1: Foundation Implementation**
+> **Final-Year B.Tech Project** &middot; **Phase 1 & Phase 2: Complete Implementation**
 
 WorthIQ is a full-stack, data-driven web application designed to help students, freshers, and working professionals understand their estimated market salary, analyze the valuation and ROI of their skill stack, discover matching roles, and plan their career trajectory.
 
@@ -17,8 +17,8 @@ WorthIQ is being engineered across six strategic development phases:
    - Normalized PostgreSQL database containerized via Docker on port `5432`.
    - Complete User Profile & Skills management endpoints with full frontend integration.
    - DBeaver visual database administration setup.
-2. **Phase 2**: Salary Potential Prediction Engine (Supervised Regression, XGBoost, Random Forest).
-   - **Part 1: Data Engineering, Collection, Cleaning & Feature Pipeline** *(Fully Implemented)*:
+2. **Phase 2**: Salary Potential Prediction Engine (Supervised Regression, XGBoost, Random Forest) *(Fully Implemented)*:
+   - **Part 1: Data Engineering, Collection, Cleaning & Feature Pipeline**:
      - Acquisition of 3 authentic Indian and global tech compensation datasets (25,332 records).
      - Cleaning, deduplication, monthly stipend annualization, and outlier filtering (1.2L to 80L).
      - Role normalization into 8 standard tracks and location standardization across 6 Indian tech hubs.
@@ -27,8 +27,15 @@ WorthIQ is being engineered across six strategic development phases:
      - Scikit-learn ColumnTransformer feature pipeline outputting 55 engineered features.
      - Zero-leakage 80/20 train/test splitting and preprocessor serialization (`preprocessor.joblib`).
      - Automated test suite with 6 passing unit/integration tests in `ml/tests/`.
-   - **Part 2: Model Training, Comparison, Django API & UI Integration** *(Next Step)*.
-3. **Phase 3**: Skill Impact & Valuation Analysis (Marginal skill attribution, SHAP explainability).
+   - **Part 2: Model Training, Comparison, Django API & UI Integration**:
+     - Benchmark of 3 regression models (Linear Regression, Random Forest, XGBoost).
+     - Random Forest selected as winning engine (CV MAE: ₹3.35L, Test $R^2$: 0.36, MedAE: ₹2.15L).
+     - Quantile regression models ($P10, P50, P90$) with empirical coverage calibration (10.2%, 48.1%, 89.3%).
+     - Django ML service app `backend/apps/predictions` with REST endpoints and PostgreSQL history tracking.
+     - Empirical 4-factor confidence scoring engine (High, Medium, Low).
+     - React frontend integration in `SalaryAnalysisPage.jsx` and `SavedReportsPage.jsx` with Recharts distribution charts.
+     - 100% test pass rate across 13 pytest ML tests, 26 Django tests, and Vite build.
+3. **Phase 3**: Skill Impact & Valuation Analysis (Marginal skill attribution, SHAP explainability) *(Next Step)*.
 4. **Phase 4**: Job Role Matching & Gap Analysis (TF-IDF & Cosine Similarity).
 5. **Phase 5**: Dynamic Career Growth Roadmap (Sequential DAG learning paths).
 6. **Phase 6**: What-If Salary Simulation Lab (Real-time interactive career sandboxing).

@@ -1,0 +1,103 @@
+{
+  "training_completed_at": "2026-11-23T07:15:30.576097Z",
+  "selected_model": "Random Forest",
+  "models_evaluated": [
+    "Linear Regression",
+    "Random Forest",
+    "XGBoost"
+  ],
+  "metrics": {
+    "Linear Regression": {
+      "cv": {
+        "mae": 355217.1,
+        "rmse": 575115.93,
+        "r2": 0.3703,
+        "medae": 234662.58,
+        "mape_pct": 57.36
+      },
+      "train": {
+        "mae": 354542.34,
+        "rmse": 574409.96,
+        "r2": 0.3718,
+        "medae": 233962.09,
+        "mape_pct": 57.23
+      },
+      "test": {
+        "mae": 371269.59,
+        "rmse": 626448.82,
+        "r2": 0.3193,
+        "medae": 237826.45,
+        "mape_pct": 57.69
+      }
+    },
+    "Random Forest": {
+      "cv": {
+        "mae": 335065.71,
+        "rmse": 556272.73,
+        "r2": 0.4109,
+        "medae": 212905.68,
+        "mape_pct": 55.18
+      },
+      "train": {
+        "mae": 278204.83,
+        "rmse": 488923.8,
+        "r2": 0.5449,
+        "medae": 158581.34,
+        "mape_pct": 44.4
+      },
+      "test": {
+        "mae": 351026.62,
+        "rmse": 607554.94,
+        "r2": 0.3597,
+        "medae": 215291.21,
+        "mape_pct": 55.58
+      }
+    },
+    "XGBoost": {
+      "cv": {
+        "mae": 335819.49,
+        "rmse": 556434.21,
+        "r2": 0.4105,
+        "medae": 211600.78,
+        "mape_pct": 54.92
+      },
+      "train": {
+        "mae": 305057.1,
+        "rmse": 515738.81,
+        "r2": 0.4936,
+        "medae": 187729.41,
+        "mape_pct": 48.37
+      },
+      "test": {
+        "mae": 351741.0,
+        "rmse": 608385.0,
+        "r2": 0.358,
+        "medae": 215888.31,
+        "mape_pct": 55.43
+      }
+    }
+  },
+  "quantiles": {
+    "p10": {
+      "alpha": 0.1,
+      "target_coverage_pct": 10.0,
+      "empirical_coverage_pct": 10.2,
+      "pinball_loss_inr": 52652.88,
+      "median_predicted_inr": 203868.03
+    },
+    "p50": {
+      "alpha": 0.5,
+      "target_coverage_pct": 50.0,
+      "empirical_coverage_pct": 48.1,
+      "pinball_loss_inr": 175157.15,
+      "median_predicted_inr": 556895.03
+    },
+    "p90": {
+      "alpha": 0.9,
+      "target_coverage_pct": 90.0,
+      "empirical_coverage_pct": 89.3,
+      "pinball_loss_inr": 124282.66,
+      "median_predicted_inr": 1376493.53
+    }
+  }
+}

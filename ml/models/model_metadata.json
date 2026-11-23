@@ -1,0 +1,153 @@
+{
+  "model_name": "Random Forest",
+  "model_version": "2.0.0",
+  "training_timestamp": "2026-11-23T07:15:30.562346Z",
+  "random_seed": 42,
+  "algorithm": "RandomForestRegressor",
+  "target_variable": "annual_salary_inr",
+  "target_currency": "INR",
+  "target_period": "annual",
+  "training_rows": 20265,
+  "test_rows": 5067,
+  "engineered_feature_count": 55,
+  "engineered_features": [
+    "job_role_Backend Developer",
+    "job_role_Data Analyst",
+    "job_role_Data Scientist",
+    "job_role_DevOps Engineer",
+    "job_role_Frontend Developer",
+    "job_role_Full Stack Developer",
+    "job_role_Machine Learning Engineer",
+    "job_role_Software Developer",
+    "location_Bengaluru",
+    "location_Chennai",
+    "location_Delhi NCR",
+    "location_Hyderabad",
+    "location_Mumbai",
+    "location_Pune",
+    "education_Bachelor's Degree",
+    "education_Diploma",
+    "education_Master's Degree",
+    "education_PhD",
+    "num__years_of_experience",
+    "num__company_rating",
+    "skill__aws",
+    "skill__cpp",
+    "skill__ci/cd",
+    "skill__css3",
+    "skill__data_analysis",
+    "skill__django",
+    "skill__docker",
+    "skill__express_js",
+    "skill__fastapi",
+    "skill__flutter",
+    "skill__git",
+    "skill__go",
+    "skill__graphql",
+    "skill__html5",
+    "skill__java",
+    "skill__javascript",
+    "skill__kubernetes",
+    "skill__linux",
+    "skill__machine_learning",
+    "skill__microservices",
+    "skill__mongodb",
+    "skill__next_js",
+    "skill__node_js",
+    "skill__numpy",
+    "skill__pandas",
+    "skill__postgresql",
+    "skill__python",
+    "skill__rest_apis",
+    "skill__react_js",
+    "skill__redis",
+    "skill__sql",
+    "skill__scikit-learn",
+    "skill__spring_boot",
+    "skill__tailwind_css",
+    "skill__typescript"
+  ],
+  "hyperparameters": {
+    "n_estimators": 150,
+    "max_depth": 16,
+    "min_samples_split": 4,
+    "min_samples_leaf": 2,
+    "random_state": 42
+  },
+  "evaluation_metrics": {
+    "cv_5fold": {
+      "mae": 335065.71,
+      "rmse": 556272.73,
+      "r2": 0.4109,
+      "medae": 212905.68,
+      "mape_pct": 55.18
+    },
+    "train": {
+      "mae": 278204.83,
+      "rmse": 488923.8,
+      "r2": 0.5449,
+      "medae": 158581.34,
+      "mape_pct": 44.4
+    },
+    "test": {
+      "mae": 351026.62,
+      "rmse": 607554.94,
+      "r2": 0.3597,
+      "medae": 215291.21,
+      "mape_pct": 55.58
+    }
+  },
+  "quantile_models": {
+    "methodology": "GradientBoostingRegressor(loss='quantile')",
+    "evaluation": {
+      "p10": {
+        "alpha": 0.1,
+        "target_coverage_pct": 10.0,
+        "empirical_coverage_pct": 10.2,
+        "pinball_loss_inr": 52652.88,
+        "median_predicted_inr": 203868.03
+      },
+      "p50": {
+        "alpha": 0.5,
+        "target_coverage_pct": 50.0,
+        "empirical_coverage_pct": 48.1,
+        "pinball_loss_inr": 175157.15,
+        "median_predicted_inr": 556895.03
+      },
+      "p90": {
+        "alpha": 0.9,
+        "target_coverage_pct": 90.0,
+        "empirical_coverage_pct": 89.3,
+        "pinball_loss_inr": 124282.66,
+        "median_predicted_inr": 1376493.53
+      }
+    },
+    "monotonic_guaranteed_by_postprocessing": true
+  },
+  "supported_taxonomies": {
+    "job_roles": [
+      "Software Developer",
+      "Full Stack Developer",
+      "Frontend Developer",
+      "Backend Developer",
+      "Data Analyst",
+      "Data Scientist",
+      "Machine Learning Engineer",
+      "DevOps Engineer"
+    ],
+    "locations": [
+      "Bengaluru",
+      "Hyderabad",
+      "Pune",
+      "Mumbai",
+      "Delhi NCR",
+      "Chennai"
+    ],
+    "education": [
+      "Bachelor's Degree",
+      "Master's Degree",
+      "Diploma",
+      "PhD"
+    ]
+  }
+}
