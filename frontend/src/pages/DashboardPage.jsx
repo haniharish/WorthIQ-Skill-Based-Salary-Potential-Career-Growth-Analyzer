@@ -100,52 +100,116 @@ export const DashboardPage = () => {
   // Active roadmap
   const activeRoadmap = roadmaps && roadmaps.length > 0 ? roadmaps[0] : null;
 
+  // Extract normalized salary fields safely from PredictionHistory or Prediction API
+  const medianSalary = Number(
+    latestPrediction?.predicted_median_salary ??
+    latestPrediction?.predicted_salary ??
+    (latestPrediction?.salary_lpa ? latestPrediction.salary_lpa * 100000 : 0)
+  );
+
+  const lowSalary = Number(
+    latestPrediction?.predicted_low_salary ??
+    latestPrediction?.salary_range?.low ??
+    latestPrediction?.salary_range?.p10_salary ??
+    (medianSalary > 0 ? Math.round(medianSalary * 0.7) : 0)
+  );
+
+  const highSalary = Number(
+    latestPrediction?.predicted_high_salary ??
+    latestPrediction?.salary_range?.high ??
+    latestPrediction?.salary_range?.p90_salary ??
+    (medianSalary > 0 ? Math.round(medianSalary * 1.35) : 0)
+  );
+
+  const medianLpa =
+    latestPrediction?.salary_lpa ??
+    latestPrediction?.predicted_salary_lpa ??
+    (medianSalary > 0 ? (medianSalary / 100000).toFixed(1) : null);
+
+  const lowLpa =
+    latestPrediction?.salary_range?.p10_lpa ??
+    (lowSalary > 0 ? (lowSalary / 100000).toFixed(1) : null);
+
+  const highLpa =
+    latestPrediction?.salary_range?.p90_lpa ??
+    (highSalary > 0 ? (highSalary / 100000).toFixed(1) : null);
+
   // Prepare chart data for latest prediction range
-  const rangeChartData = latestPrediction
-    ? [
-        {
-          name: 'Conservative (P10)',
-          salary: latestPrediction.salary_range?.p10_lpa || 4.0,
-          raw: latestPrediction.salary_range?.p10_salary || 400000,
-          color: '#94a3b8',
-        },
-        {
-          name: 'Market Median (P50)',
-          salary: latestPrediction.predicted_salary_lpa || 7.5,
-          raw: latestPrediction.predicted_salary || 750000,
-          color: '#6366f1',
-        },
-        {
-          name: 'Top Tier (P90)',
-          salary: latestPrediction.salary_range?.p90_lpa || 15.0,
-          raw: latestPrediction.salary_range?.p90_salary || 1500000,
-          color: '#10b981',
-        },
-      ]
-    : [];
+  const rangeChartData =
+    latestPrediction && medianSalary > 0
+      ? [
+          {
+            name: 'Conservative (P10)',
+            salary: lowLpa ? parseFloat(lowLpa) : 4.0,
+            raw: lowSalary,
+            color: '#94a3b8',
+          },
+          {
+            name: 'Market Median (P50)',
+            salary: medianLpa ? parseFloat(medianLpa) : 7.5,
+            raw: medianSalary,
+            color: '#6366f1',
+          },
+          {
+            name: 'Top Tier (P90)',
+            salary: highLpa ? parseFloat(highLpa) : 15.0,
+            raw: highSalary,
+            color: '#10b981',
+          },
+        ]
+      : [];
 
   // Historical trend data (reversed to chronological)
   const historyChartData = (predictionHistory || [])
     .slice(0, 7)
     .reverse()
-    .map((item, idx) => ({
-      name: new Date(item.created_at).toLocaleDateString('en-IN', {
-        month: 'short',
-        day: 'numeric',
-      }),
-      lpa: item.predicted_salary_lpa || 0,
-      role: item.job_role,
-    }));
+    .map((item) => {
+      const med = Number(item.predicted_median_salary ?? item.predicted_salary ?? 0);
+      const lpa = Number(item.salary_lpa ?? item.predicted_salary_lpa ?? (med > 0 ? med / 100000 : 0));
+      return {
+        name: new Date(item.created_at).toLocaleDateString('en-IN', {
+          month: 'short',
+          day: 'numeric',
+        }),
+        lpa: Number(lpa.toFixed(1)),
+        role: item.job_role,
+      };
+    });
 
   return (
-    <div className="space-y-8 max-w-7xl mx-auto pb-12">
-      {/* 1. Header & Welcome Banner */}
+    <div className="space-y-6 sm:space-y-8 max-w-7xl mx-auto pb-12">
+      {/* 1. Page Header (Positioned, oriented and sized per SaaS template) */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 border-b border-slate-200/80">
+        <div>
+          <div className="flex items-center gap-2 mb-1">
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+              Dashboard Overview
+            </h1>
+            <Badge variant="indigo" size="xs">
+              AI 2.0
+            </Badge>
+          </div>
+          <p className="text-xs sm:text-sm text-slate-500">
+            Real-time compensation analytics, market valuation bounds, and AI career guidance.
+          </p>
+        </div>
+
+        <div className="flex items-center gap-3">
+          <Link to="/salary-analysis">
+            <Button variant="primary" size="sm" icon={TrendingUp}>
+              New Valuation
+            </Button>
+          </Link>
+        </div>
+      </div>
+
+      {/* 2. Welcome Banner Card */}
       <div className="bg-white rounded-2xl border border-slate-200/90 p-6 sm:p-8 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div>
           <div className="flex flex-wrap items-center gap-2.5 mb-2">
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+            <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
               Welcome back, {user?.full_name || 'Engineer'}
-            </h1>
+            </h2>
             <Badge variant="indigo" dot={true}>
               AI Engine Active
             </Badge>
@@ -179,7 +243,7 @@ export const DashboardPage = () => {
             </Button>
           </Link>
           <Link to="/salary-analysis">
-            <Button variant="primary" size="sm" icon={TrendingUp}>
+            <Button variant="secondary" size="sm" icon={TrendingUp}>
               Analyze Salary
             </Button>
           </Link>
@@ -223,17 +287,17 @@ export const DashboardPage = () => {
           <StatCard
             title="Estimated Salary (P50)"
             value={
-              latestPrediction
-                ? latestPrediction.predicted_salary_formatted || `₹${latestPrediction.predicted_salary_lpa} LPA`
+              latestPrediction && medianLpa
+                ? `₹${medianLpa} LPA`
                 : 'Not Evaluated'
             }
             subtitle={
-              latestPrediction
-                ? `${latestPrediction.predicted_salary_lpa} LPA Annual Median`
+              latestPrediction && medianLpa
+                ? `₹${medianLpa} LPA Annual Median`
                 : 'Run your first evaluation'
             }
             icon={TrendingUp}
-            badgeText={latestPrediction ? 'P50 Median' : null}
+            badgeText={latestPrediction && medianLpa ? 'P50 Median' : null}
             badgeVariant="indigo"
             onClick={() => navigate(latestPrediction ? `/explanations/${latestPrediction.id}` : '/salary-analysis')}
           />
@@ -242,23 +306,25 @@ export const DashboardPage = () => {
           <StatCard
             title="Estimated Range (P10–P90)"
             value={
-              latestPrediction
-                ? `₹${latestPrediction.salary_range?.p10_lpa}L – ₹${latestPrediction.salary_range?.p90_lpa}L`
+              latestPrediction && lowLpa && highLpa
+                ? `₹${lowLpa}L – ₹${highLpa}L`
                 : '—'
             }
             subtitle={
-              latestPrediction
+              latestPrediction && lowLpa && highLpa
                 ? 'Conservative to top-tier bounds'
                 : 'Awaiting model inference'
             }
             icon={BarChart3}
-            badgeText={latestPrediction?.confidence_level || 'Pending'}
+            badgeText={
+              typeof latestPrediction?.confidence === 'string'
+                ? latestPrediction.confidence
+                : latestPrediction?.confidence?.confidence_tier || latestPrediction?.confidence_level || 'Active'
+            }
             badgeVariant={
-              latestPrediction?.confidence_level === 'High'
+              (latestPrediction?.confidence === 'High' || latestPrediction?.confidence?.confidence_tier === 'High')
                 ? 'emerald'
-                : latestPrediction?.confidence_level === 'Medium'
-                ? 'indigo'
-                : 'amber'
+                : 'indigo'
             }
             onClick={() => navigate('/salary-analysis')}
           />
@@ -338,7 +404,7 @@ export const DashboardPage = () => {
                         Monthly Gross Equivalent
                       </span>
                       <p className="text-base font-bold text-indigo-600 mt-0.5">
-                        ₹{Math.round((latestPrediction.predicted_salary || 750000) / 12).toLocaleString('en-IN')}{' '}
+                        ₹{medianSalary > 0 ? Math.round(medianSalary / 12).toLocaleString('en-IN') : '62,500'}{' '}
                         <span className="text-xs text-slate-400 font-normal">/ mo</span>
                       </p>
                     </div>

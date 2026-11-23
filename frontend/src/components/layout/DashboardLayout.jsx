@@ -96,7 +96,7 @@ export const DashboardLayout = () => {
     <div className="min-h-screen bg-[#F7F8FC] flex flex-col antialiased text-[#172033]">
       {/* Top Navbar */}
       <header className="sticky top-0 z-40 h-16 bg-white/95 backdrop-blur-xs border-b border-slate-200/90 flex items-center justify-between px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3 sm:gap-4">
           <button
             type="button"
             onClick={() => setSidebarOpen(!sidebarOpen)}
@@ -107,11 +107,13 @@ export const DashboardLayout = () => {
             {sidebarOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
           <Logo size="sm" to="/dashboard" />
-        </div>
 
-        {/* Center: Breadcrumbs on medium+ screens */}
-        <div className="hidden md:flex items-center">
-          <Breadcrumbs />
+          <div className="hidden sm:block h-5 w-px bg-slate-200" />
+
+          {/* Breadcrumbs aligned cleanly to the left next to Logo */}
+          <div className="hidden sm:flex items-center">
+            <Breadcrumbs />
+          </div>
         </div>
 
         {/* Right Header controls */}

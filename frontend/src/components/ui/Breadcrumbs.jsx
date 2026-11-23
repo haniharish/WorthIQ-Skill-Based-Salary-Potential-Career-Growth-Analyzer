@@ -10,8 +10,11 @@ const ROUTE_LABELS = {
   'job-matching': 'Role Matching',
   'role-matching': 'Role Matching',
   'career-roadmap': 'Career Roadmap',
+  roadmaps: 'Career Roadmap',
   'what-if-simulator': 'What-If Simulator',
+  'what-if': 'What-If Simulator',
   'saved-reports': 'Saved Reports',
+  reports: 'Saved Reports',
   explanations: 'SHAP Explainability',
   profile: 'My Profile',
   setup: 'Setup',
@@ -23,15 +26,15 @@ export const Breadcrumbs = ({ customItems }) => {
 
   if (customItems) {
     return (
-      <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 text-xs text-slate-500">
-        <Link to="/dashboard" className="hover:text-slate-800 transition-colors flex items-center gap-1">
+      <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 text-xs text-slate-500 font-medium">
+        <Link to="/dashboard" className="text-slate-400 hover:text-indigo-600 transition-colors flex items-center gap-1">
           <Home className="w-3.5 h-3.5" />
         </Link>
         {customItems.map((item, idx) => (
           <React.Fragment key={idx}>
-            <ChevronRight className="w-3 h-3 text-slate-400 shrink-0" />
+            <ChevronRight className="w-3 h-3 text-slate-300 shrink-0" />
             {item.path ? (
-              <Link to={item.path} className="hover:text-slate-800 transition-colors truncate max-w-[150px]">
+              <Link to={item.path} className="text-slate-500 hover:text-indigo-600 transition-colors truncate max-w-[150px]">
                 {item.label}
               </Link>
             ) : (
@@ -47,15 +50,19 @@ export const Breadcrumbs = ({ customItems }) => {
 
   if (segments.length === 0 || (segments.length === 1 && segments[0] === 'dashboard')) {
     return (
-      <div className="flex items-center gap-1.5 text-xs text-slate-500 font-medium">
-        <span className="text-slate-900 font-semibold">Dashboard Overview</span>
-      </div>
+      <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 text-xs text-slate-500 font-medium">
+        <Link to="/dashboard" className="text-slate-400 hover:text-indigo-600 transition-colors flex items-center gap-1">
+          <Home className="w-3.5 h-3.5" />
+        </Link>
+        <ChevronRight className="w-3 h-3 text-slate-300 shrink-0" />
+        <span className="font-semibold text-slate-800">Dashboard</span>
+      </nav>
     );
   }
 
   return (
-    <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 text-xs text-slate-500">
-      <Link to="/dashboard" className="hover:text-slate-800 transition-colors flex items-center gap-1">
+    <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 text-xs text-slate-500 font-medium">
+      <Link to="/dashboard" className="text-slate-400 hover:text-indigo-600 transition-colors flex items-center gap-1">
         <Home className="w-3.5 h-3.5" />
       </Link>
       {segments.map((seg, idx) => {
@@ -65,11 +72,11 @@ export const Breadcrumbs = ({ customItems }) => {
 
         return (
           <React.Fragment key={path}>
-            <ChevronRight className="w-3 h-3 text-slate-400 shrink-0" />
+            <ChevronRight className="w-3 h-3 text-slate-300 shrink-0" />
             {isLast ? (
               <span className="font-semibold text-slate-800">{label}</span>
             ) : (
-              <Link to={path} className="hover:text-slate-800 transition-colors">
+              <Link to={path} className="text-slate-500 hover:text-indigo-600 transition-colors">
                 {label}
               </Link>
             )}
