@@ -24,10 +24,10 @@ import {
 
 const navigationItems = [
   { name: 'Dashboard', path: '/dashboard', icon: LayoutDashboard },
-  { name: 'Salary Analysis', path: '/salary-analysis', icon: TrendingUp, badge: 'Phase 2' },
-  { name: 'Skill Impact', path: '/skill-impact', icon: Sparkles, badge: 'Phase 3' },
-  { name: 'Job Matching', path: '/job-matching', icon: Briefcase, badge: 'Phase 4' },
-  { name: 'Career Roadmap', path: '/career-roadmap', icon: Compass, badge: 'Phase 5' },
+  { name: 'Salary Analysis', path: '/salary-analysis', icon: TrendingUp, badge: 'Live' },
+  { name: 'Skill Impact', path: '/skill-impact', icon: Sparkles, badge: 'AI' },
+  { name: 'Job Matching', path: '/job-matching', icon: Briefcase, badge: 'AI' },
+  { name: 'Career Roadmap', path: '/career-roadmap', icon: Compass, badge: 'AI' },
   { name: 'What-If Simulator', path: '/what-if-simulator', icon: Sliders, badge: 'Phase 6' },
   { name: 'Saved Reports', path: '/saved-reports', icon: BookmarkCheck },
   { name: 'My Profile', path: '/profile', icon: User },

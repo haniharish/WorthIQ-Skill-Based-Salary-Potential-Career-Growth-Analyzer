@@ -276,15 +276,25 @@ export const SavedReportsPage = () => {
 
                       {/* Actions */}
                       <td className="px-5 py-4 whitespace-nowrap text-right">
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          icon={Eye}
-                          onClick={() => handleOpenDetail(item.id)}
-                          className="text-xs"
-                        >
-                          View Details
-                        </Button>
+                        <div className="flex items-center justify-end gap-1.5">
+                          <Link
+                            to={`/explanations/${item.id}`}
+                            className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-medium text-indigo-700 bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 transition-colors"
+                            title="View SHAP Explainability"
+                          >
+                            <Sparkles className="w-3.5 h-3.5 text-indigo-600" />
+                            SHAP
+                          </Link>
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            icon={Eye}
+                            onClick={() => handleOpenDetail(item.id)}
+                            className="text-xs"
+                          >
+                            Details
+                          </Button>
+                        </div>
                       </td>
                     </tr>
                   ))}
@@ -510,13 +520,22 @@ export const SavedReportsPage = () => {
             </div>
 
             {/* Modal Footer */}
-            <div className="pt-4 border-t border-slate-200 flex items-center justify-between">
+            <div className="pt-4 border-t border-slate-200 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
               <span className="text-[11px] text-slate-400">
                 Model: {selectedReport.model_version || '2.0.0 (Random Forest)'}
               </span>
-              <Button variant="secondary" size="sm" onClick={() => setSelectedReport(null)}>
-                Close
-              </Button>
+              <div className="flex items-center gap-2">
+                <Link
+                  to={`/explanations/${selectedReport.id}`}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-white bg-indigo-600 hover:bg-indigo-700 shadow-2xs transition-colors"
+                >
+                  <Sparkles className="w-3.5 h-3.5" />
+                  View SHAP Explanation
+                </Link>
+                <Button variant="secondary" size="sm" onClick={() => setSelectedReport(null)}>
+                  Close
+                </Button>
+              </div>
             </div>
           </div>
         </div>

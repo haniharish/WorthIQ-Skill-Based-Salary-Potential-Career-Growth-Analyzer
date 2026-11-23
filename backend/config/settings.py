@@ -3,7 +3,13 @@ from pathlib import Path
 from datetime import timedelta
 from dotenv import load_dotenv
 
+import sys
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Add root project workspace to sys.path for ML modules access
+PROJECT_ROOT = BASE_DIR.parent
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
 
 # Load environment variables
 load_dotenv(BASE_DIR / '.env')
@@ -32,6 +38,7 @@ INSTALLED_APPS = [
     'apps.accounts.apps.AccountsConfig',
     'apps.profiles.apps.ProfilesConfig',
     'apps.predictions.apps.PredictionsConfig',
+    'apps.intelligence.apps.IntelligenceConfig',
 ]
 
 MIDDLEWARE = [

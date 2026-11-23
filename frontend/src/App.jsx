@@ -17,6 +17,7 @@ import JobMatchingPage from './pages/JobMatchingPage';
 import CareerRoadmapPage from './pages/CareerRoadmapPage';
 import WhatIfSimulatorPage from './pages/WhatIfSimulatorPage';
 import SavedReportsPage from './pages/SavedReportsPage';
+import PredictionExplanationPage from './pages/PredictionExplanationPage';
 import ProfilePage from './pages/ProfilePage';
 import SettingsPage from './pages/SettingsPage';
 
@@ -70,6 +71,7 @@ export function App() {
           <Route path="/career-roadmap" element={<CareerRoadmapPage />} />
           <Route path="/what-if-simulator" element={<WhatIfSimulatorPage />} />
           <Route path="/saved-reports" element={<SavedReportsPage />} />
+          <Route path="/explanations/:predictionId" element={<PredictionExplanationPage />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/settings" element={<SettingsPage />} />
         </Route>

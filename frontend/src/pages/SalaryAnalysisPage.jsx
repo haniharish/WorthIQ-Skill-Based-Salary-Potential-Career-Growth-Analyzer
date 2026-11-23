@@ -891,7 +891,13 @@ export const SalaryAnalysisPage = () => {
               data. Individual offers may vary based on company tier, individual negotiation, interview performance,
               and equity components.
             </p>
-            <div className="pt-2 flex justify-end">
+            <div className="pt-2 flex flex-wrap items-center justify-between gap-3">
+              <Link
+                to={`/explanations/${predictionResult.id}`}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-indigo-600 text-white font-semibold text-xs hover:bg-indigo-700 transition-colors shadow-2xs"
+              >
+                <Sparkles className="w-3.5 h-3.5" /> View SHAP Explainability & Feature Impact
+              </Link>
               <Link to="/saved-reports" className="text-indigo-600 hover:text-indigo-800 font-semibold inline-flex items-center gap-1">
                 View all past predictions in Saved Reports <ArrowRight className="w-3.5 h-3.5" />
               </Link>

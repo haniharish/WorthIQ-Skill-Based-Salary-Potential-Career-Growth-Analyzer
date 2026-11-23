@@ -1,0 +1,1961 @@
+{
+  "total_dataset_records": 25332,
+  "taxonomy": {
+    "Python": {
+      "category": "Programming Languages",
+      "aliases": [
+        "py",
+        "python3",
+        "python 3"
+      ],
+      "description": "General-purpose programming language widely used in AI, data science, and web backends."
+    },
+    "JavaScript": {
+      "category": "Programming Languages",
+      "aliases": [
+        "js",
+        "ecmascript",
+        "es6"
+      ],
+      "description": "Core client-side and full-stack runtime language powering modern web applications."
+    },
+    "TypeScript": {
+      "category": "Programming Languages",
+      "aliases": [
+        "ts"
+      ],
+      "description": "Typed superset of JavaScript providing static type definitions for enterprise codebases."
+    },
+    "Java": {
+      "category": "Programming Languages",
+      "aliases": [
+        "core java",
+        "java 11",
+        "java 17"
+      ],
+      "description": "Object-oriented, high-performance language widely used for large-scale enterprise services."
+    },
+    "C++": {
+      "category": "Programming Languages",
+      "aliases": [
+        "cpp",
+        "cplusplus",
+        "c/c++"
+      ],
+      "description": "High-performance systems language used in high-frequency trading, game engines, and low-latency systems."
+    },
+    "Go": {
+      "category": "Programming Languages",
+      "aliases": [
+        "golang"
+      ],
+      "description": "Concurrent compiled language developed by Google, dominant in cloud-native microservices."
+    },
+    "React.js": {
+      "category": "Frontend",
+      "aliases": [
+        "react",
+        "reactjs",
+        "react.js"
+      ],
+      "description": "Component-based declarative UI library developed by Meta for reactive single-page applications."
+    },
+    "Next.js": {
+      "category": "Frontend",
+      "aliases": [
+        "nextjs",
+        "next.js",
+        "next"
+      ],
+      "description": "React framework for server-side rendering (SSR), static site generation (SSG), and edge deployment."
+    },
+    "HTML5": {
+      "category": "Frontend",
+      "aliases": [
+        "html"
+      ],
+      "description": "Standard semantic markup language for structuring web documents."
+    },
+    "CSS3": {
+      "category": "Frontend",
+      "aliases": [
+        "css"
+      ],
+      "description": "Style sheet language used for describing presentation and responsive UI design."
+    },
+    "Tailwind CSS": {
+      "category": "Frontend",
+      "aliases": [
+        "tailwind",
+        "tailwindcss"
+      ],
+      "description": "Utility-first CSS framework for rapid responsive interface development."
+    },
+    "Flutter": {
+      "category": "Frontend",
+      "aliases": [
+        "dart/flutter",
+        "flutter sdk"
+      ],
+      "description": "Google cross-platform UI framework for compiling mobile, web, and desktop apps from single codebase."
+    },
+    "Node.js": {
+      "category": "Backend",
+      "aliases": [
+        "nodejs",
+        "node",
+        "node.js"
+      ],
+      "description": "Asynchronous event-driven JavaScript runtime built on Chrome's V8 engine."
+    },
+    "Express.js": {
+      "category": "Backend",
+      "aliases": [
+        "express",
+        "expressjs",
+        "express.js"
+      ],
+      "description": "Fast, unopinionated, minimalist web framework for Node.js."
+    },
+    "Django": {
+      "category": "Backend",
+      "aliases": [
+        "django framework",
+        "django rest framework",
+        "drf"
+      ],
+      "description": "High-level Python web framework encouraging clean, pragmatic design and rapid development."
+    },
+    "FastAPI": {
+      "category": "Backend",
+      "aliases": [
+        "fast-api",
+        "fastapi"
+      ],
+      "description": "Modern, fast (high-performance) web framework for building APIs with Python 3.8+ based on standard type hints."
+    },
+    "Spring Boot": {
+      "category": "Backend",
+      "aliases": [
+        "spring",
+        "springboot",
+        "spring-boot"
+      ],
+      "description": "Opinionated Java enterprise framework for creating stand-alone, production-grade Spring applications."
+    },
+    "REST APIs": {
+      "category": "Backend",
+      "aliases": [
+        "rest",
+        "restful apis",
+        "restful api",
+        "rest api"
+      ],
+      "description": "Architectural style for networked hypermedia systems facilitating client-server communication."
+    },
+    "Microservices": {
+      "category": "Backend",
+      "aliases": [
+        "microservice",
+        "microservices architecture"
+      ],
+      "description": "Architectural approach designing software as small, independently deployable services."
+    },
+    "GraphQL": {
+      "category": "Backend",
+      "aliases": [
+        "graphql api",
+        "gql"
+      ],
+      "description": "Query language for APIs and runtime for fulfilling queries with existing data."
+    },
+    "PostgreSQL": {
+      "category": "Databases",
+      "aliases": [
+        "postgres",
+        "postgresql db",
+        "psql"
+      ],
+      "description": "Powerful open-source object-relational database system with strong reliability and ACID guarantees."
+    },
+    "MongoDB": {
+      "category": "Databases",
+      "aliases": [
+        "mongo",
+        "mongodb atlas"
+      ],
+      "description": "Document-oriented NoSQL database designed for high availability and horizontal scaling."
+    },
+    "SQL": {
+      "category": "Databases",
+      "aliases": [
+        "structured query language",
+        "rdbms"
+      ],
+      "description": "Domain-specific language used in programming and managing relational data streams."
+    },
+    "Redis": {
+      "category": "Databases",
+      "aliases": [
+        "redis cache"
+      ],
+      "description": "In-memory data structure store used as a distributed cache, message broker, and fast database."
+    },
+    "AWS": {
+      "category": "Cloud & DevOps",
+      "aliases": [
+        "amazon web services",
+        "amazon aws"
+      ],
+      "description": "Comprehensive cloud computing platform offering compute, storage, and managed services."
+    },
+    "Docker": {
+      "category": "Cloud & DevOps",
+      "aliases": [
+        "docker containers",
+        "dockerized"
+      ],
+      "description": "Containerization platform packaging applications and dependencies into standardized units."
+    },
+    "Kubernetes": {
+      "category": "Cloud & DevOps",
+      "aliases": [
+        "k8s",
+        "kube"
+      ],
+      "description": "Open-source system for automating deployment, scaling, and management of containerized applications."
+    },
+    "CI/CD": {
+      "category": "Cloud & DevOps",
+      "aliases": [
+        "continuous integration",
+        "cicd",
+        "github actions",
+        "gitlab ci"
+      ],
+      "description": "Method of frequently delivering apps to customers by introducing automation into development stages."
+    },
+    "Linux": {
+      "category": "Cloud & DevOps",
+      "aliases": [
+        "unix",
+        "ubuntu",
+        "debian",
+        "redhat"
+      ],
+      "description": "Open-source Unix-like operating system kernel dominant across servers and cloud infrastructure."
+    },
+    "Git": {
+      "category": "Cloud & DevOps",
+      "aliases": [
+        "github",
+        "gitlab",
+        "version control"
+      ],
+      "description": "Distributed version control system tracking source code modifications across engineering teams."
+    },
+    "Machine Learning": {
+      "category": "Data & AI",
+      "aliases": [
+        "ml",
+        "machine-learning"
+      ],
+      "description": "Field of artificial intelligence enabling computer systems to learn and infer from data patterns."
+    },
+    "Scikit-learn": {
+      "category": "Data & AI",
+      "aliases": [
+        "sklearn",
+        "scikit learn"
+      ],
+      "description": "Python module for machine learning built on NumPy, SciPy, and matplotlib."
+    },
+    "Pandas": {
+      "category": "Data & AI",
+      "aliases": [
+        "pandas library"
+      ],
+      "description": "Fast, flexible, and expressive data structures designed to make working with structured tabular data easy."
+    },
+    "NumPy": {
+      "category": "Data & AI",
+      "aliases": [
+        "numpy library"
+      ],
+      "description": "Core scientific computing library providing multidimensional array objects and linear algebra routines."
+    },
+    "Data Analysis": {
+      "category": "Data & AI",
+      "aliases": [
+        "exploratory data analysis",
+        "eda"
+      ],
+      "description": "Process of inspecting, cleansing, transforming, and modeling data with the goal of discovering useful findings."
+    }
+  },
+  "skill_statistics": {
+    "Git": {
+      "frequency": 24075,
+      "support_pct": 95.04,
+      "median_salary": 600000.0,
+      "mean_salary": 845510.44,
+      "p25_salary": 324000.0,
+      "p75_salary": 1100000.0,
+      "category": "Cloud & DevOps",
+      "description": "Distributed version control system tracking source code modifications across engineering teams."
+    },
+    "Go": {
+      "frequency": 3959,
+      "support_pct": 15.63,
+      "median_salary": 600000.0,
+      "mean_salary": 830062.61,
+      "p25_salary": 360000.0,
+      "p75_salary": 1100000.0,
+      "category": "Programming Languages",
+      "description": "Concurrent compiled language developed by Google, dominant in cloud-native microservices."
+    },
+    "C++": {
+      "frequency": 3750,
+      "support_pct": 14.8,
+      "median_salary": 600000.0,
+      "mean_salary": 776773.29,
+      "p25_salary": 360000.0,
+      "p75_salary": 1000000.0,
+      "category": "Programming Languages",
+      "description": "High-performance systems language used in high-frequency trading, game engines, and low-latency systems."
+    },
+    "CI/CD": {
+      "frequency": 4469,
+      "support_pct": 17.64,
+      "median_salary": 696000.0,
+      "mean_salary": 858572.66,
+      "p25_salary": 400000.0,
+      "p75_salary": 1100000.0,
+      "category": "Cloud & DevOps",
+      "description": "Method of frequently delivering apps to customers by introducing automation into development stages."
+    },
+    "REST APIs": {
+      "frequency": 20875,
+      "support_pct": 82.41,
+      "median_salary": 600000.0,
+      "mean_salary": 817490.26,
+      "p25_salary": 312000.0,
+      "p75_salary": 1066872.5150000001,
+      "category": "Backend",
+      "description": "Architectural style for networked hypermedia systems facilitating client-server communication."
+    },
+    "Linux": {
+      "frequency": 16996,
+      "support_pct": 67.09,
+      "median_salary": 600000.0,
+      "mean_salary": 767172.96,
+      "p25_salary": 312000.0,
+      "p75_salary": 1000000.0,
+      "category": "Cloud & DevOps",
+      "description": "Open-source Unix-like operating system kernel dominant across servers and cloud infrastructure."
+    },
+    "SQL": {
+      "frequency": 19049,
+      "support_pct": 75.2,
+      "median_salary": 600000.0,
+      "mean_salary": 878345.31,
+      "p25_salary": 348000.0,
+      "p75_salary": 1176000.0,
+      "category": "Databases",
+      "description": "Domain-specific language used in programming and managing relational data streams."
+    },
+    "Python": {
+      "frequency": 10125,
+      "support_pct": 39.97,
+      "median_salary": 900000.0,
+      "mean_salary": 1130649.58,
+      "p25_salary": 420000.0,
+      "p75_salary": 1823794.14,
+      "category": "Programming Languages",
+      "description": "General-purpose programming language widely used in AI, data science, and web backends."
+    },
+    "Java": {
+      "frequency": 5582,
+      "support_pct": 22.04,
+      "median_salary": 504000.0,
+      "mean_salary": 722851.6,
+      "p25_salary": 300000.0,
+      "p75_salary": 921000.0,
+      "category": "Programming Languages",
+      "description": "Object-oriented, high-performance language widely used for large-scale enterprise services."
+    },
+    "Spring Boot": {
+      "frequency": 4176,
+      "support_pct": 16.49,
+      "median_salary": 600000.0,
+      "mean_salary": 780173.96,
+      "p25_salary": 348000.0,
+      "p75_salary": 1000000.0,
+      "category": "Backend",
+      "description": "Opinionated Java enterprise framework for creating stand-alone, production-grade Spring applications."
+    },
+    "Microservices": {
+      "frequency": 4692,
+      "support_pct": 18.52,
+      "median_salary": 600000.0,
+      "mean_salary": 871136.06,
+      "p25_salary": 400000.0,
+      "p75_salary": 1152000.0,
+      "category": "Backend",
+      "description": "Architectural approach designing software as small, independently deployable services."
+    },
+    "Docker": {
+      "frequency": 5799,
+      "support_pct": 22.89,
+      "median_salary": 800000.0,
+      "mean_salary": 1038917.59,
+      "p25_salary": 400000.0,
+      "p75_salary": 1572327.56,
+      "category": "Cloud & DevOps",
+      "description": "Containerization platform packaging applications and dependencies into standardized units."
+    },
+    "PostgreSQL": {
+      "frequency": 7807,
+      "support_pct": 30.82,
+      "median_salary": 800000.0,
+      "mean_salary": 1091504.79,
+      "p25_salary": 400000.0,
+      "p75_salary": 1739267.875,
+      "category": "Databases",
+      "description": "Powerful open-source object-relational database system with strong reliability and ACID guarantees."
+    },
+    "Redis": {
+      "frequency": 496,
+      "support_pct": 1.96,
+      "median_salary": 700000.0,
+      "mean_salary": 910983.87,
+      "p25_salary": 400000.0,
+      "p75_salary": 1200000.0,
+      "category": "Databases",
+      "description": "In-memory data structure store used as a distributed cache, message broker, and fast database."
+    },
+    "React.js": {
+      "frequency": 3113,
+      "support_pct": 12.29,
+      "median_salary": 400000.0,
+      "mean_salary": 574589.94,
+      "p25_salary": 276000.0,
+      "p75_salary": 700000.0,
+      "category": "Frontend",
+      "description": "Component-based declarative UI library developed by Meta for reactive single-page applications."
+    },
+    "Node.js": {
+      "frequency": 586,
+      "support_pct": 2.31,
+      "median_salary": 600000.0,
+      "mean_salary": 876451.55,
+      "p25_salary": 336000.0,
+      "p75_salary": 1100000.0,
+      "category": "Backend",
+      "description": "Asynchronous event-driven JavaScript runtime built on Chrome's V8 engine."
+    },
+    "Django": {
+      "frequency": 2082,
+      "support_pct": 8.22,
+      "median_salary": 600000.0,
+      "mean_salary": 843850.8,
+      "p25_salary": 336000.0,
+      "p75_salary": 1100000.0,
+      "category": "Backend",
+      "description": "High-level Python web framework encouraging clean, pragmatic design and rapid development."
+    },
+    "JavaScript": {
+      "frequency": 3113,
+      "support_pct": 12.29,
+      "median_salary": 400000.0,
+      "mean_salary": 574589.94,
+      "p25_salary": 276000.0,
+      "p75_salary": 700000.0,
+      "category": "Programming Languages",
+      "description": "Core client-side and full-stack runtime language powering modern web applications."
+    },
+    "GraphQL": {
+      "frequency": 1301,
+      "support_pct": 5.14,
+      "median_salary": 420000.0,
+      "mean_salary": 597942.04,
+      "p25_salary": 300000.0,
+      "p75_salary": 700000.0,
+      "category": "Backend",
+      "description": "Query language for APIs and runtime for fulfilling queries with existing data."
+    },
+    "HTML5": {
+      "frequency": 2989,
+      "support_pct": 11.8,
+      "median_salary": 400000.0,
+      "mean_salary": 571581.76,
+      "p25_salary": 264000.0,
+      "p75_salary": 700000.0,
+      "category": "Frontend",
+      "description": "Standard semantic markup language for structuring web documents."
+    },
+    "CSS3": {
+      "frequency": 2989,
+      "support_pct": 11.8,
+      "median_salary": 400000.0,
+      "mean_salary": 571581.76,
+      "p25_salary": 264000.0,
+      "p75_salary": 700000.0,
+      "category": "Frontend",
+      "description": "Style sheet language used for describing presentation and responsive UI design."
+    },
+    "Next.js": {
+      "frequency": 1307,
+      "support_pct": 5.16,
+      "median_salary": 444000.0,
+      "mean_salary": 612998.66,
+      "p25_salary": 300000.0,
+      "p75_salary": 704000.0,
+      "category": "Frontend",
+      "description": "React framework for server-side rendering (SSR), static site generation (SSG), and edge deployment."
+    },
+    "MongoDB": {
+      "frequency": 468,
+      "support_pct": 1.85,
+      "median_salary": 600000.0,
+      "mean_salary": 859152.14,
+      "p25_salary": 399000.0,
+      "p75_salary": 1100000.0,
+      "category": "Databases",
+      "description": "Document-oriented NoSQL database designed for high availability and horizontal scaling."
+    },
+    "Express.js": {
+      "frequency": 472,
+      "support_pct": 1.86,
+      "median_salary": 726000.0,
+      "mean_salary": 995779.66,
+      "p25_salary": 400000.0,
+      "p75_salary": 1300000.0,
+      "category": "Backend",
+      "description": "Fast, unopinionated, minimalist web framework for Node.js."
+    },
+    "FastAPI": {
+      "frequency": 1036,
+      "support_pct": 4.09,
+      "median_salary": 1780593.9849999999,
+      "mean_salary": 1581511.46,
+      "p25_salary": 803000.0,
+      "p75_salary": 2209886.2024999997,
+      "category": "Backend",
+      "description": "Modern, fast (high-performance) web framework for building APIs with Python 3.8+ based on standard type hints."
+    },
+    "Tailwind CSS": {
+      "frequency": 1284,
+      "support_pct": 5.07,
+      "median_salary": 444000.0,
+      "mean_salary": 615980.91,
+      "p25_salary": 300000.0,
+      "p75_salary": 700000.0,
+      "category": "Frontend",
+      "description": "Utility-first CSS framework for rapid responsive interface development."
+    },
+    "TypeScript": {
+      "frequency": 1284,
+      "support_pct": 5.07,
+      "median_salary": 432000.0,
+      "mean_salary": 602084.59,
+      "p25_salary": 300000.0,
+      "p75_salary": 700000.0,
+      "category": "Programming Languages",
+      "description": "Typed superset of JavaScript providing static type definitions for enterprise codebases."
+    },
+    "Kubernetes": {
+      "frequency": 730,
+      "support_pct": 2.88,
+      "median_salary": 1339479.4649999999,
+      "mean_salary": 1409874.96,
+      "p25_salary": 874946.1225,
+      "p75_salary": 1872005.0475,
+      "category": "Cloud & DevOps",
+      "description": "Open-source system for automating deployment, scaling, and management of containerized applications."
+    },
+    "Scikit-learn": {
+      "frequency": 1456,
+      "support_pct": 5.75,
+      "median_salary": 1945509.55,
+      "mean_salary": 1806906.31,
+      "p25_salary": 1261777.2725,
+      "p75_salary": 2221987.585,
+      "category": "Data & AI",
+      "description": "Python module for machine learning built on NumPy, SciPy, and matplotlib."
+    },
+    "Pandas": {
+      "frequency": 3075,
+      "support_pct": 12.14,
+      "median_salary": 1960907.83,
+      "mean_salary": 1821074.79,
+      "p25_salary": 1273394.38,
+      "p75_salary": 2244749.375,
+      "category": "Data & AI",
+      "description": "Fast, flexible, and expressive data structures designed to make working with structured tabular data easy."
+    },
+    "Machine Learning": {
+      "frequency": 1456,
+      "support_pct": 5.75,
+      "median_salary": 1945509.55,
+      "mean_salary": 1806906.31,
+      "p25_salary": 1261777.2725,
+      "p75_salary": 2221987.585,
+      "category": "Data & AI",
+      "description": "Field of artificial intelligence enabling computer systems to learn and infer from data patterns."
+    },
+    "Data Analysis": {
+      "frequency": 2336,
+      "support_pct": 9.22,
+      "median_salary": 1987843.38,
+      "mean_salary": 1848117.39,
+      "p25_salary": 1354604.515,
+      "p75_salary": 2263912.005,
+      "category": "Data & AI",
+      "description": "Process of inspecting, cleansing, transforming, and modeling data with the goal of discovering useful findings."
+    },
+    "NumPy": {
+      "frequency": 2344,
+      "support_pct": 9.25,
+      "median_salary": 2048077.4100000001,
+      "mean_salary": 1944594.73,
+      "p25_salary": 1718022.2025000001,
+      "p75_salary": 2298351.4875,
+      "category": "Data & AI",
+      "description": "Core scientific computing library providing multidimensional array objects and linear algebra routines."
+    },
+    "AWS": {
+      "frequency": 419,
+      "support_pct": 1.65,
+      "median_salary": 1930286.42,
+      "mean_salary": 1825884.65,
+      "p25_salary": 1469703.3399999999,
+      "p75_salary": 2175711.075,
+      "category": "Cloud & DevOps",
+      "description": "Comprehensive cloud computing platform offering compute, storage, and managed services."
+    }
+  },
+  "top_cooccurrences": [
+    {
+      "skill_a": "Git",
+      "skill_b": "REST APIs",
+      "pair_count": 20443,
+      "support_pct": 80.7,
+      "confidence_a_to_b": 84.91,
+      "confidence_b_to_a": 97.93,
+      "lift": 1.03,
+      "pair_median_salary": 600000.0,
+      "pair_mean_salary": 801048.76
+    },
+    {
+      "skill_a": "Git",
+      "skill_b": "SQL",
+      "pair_count": 18077,
+      "support_pct": 71.36,
+      "confidence_a_to_b": 75.09,
+      "confidence_b_to_a": 94.9,
+      "lift": 1.0,
+      "pair_median_salary": 600000.0,
+      "pair_mean_salary": 843892.71
+    },
+    {
+      "skill_a": "REST APIs",
+      "skill_b": "SQL",
+      "pair_count": 17762,
+      "support_pct": 70.117,
+      "confidence_a_to_b": 85.09,
+      "confidence_b_to_a": 93.24,
+      "lift": 1.13,
+      "pair_median_salary": 600000.0,
+      "pair_mean_salary": 817618.65
+    },
+    {
+      "skill_a": "Git",
+      "skill_b": "Linux",
+      "pair_count": 16996,
+      "support_pct": 67.093,
+      "confidence_a_to_b": 70.6,
+      "confidence_b_to_a": 100.0,
+      "lift": 1.05,
+      "pair_median_salary": 600000.0,
+      "pair_mean_salary": 767172.96
+    },
+    {
+      "skill_a": "Linux",
+      "skill_b": "REST APIs",
+      "pair_count": 16365,
+      "support_pct": 64.602,
+      "confidence_a_to_b": 96.29,
+      "confidence_b_to_a": 78.4,
+      "lift": 1.17,
+      "pair_median_salary": 564000.0,
+      "pair_mean_salary": 740693.64
+    },
+    {
+      "skill_a": "Linux",
+      "skill_b": "SQL",
+      "pair_count": 16166,
+      "support_pct": 63.817,
+      "confidence_a_to_b": 95.12,
+      "confidence_b_to_a": 84.87,
+      "lift": 1.26,
+      "pair_median_salary": 528000.0,
+      "pair_mean_salary": 731023.18
+    },
+    {
+      "skill_a": "Git",
+      "skill_b": "Python",
+      "pair_count": 8868,
+      "support_pct": 35.007,
+      "confidence_a_to_b": 36.83,
+      "confidence_b_to_a": 87.59,
+      "lift": 0.92,
+      "pair_median_salary": 800000.0,
+      "pair_mean_salary": 1076938.11
+    },
+    {
+      "skill_a": "Python",
+      "skill_b": "REST APIs",
+      "pair_count": 7798,
+      "support_pct": 30.783,
+      "confidence_a_to_b": 77.02,
+      "confidence_b_to_a": 37.36,
+      "lift": 0.93,
+      "pair_median_salary": 700000.0,
+      "pair_mean_salary": 973952.37
+    },
+    {
+      "skill_a": "Python",
+      "skill_b": "SQL",
+      "pair_count": 7362,
+      "support_pct": 29.062,
+      "confidence_a_to_b": 72.71,
+      "confidence_b_to_a": 38.65,
+      "lift": 0.97,
+      "pair_median_salary": 899347.34,
+      "pair_mean_salary": 1120670.26
+    },
+    {
+      "skill_a": "Git",
+      "skill_b": "PostgreSQL",
+      "pair_count": 7146,
+      "support_pct": 28.209,
+      "confidence_a_to_b": 29.68,
+      "confidence_b_to_a": 91.53,
+      "lift": 0.96,
+      "pair_median_salary": 700000.0,
+      "pair_mean_salary": 1030181.22
+    },
+    {
+      "skill_a": "PostgreSQL",
+      "skill_b": "REST APIs",
+      "pair_count": 6683,
+      "support_pct": 26.382,
+      "confidence_a_to_b": 85.6,
+      "confidence_b_to_a": 32.01,
+      "lift": 1.04,
+      "pair_median_salary": 700000.0,
+      "pair_mean_salary": 985000.67
+    },
+    {
+      "skill_a": "Git",
+      "skill_b": "Java",
+      "pair_count": 5582,
+      "support_pct": 22.035,
+      "confidence_a_to_b": 23.19,
+      "confidence_b_to_a": 100.0,
+      "lift": 1.05,
+      "pair_median_salary": 504000.0,
+      "pair_mean_salary": 722851.6
+    },
+    {
+      "skill_a": "Docker",
+      "skill_b": "Git",
+      "pair_count": 5577,
+      "support_pct": 22.016,
+      "confidence_a_to_b": 96.17,
+      "confidence_b_to_a": 23.17,
+      "lift": 1.01,
+      "pair_median_salary": 791917.01,
+      "pair_mean_salary": 1002416.88
+    },
+    {
+      "skill_a": "PostgreSQL",
+      "skill_b": "SQL",
+      "pair_count": 5552,
+      "support_pct": 21.917,
+      "confidence_a_to_b": 71.12,
+      "confidence_b_to_a": 29.15,
+      "lift": 0.95,
+      "pair_median_salary": 800000.0,
+      "pair_mean_salary": 1106710.9
+    },
+    {
+      "skill_a": "Java",
+      "skill_b": "REST APIs",
+      "pair_count": 5496,
+      "support_pct": 21.696,
+      "confidence_a_to_b": 98.46,
+      "confidence_b_to_a": 26.33,
+      "lift": 1.19,
+      "pair_median_salary": 516000.0,
+      "pair_mean_salary": 723634.83
+    },
+    {
+      "skill_a": "Java",
+      "skill_b": "SQL",
+      "pair_count": 5086,
+      "support_pct": 20.077,
+      "confidence_a_to_b": 91.11,
+      "confidence_b_to_a": 26.7,
+      "lift": 1.21,
+      "pair_median_salary": 500000.0,
+      "pair_mean_salary": 710403.91
+    },
+    {
+      "skill_a": "Java",
+      "skill_b": "Linux",
+      "pair_count": 5003,
+      "support_pct": 19.75,
+      "confidence_a_to_b": 89.63,
+      "confidence_b_to_a": 29.44,
+      "lift": 1.34,
+      "pair_median_salary": 500000.0,
+      "pair_mean_salary": 706917.1
+    },
+    {
+      "skill_a": "Linux",
+      "skill_b": "Python",
+      "pair_count": 4856,
+      "support_pct": 19.169,
+      "confidence_a_to_b": 28.57,
+      "confidence_b_to_a": 47.96,
+      "lift": 0.71,
+      "pair_median_salary": 600000.0,
+      "pair_mean_salary": 822638.71
+    },
+    {
+      "skill_a": "PostgreSQL",
+      "skill_b": "Python",
+      "pair_count": 4752,
+      "support_pct": 18.759,
+      "confidence_a_to_b": 60.87,
+      "confidence_b_to_a": 46.93,
+      "lift": 1.52,
+      "pair_median_salary": 1100000.0,
+      "pair_mean_salary": 1282991.17
+    },
+    {
+      "skill_a": "Git",
+      "skill_b": "Microservices",
+      "pair_count": 4692,
+      "support_pct": 18.522,
+      "confidence_a_to_b": 19.49,
+      "confidence_b_to_a": 100.0,
+      "lift": 1.05,
+      "pair_median_salary": 600000.0,
+      "pair_mean_salary": 871136.06
+    },
+    {
+      "skill_a": "Docker",
+      "skill_b": "Linux",
+      "pair_count": 4593,
+      "support_pct": 18.131,
+      "confidence_a_to_b": 79.2,
+      "confidence_b_to_a": 27.02,
+      "lift": 1.18,
+      "pair_median_salary": 700000.0,
+      "pair_mean_salary": 918295.99
+    },
+    {
+      "skill_a": "CI/CD",
+      "skill_b": "Git",
+      "pair_count": 4469,
+      "support_pct": 17.642,
+      "confidence_a_to_b": 100.0,
+      "confidence_b_to_a": 18.56,
+      "lift": 1.05,
+      "pair_median_salary": 696000.0,
+      "pair_mean_salary": 858572.66
+    },
+    {
+      "skill_a": "CI/CD",
+      "skill_b": "Linux",
+      "pair_count": 4469,
+      "support_pct": 17.642,
+      "confidence_a_to_b": 100.0,
+      "confidence_b_to_a": 26.29,
+      "lift": 1.49,
+      "pair_median_salary": 696000.0,
+      "pair_mean_salary": 858572.66
+    },
+    {
+      "skill_a": "Docker",
+      "skill_b": "REST APIs",
+      "pair_count": 4421,
+      "support_pct": 17.452,
+      "confidence_a_to_b": 76.24,
+      "confidence_b_to_a": 21.18,
+      "lift": 0.93,
+      "pair_median_salary": 600000.0,
+      "pair_mean_salary": 845894.89
+    },
+    {
+      "skill_a": "Microservices",
+      "skill_b": "REST APIs",
+      "pair_count": 4371,
+      "support_pct": 17.255,
+      "confidence_a_to_b": 93.16,
+      "confidence_b_to_a": 20.94,
+      "lift": 1.13,
+      "pair_median_salary": 600000.0,
+      "pair_mean_salary": 805481.13
+    },
+    {
+      "skill_a": "Git",
+      "skill_b": "Spring Boot",
+      "pair_count": 4176,
+      "support_pct": 16.485,
+      "confidence_a_to_b": 17.35,
+      "confidence_b_to_a": 100.0,
+      "lift": 1.05,
+      "pair_median_salary": 600000.0,
+      "pair_mean_salary": 780173.96
+    },
+    {
+      "skill_a": "REST APIs",
+      "skill_b": "Spring Boot",
+      "pair_count": 4176,
+      "support_pct": 16.485,
+      "confidence_a_to_b": 20.0,
+      "confidence_b_to_a": 100.0,
+      "lift": 1.21,
+      "pair_median_salary": 600000.0,
+      "pair_mean_salary": 780173.96
+    },
+    {
+      "skill_a": "Docker",
+      "skill_b": "SQL",
+      "pair_count": 4164,
+      "support_pct": 16.438,
+      "confidence_a_to_b": 71.81,
+      "confidence_b_to_a": 21.86,
+      "lift": 0.95,
+      "pair_median_salary": 600000.0,
+      "pair_mean_salary": 901697.0
+    },
+    {
+      "skill_a": "Linux",
+      "skill_b": "Microservices",
+      "pair_count": 4138,
+      "support_pct": 16.335,
+      "confidence_a_to_b": 24.35,
+      "confidence_b_to_a": 88.19,
+      "lift": 1.31,
+      "pair_median_salary": 600000.0,
+      "pair_mean_salary": 842367.6
+    },
+    {
+      "skill_a": "CI/CD",
+      "skill_b": "REST APIs",
+      "pair_count": 3997,
+      "support_pct": 15.778,
+      "confidence_a_to_b": 89.44,
+      "confidence_b_to_a": 19.15,
+      "lift": 1.09,
+      "pair_median_salary": 600000.0,
+      "pair_mean_salary": 811551.32
+    },
+    {
+      "skill_a": "Git",
+      "skill_b": "Go",
+      "pair_count": 3959,
+      "support_pct": 15.628,
+      "confidence_a_to_b": 16.44,
+      "confidence_b_to_a": 100.0,
+      "lift": 1.05,
+      "pair_median_salary": 600000.0,
+      "pair_mean_salary": 830062.61
+    },
+    {
+      "skill_a": "Go",
+      "skill_b": "Linux",
+      "pair_count": 3959,
+      "support_pct": 15.628,
+      "confidence_a_to_b": 100.0,
+      "confidence_b_to_a": 23.29,
+      "lift": 1.49,
+      "pair_median_salary": 600000.0,
+      "pair_mean_salary": 830062.61
+    },
+    {
+      "skill_a": "Microservices",
+      "skill_b": "SQL",
+      "pair_count": 3938,
+      "support_pct": 15.546,
+      "confidence_a_to_b": 83.93,
+      "confidence_b_to_a": 20.67,
+      "lift": 1.12,
+      "pair_median_salary": 600000.0,
+      "pair_mean_salary": 780266.25
+    },
+    {
+      "skill_a": "Linux",
+      "skill_b": "PostgreSQL",
+      "pair_count": 3925,
+      "support_pct": 15.494,
+      "confidence_a_to_b": 23.09,
+      "confidence_b_to_a": 50.28,
+      "lift": 0.75,
+      "pair_median_salary": 600000.0,
+      "pair_mean_salary": 820368.73
+    },
+    {
+      "skill_a": "Go",
+      "skill_b": "REST APIs",
+      "pair_count": 3813,
+      "support_pct": 15.052,
+      "confidence_a_to_b": 96.31,
+      "confidence_b_to_a": 18.27,
+      "lift": 1.17,
+      "pair_median_salary": 600000.0,
+      "pair_mean_salary": 802230.69
+    },
+    {
+      "skill_a": "SQL",
+      "skill_b": "Spring Boot",
+      "pair_count": 3796,
+      "support_pct": 14.985,
+      "confidence_a_to_b": 19.93,
+      "confidence_b_to_a": 90.9,
+      "lift": 1.21,
+      "pair_median_salary": 600000.0,
+      "pair_mean_salary": 762873.67
+    },
+    {
+      "skill_a": "C++",
+      "skill_b": "Git",
+      "pair_count": 3750,
+      "support_pct": 14.803,
+      "confidence_a_to_b": 100.0,
+      "confidence_b_to_a": 15.58,
+      "lift": 1.05,
+      "pair_median_salary": 600000.0,
+      "pair_mean_salary": 776773.29
+    },
+    {
+      "skill_a": "C++",
+      "skill_b": "Linux",
+      "pair_count": 3750,
+      "support_pct": 14.803,
+      "confidence_a_to_b": 100.0,
+      "confidence_b_to_a": 22.06,
+      "lift": 1.49,
+      "pair_median_salary": 600000.0,
+      "pair_mean_salary": 776773.29
+    },
+    {
+      "skill_a": "C++",
+      "skill_b": "REST APIs",
+      "pair_count": 3750,
+      "support_pct": 14.803,
+      "confidence_a_to_b": 100.0,
+      "confidence_b_to_a": 17.96,
+      "lift": 1.21,
+      "pair_median_salary": 600000.0,
+      "pair_mean_salary": 776773.29
+    },
+    {
+      "skill_a": "C++",
+      "skill_b": "SQL",
+      "pair_count": 3750,
+      "support_pct": 14.803,
+      "confidence_a_to_b": 100.0,
+      "confidence_b_to_a": 19.69,
+      "lift": 1.33,
+      "pair_median_salary": 600000.0,
+      "pair_mean_salary": 776773.29
+    },
+    {
+      "skill_a": "CI/CD",
+      "skill_b": "SQL",
+      "pair_count": 3739,
+      "support_pct": 14.76,
+      "confidence_a_to_b": 83.67,
+      "confidence_b_to_a": 19.63,
+      "lift": 1.11,
+      "pair_median_salary": 600000.0,
+      "pair_mean_salary": 750936.75
+    },
+    {
+      "skill_a": "Linux",
+      "skill_b": "Spring Boot",
+      "pair_count": 3721,
+      "support_pct": 14.689,
+      "confidence_a_to_b": 21.89,
+      "confidence_b_to_a": 89.1,
+      "lift": 1.33,
+      "pair_median_salary": 600000.0,
+      "pair_mean_salary": 758210.28
+    },
+    {
+      "skill_a": "Go",
+      "skill_b": "SQL",
+      "pair_count": 3717,
+      "support_pct": 14.673,
+      "confidence_a_to_b": 93.89,
+      "confidence_b_to_a": 19.51,
+      "lift": 1.25,
+      "pair_median_salary": 600000.0,
+      "pair_mean_salary": 771524.78
+    },
+    {
+      "skill_a": "Git",
+      "skill_b": "JavaScript",
+      "pair_count": 3113,
+      "support_pct": 12.289,
+      "confidence_a_to_b": 12.93,
+      "confidence_b_to_a": 100.0,
+      "lift": 1.05,
+      "pair_median_salary": 400000.0,
+      "pair_mean_salary": 574589.94
+    },
+    {
+      "skill_a": "Git",
+      "skill_b": "React.js",
+      "pair_count": 3113,
+      "support_pct": 12.289,
+      "confidence_a_to_b": 12.93,
+      "confidence_b_to_a": 100.0,
+      "lift": 1.05,
+      "pair_median_salary": 400000.0,
+      "pair_mean_salary": 574589.94
+    },
+    {
+      "skill_a": "JavaScript",
+      "skill_b": "React.js",
+      "pair_count": 3113,
+      "support_pct": 12.289,
+      "confidence_a_to_b": 100.0,
+      "confidence_b_to_a": 100.0,
+      "lift": 8.14,
+      "pair_median_salary": 400000.0,
+      "pair_mean_salary": 574589.94
+    },
+    {
+      "skill_a": "Pandas",
+      "skill_b": "Python",
+      "pair_count": 3075,
+      "support_pct": 12.139,
+      "confidence_a_to_b": 100.0,
+      "confidence_b_to_a": 30.37,
+      "lift": 2.5,
+      "pair_median_salary": 1960907.83,
+      "pair_mean_salary": 1821074.79
+    },
+    {
+      "skill_a": "CSS3",
+      "skill_b": "Git",
+      "pair_count": 2989,
+      "support_pct": 11.799,
+      "confidence_a_to_b": 100.0,
+      "confidence_b_to_a": 12.42,
+      "lift": 1.05,
+      "pair_median_salary": 400000.0,
+      "pair_mean_salary": 571581.76
+    },
+    {
+      "skill_a": "CSS3",
+      "skill_b": "HTML5",
+      "pair_count": 2989,
+      "support_pct": 11.799,
+      "confidence_a_to_b": 100.0,
+      "confidence_b_to_a": 100.0,
+      "lift": 8.48,
+      "pair_median_salary": 400000.0,
+      "pair_mean_salary": 571581.76
+    },
+    {
+      "skill_a": "CSS3",
+      "skill_b": "JavaScript",
+      "pair_count": 2989,
+      "support_pct": 11.799,
+      "confidence_a_to_b": 100.0,
+      "confidence_b_to_a": 96.02,
+      "lift": 8.14,
+      "pair_median_salary": 400000.0,
+      "pair_mean_salary": 571581.76
+    },
+    {
+      "skill_a": "CSS3",
+      "skill_b": "React.js",
+      "pair_count": 2989,
+      "support_pct": 11.799,
+      "confidence_a_to_b": 100.0,
+      "confidence_b_to_a": 96.02,
+      "lift": 8.14,
+      "pair_median_salary": 400000.0,
+      "pair_mean_salary": 571581.76
+    },
+    {
+      "skill_a": "Git",
+      "skill_b": "HTML5",
+      "pair_count": 2989,
+      "support_pct": 11.799,
+      "confidence_a_to_b": 12.42,
+      "confidence_b_to_a": 100.0,
+      "lift": 1.05,
+      "pair_median_salary": 400000.0,
+      "pair_mean_salary": 571581.76
+    },
+    {
+      "skill_a": "HTML5",
+      "skill_b": "JavaScript",
+      "pair_count": 2989,
+      "support_pct": 11.799,
+      "confidence_a_to_b": 100.0,
+      "confidence_b_to_a": 96.02,
+      "lift": 8.14,
+      "pair_median_salary": 400000.0,
+      "pair_mean_salary": 571581.76
+    },
+    {
+      "skill_a": "HTML5",
+      "skill_b": "React.js",
+      "pair_count": 2989,
+      "support_pct": 11.799,
+      "confidence_a_to_b": 100.0,
+      "confidence_b_to_a": 96.02,
+      "lift": 8.14,
+      "pair_median_salary": 400000.0,
+      "pair_mean_salary": 571581.76
+    },
+    {
+      "skill_a": "Docker",
+      "skill_b": "Python",
+      "pair_count": 2486,
+      "support_pct": 9.814,
+      "confidence_a_to_b": 42.87,
+      "confidence_b_to_a": 24.55,
+      "lift": 1.07,
+      "pair_median_salary": 1154395.445,
+      "pair_mean_salary": 1314000.96
+    },
+    {
+      "skill_a": "Pandas",
+      "skill_b": "SQL",
+      "pair_count": 2400,
+      "support_pct": 9.474,
+      "confidence_a_to_b": 78.05,
+      "confidence_b_to_a": 12.6,
+      "lift": 1.04,
+      "pair_median_salary": 1996906.445,
+      "pair_mean_salary": 1857254.1
+    },
+    {
+      "skill_a": "NumPy",
+      "skill_b": "Python",
+      "pair_count": 2344,
+      "support_pct": 9.253,
+      "confidence_a_to_b": 100.0,
+      "confidence_b_to_a": 23.15,
+      "lift": 2.5,
+      "pair_median_salary": 2048077.4100000001,
+      "pair_mean_salary": 1944594.73
+    },
+    {
+      "skill_a": "Data Analysis",
+      "skill_b": "Pandas",
+      "pair_count": 2336,
+      "support_pct": 9.222,
+      "confidence_a_to_b": 100.0,
+      "confidence_b_to_a": 75.97,
+      "lift": 8.24,
+      "pair_median_salary": 1987843.38,
+      "pair_mean_salary": 1848117.39
+    },
+    {
+      "skill_a": "Data Analysis",
+      "skill_b": "Python",
+      "pair_count": 2336,
+      "support_pct": 9.222,
+      "confidence_a_to_b": 100.0,
+      "confidence_b_to_a": 23.07,
+      "lift": 2.5,
+      "pair_median_salary": 1987843.38,
+      "pair_mean_salary": 1848117.39
+    },
+    {
+      "skill_a": "NumPy",
+      "skill_b": "Pandas",
+      "pair_count": 2257,
+      "support_pct": 8.91,
+      "confidence_a_to_b": 96.29,
+      "confidence_b_to_a": 73.4,
+      "lift": 7.93,
+      "pair_median_salary": 2049555.78,
+      "pair_mean_salary": 1947182.5
+    },
+    {
+      "skill_a": "Data Analysis",
+      "skill_b": "SQL",
+      "pair_count": 2095,
+      "support_pct": 8.27,
+      "confidence_a_to_b": 89.68,
+      "confidence_b_to_a": 11.0,
+      "lift": 1.19,
+      "pair_median_salary": 1982741.6,
+      "pair_mean_salary": 1838170.69
+    },
+    {
+      "skill_a": "Django",
+      "skill_b": "Git",
+      "pair_count": 2082,
+      "support_pct": 8.219,
+      "confidence_a_to_b": 100.0,
+      "confidence_b_to_a": 8.65,
+      "lift": 1.05,
+      "pair_median_salary": 600000.0,
+      "pair_mean_salary": 843850.8
+    },
+    {
+      "skill_a": "Django",
+      "skill_b": "PostgreSQL",
+      "pair_count": 2082,
+      "support_pct": 8.219,
+      "confidence_a_to_b": 100.0,
+      "confidence_b_to_a": 26.67,
+      "lift": 3.24,
+      "pair_median_salary": 600000.0,
+      "pair_mean_salary": 843850.8
+    },
+    {
+      "skill_a": "Django",
+      "skill_b": "Python",
+      "pair_count": 2057,
+      "support_pct": 8.12,
+      "confidence_a_to_b": 98.8,
+      "confidence_b_to_a": 20.32,
+      "lift": 2.47,
+      "pair_median_salary": 600000.0,
+      "pair_mean_salary": 847842.86
+    },
+    {
+      "skill_a": "Django",
+      "skill_b": "REST APIs",
+      "pair_count": 2046,
+      "support_pct": 8.077,
+      "confidence_a_to_b": 98.27,
+      "confidence_b_to_a": 9.8,
+      "lift": 1.19,
+      "pair_median_salary": 600000.0,
+      "pair_mean_salary": 847730.58
+    },
+    {
+      "skill_a": "Git",
+      "skill_b": "Pandas",
+      "pair_count": 1818,
+      "support_pct": 7.177,
+      "confidence_a_to_b": 7.55,
+      "confidence_b_to_a": 59.12,
+      "lift": 0.62,
+      "pair_median_salary": 2110687.72,
+      "pair_mean_salary": 2036449.46
+    },
+    {
+      "skill_a": "Java",
+      "skill_b": "Python",
+      "pair_count": 1715,
+      "support_pct": 6.77,
+      "confidence_a_to_b": 30.72,
+      "confidence_b_to_a": 16.94,
+      "lift": 0.77,
+      "pair_median_salary": 600000.0,
+      "pair_mean_salary": 774179.75
+    },
+    {
+      "skill_a": "Pandas",
+      "skill_b": "PostgreSQL",
+      "pair_count": 1714,
+      "support_pct": 6.766,
+      "confidence_a_to_b": 55.74,
+      "confidence_b_to_a": 21.95,
+      "lift": 1.81,
+      "pair_median_salary": 2101838.535,
+      "pair_mean_salary": 2034728.83
+    },
+    {
+      "skill_a": "NumPy",
+      "skill_b": "SQL",
+      "pair_count": 1702,
+      "support_pct": 6.719,
+      "confidence_a_to_b": 72.61,
+      "confidence_b_to_a": 8.93,
+      "lift": 0.97,
+      "pair_median_salary": 2113426.82,
+      "pair_mean_salary": 2039438.78
+    },
+    {
+      "skill_a": "Docker",
+      "skill_b": "PostgreSQL",
+      "pair_count": 1670,
+      "support_pct": 6.592,
+      "confidence_a_to_b": 28.8,
+      "confidence_b_to_a": 21.39,
+      "lift": 0.93,
+      "pair_median_salary": 970456.315,
+      "pair_mean_salary": 1189241.58
+    },
+    {
+      "skill_a": "Data Analysis",
+      "skill_b": "NumPy",
+      "pair_count": 1636,
+      "support_pct": 6.458,
+      "confidence_a_to_b": 70.03,
+      "confidence_b_to_a": 69.8,
+      "lift": 7.57,
+      "pair_median_salary": 2100729.73,
+      "pair_mean_salary": 2034909.61
+    },
+    {
+      "skill_a": "Microservices",
+      "skill_b": "Python",
+      "pair_count": 1602,
+      "support_pct": 6.324,
+      "confidence_a_to_b": 34.14,
+      "confidence_b_to_a": 15.82,
+      "lift": 0.85,
+      "pair_median_salary": 700000.0,
+      "pair_mean_salary": 1026653.69
+    },
+    {
+      "skill_a": "Java",
+      "skill_b": "PostgreSQL",
+      "pair_count": 1592,
+      "support_pct": 6.285,
+      "confidence_a_to_b": 28.52,
+      "confidence_b_to_a": 20.39,
+      "lift": 0.93,
+      "pair_median_salary": 588000.0,
+      "pair_mean_salary": 779458.15
+    },
+    {
+      "skill_a": "Data Analysis",
+      "skill_b": "PostgreSQL",
+      "pair_count": 1463,
+      "support_pct": 5.775,
+      "confidence_a_to_b": 62.63,
+      "confidence_b_to_a": 18.74,
+      "lift": 2.03,
+      "pair_median_salary": 2117533.9,
+      "pair_mean_salary": 2051357.19
+    },
+    {
+      "skill_a": "Machine Learning",
+      "skill_b": "Python",
+      "pair_count": 1456,
+      "support_pct": 5.748,
+      "confidence_a_to_b": 100.0,
+      "confidence_b_to_a": 14.38,
+      "lift": 2.5,
+      "pair_median_salary": 1945509.55,
+      "pair_mean_salary": 1806906.31
+    },
+    {
+      "skill_a": "Machine Learning",
+      "skill_b": "Scikit-learn",
+      "pair_count": 1456,
+      "support_pct": 5.748,
+      "confidence_a_to_b": 100.0,
+      "confidence_b_to_a": 100.0,
+      "lift": 17.4,
+      "pair_median_salary": 1945509.55,
+      "pair_mean_salary": 1806906.31
+    },
+    {
+      "skill_a": "Python",
+      "skill_b": "Scikit-learn",
+      "pair_count": 1456,
+      "support_pct": 5.748,
+      "confidence_a_to_b": 14.38,
+      "confidence_b_to_a": 100.0,
+      "lift": 2.5,
+      "pair_median_salary": 1945509.55,
+      "pair_mean_salary": 1806906.31
+    },
+    {
+      "skill_a": "CI/CD",
+      "skill_b": "Docker",
+      "pair_count": 1433,
+      "support_pct": 5.657,
+      "confidence_a_to_b": 32.07,
+      "confidence_b_to_a": 24.71,
+      "lift": 1.4,
+      "pair_median_salary": 923169.37,
+      "pair_mean_salary": 1121070.35
+    },
+    {
+      "skill_a": "Git",
+      "skill_b": "NumPy",
+      "pair_count": 1422,
+      "support_pct": 5.613,
+      "confidence_a_to_b": 5.91,
+      "confidence_b_to_a": 60.67,
+      "lift": 0.64,
+      "pair_median_salary": 2177563.0549999997,
+      "pair_mean_salary": 2135151.21
+    },
+    {
+      "skill_a": "Data Analysis",
+      "skill_b": "Git",
+      "pair_count": 1374,
+      "support_pct": 5.424,
+      "confidence_a_to_b": 58.82,
+      "confidence_b_to_a": 5.71,
+      "lift": 0.62,
+      "pair_median_salary": 2139040.795,
+      "pair_mean_salary": 2078219.63
+    },
+    {
+      "skill_a": "Python",
+      "skill_b": "Spring Boot",
+      "pair_count": 1347,
+      "support_pct": 5.317,
+      "confidence_a_to_b": 13.3,
+      "confidence_b_to_a": 32.26,
+      "lift": 0.81,
+      "pair_median_salary": 600000.0,
+      "pair_mean_salary": 817511.86
+    },
+    {
+      "skill_a": "Git",
+      "skill_b": "Next.js",
+      "pair_count": 1307,
+      "support_pct": 5.159,
+      "confidence_a_to_b": 5.43,
+      "confidence_b_to_a": 100.0,
+      "lift": 1.05,
+      "pair_median_salary": 444000.0,
+      "pair_mean_salary": 612998.66
+    },
+    {
+      "skill_a": "JavaScript",
+      "skill_b": "Next.js",
+      "pair_count": 1307,
+      "support_pct": 5.159,
+      "confidence_a_to_b": 41.99,
+      "confidence_b_to_a": 100.0,
+      "lift": 8.14,
+      "pair_median_salary": 444000.0,
+      "pair_mean_salary": 612998.66
+    },
+    {
+      "skill_a": "Next.js",
+      "skill_b": "React.js",
+      "pair_count": 1307,
+      "support_pct": 5.159,
+      "confidence_a_to_b": 100.0,
+      "confidence_b_to_a": 41.99,
+      "lift": 8.14,
+      "pair_median_salary": 444000.0,
+      "pair_mean_salary": 612998.66
+    },
+    {
+      "skill_a": "NumPy",
+      "skill_b": "PostgreSQL",
+      "pair_count": 1306,
+      "support_pct": 5.156,
+      "confidence_a_to_b": 55.72,
+      "confidence_b_to_a": 16.73,
+      "lift": 1.81,
+      "pair_median_salary": 2185271.3449999997,
+      "pair_mean_salary": 2151404.74
+    },
+    {
+      "skill_a": "CSS3",
+      "skill_b": "GraphQL",
+      "pair_count": 1301,
+      "support_pct": 5.136,
+      "confidence_a_to_b": 43.53,
+      "confidence_b_to_a": 100.0,
+      "lift": 8.48,
+      "pair_median_salary": 420000.0,
+      "pair_mean_salary": 597942.04
+    },
+    {
+      "skill_a": "Git",
+      "skill_b": "GraphQL",
+      "pair_count": 1301,
+      "support_pct": 5.136,
+      "confidence_a_to_b": 5.4,
+      "confidence_b_to_a": 100.0,
+      "lift": 1.05,
+      "pair_median_salary": 420000.0,
+      "pair_mean_salary": 597942.04
+    },
+    {
+      "skill_a": "GraphQL",
+      "skill_b": "HTML5",
+      "pair_count": 1301,
+      "support_pct": 5.136,
+      "confidence_a_to_b": 100.0,
+      "confidence_b_to_a": 43.53,
+      "lift": 8.48,
+      "pair_median_salary": 420000.0,
+      "pair_mean_salary": 597942.04
+    },
+    {
+      "skill_a": "GraphQL",
+      "skill_b": "JavaScript",
+      "pair_count": 1301,
+      "support_pct": 5.136,
+      "confidence_a_to_b": 100.0,
+      "confidence_b_to_a": 41.79,
+      "lift": 8.14,
+      "pair_median_salary": 420000.0,
+      "pair_mean_salary": 597942.04
+    },
+    {
+      "skill_a": "GraphQL",
+      "skill_b": "React.js",
+      "pair_count": 1301,
+      "support_pct": 5.136,
+      "confidence_a_to_b": 100.0,
+      "confidence_b_to_a": 41.79,
+      "lift": 8.14,
+      "pair_median_salary": 420000.0,
+      "pair_mean_salary": 597942.04
+    },
+    {
+      "skill_a": "Microservices",
+      "skill_b": "PostgreSQL",
+      "pair_count": 1291,
+      "support_pct": 5.096,
+      "confidence_a_to_b": 27.51,
+      "confidence_b_to_a": 16.54,
+      "lift": 0.89,
+      "pair_median_salary": 700000.0,
+      "pair_mean_salary": 957515.7
+    },
+    {
+      "skill_a": "Git",
+      "skill_b": "Tailwind CSS",
+      "pair_count": 1284,
+      "support_pct": 5.069,
+      "confidence_a_to_b": 5.33,
+      "confidence_b_to_a": 100.0,
+      "lift": 1.05,
+      "pair_median_salary": 444000.0,
+      "pair_mean_salary": 615980.91
+    },
+    {
+      "skill_a": "JavaScript",
+      "skill_b": "Tailwind CSS",
+      "pair_count": 1284,
+      "support_pct": 5.069,
+      "confidence_a_to_b": 41.25,
+      "confidence_b_to_a": 100.0,
+      "lift": 8.14,
+      "pair_median_salary": 444000.0,
+      "pair_mean_salary": 615980.91
+    },
+    {
+      "skill_a": "React.js",
+      "skill_b": "Tailwind CSS",
+      "pair_count": 1284,
+      "support_pct": 5.069,
+      "confidence_a_to_b": 41.25,
+      "confidence_b_to_a": 100.0,
+      "lift": 8.14,
+      "pair_median_salary": 444000.0,
+      "pair_mean_salary": 615980.91
+    },
+    {
+      "skill_a": "Git",
+      "skill_b": "TypeScript",
+      "pair_count": 1284,
+      "support_pct": 5.069,
+      "confidence_a_to_b": 5.33,
+      "confidence_b_to_a": 100.0,
+      "lift": 1.05,
+      "pair_median_salary": 432000.0,
+      "pair_mean_salary": 602084.59
+    },
+    {
+      "skill_a": "JavaScript",
+      "skill_b": "TypeScript",
+      "pair_count": 1284,
+      "support_pct": 5.069,
+      "confidence_a_to_b": 41.25,
+      "confidence_b_to_a": 100.0,
+      "lift": 8.14,
+      "pair_median_salary": 432000.0,
+      "pair_mean_salary": 602084.59
+    },
+    {
+      "skill_a": "React.js",
+      "skill_b": "TypeScript",
+      "pair_count": 1284,
+      "support_pct": 5.069,
+      "confidence_a_to_b": 41.25,
+      "confidence_b_to_a": 100.0,
+      "lift": 8.14,
+      "pair_median_salary": 432000.0,
+      "pair_mean_salary": 602084.59
+    },
+    {
+      "skill_a": "CSS3",
+      "skill_b": "Next.js",
+      "pair_count": 1269,
+      "support_pct": 5.009,
+      "confidence_a_to_b": 42.46,
+      "confidence_b_to_a": 97.09,
+      "lift": 8.23,
+      "pair_median_salary": 432000.0,
+      "pair_mean_salary": 608410.75
+    },
+    {
+      "skill_a": "HTML5",
+      "skill_b": "Next.js",
+      "pair_count": 1269,
+      "support_pct": 5.009,
+      "confidence_a_to_b": 42.46,
+      "confidence_b_to_a": 97.09,
+      "lift": 8.23,
+      "pair_median_salary": 432000.0,
+      "pair_mean_salary": 608410.75
+    },
+    {
+      "skill_a": "Docker",
+      "skill_b": "Microservices",
+      "pair_count": 1265,
+      "support_pct": 4.994,
+      "confidence_a_to_b": 21.81,
+      "confidence_b_to_a": 26.96,
+      "lift": 1.18,
+      "pair_median_salary": 956999.54,
+      "pair_mean_salary": 1184198.32
+    },
+    {
+      "skill_a": "CSS3",
+      "skill_b": "TypeScript",
+      "pair_count": 1257,
+      "support_pct": 4.962,
+      "confidence_a_to_b": 42.05,
+      "confidence_b_to_a": 97.9,
+      "lift": 8.3,
+      "pair_median_salary": 432000.0,
+      "pair_mean_salary": 599844.56
+    },
+    {
+      "skill_a": "HTML5",
+      "skill_b": "TypeScript",
+      "pair_count": 1257,
+      "support_pct": 4.962,
+      "confidence_a_to_b": 42.05,
+      "confidence_b_to_a": 97.9,
+      "lift": 8.3,
+      "pair_median_salary": 432000.0,
+      "pair_mean_salary": 599844.56
+    },
+    {
+      "skill_a": "CSS3",
+      "skill_b": "Tailwind CSS",
+      "pair_count": 1256,
+      "support_pct": 4.958,
+      "confidence_a_to_b": 42.02,
+      "confidence_b_to_a": 97.82,
+      "lift": 8.29,
+      "pair_median_salary": 444000.0,
+      "pair_mean_salary": 617935.9
+    },
+    {
+      "skill_a": "HTML5",
+      "skill_b": "Tailwind CSS",
+      "pair_count": 1256,
+      "support_pct": 4.958,
+      "confidence_a_to_b": 42.02,
+      "confidence_b_to_a": 97.82,
+      "lift": 8.29,
+      "pair_median_salary": 444000.0,
+      "pair_mean_salary": 617935.9
+    },
+    {
+      "skill_a": "JavaScript",
+      "skill_b": "REST APIs",
+      "pair_count": 1246,
+      "support_pct": 4.919,
+      "confidence_a_to_b": 40.03,
+      "confidence_b_to_a": 5.97,
+      "lift": 0.49,
+      "pair_median_salary": 432000.0,
+      "pair_mean_salary": 606731.87
+    },
+    {
+      "skill_a": "REST APIs",
+      "skill_b": "React.js",
+      "pair_count": 1246,
+      "support_pct": 4.919,
+      "confidence_a_to_b": 5.97,
+      "confidence_b_to_a": 40.03,
+      "lift": 0.49,
+      "pair_median_salary": 432000.0,
+      "pair_mean_salary": 606731.87
+    },
+    {
+      "skill_a": "CSS3",
+      "skill_b": "REST APIs",
+      "pair_count": 1224,
+      "support_pct": 4.832,
+      "confidence_a_to_b": 40.95,
+      "confidence_b_to_a": 5.86,
+      "lift": 0.5,
+      "pair_median_salary": 436704.0,
+      "pair_mean_salary": 607859.4
+    },
+    {
+      "skill_a": "HTML5",
+      "skill_b": "REST APIs",
+      "pair_count": 1224,
+      "support_pct": 4.832,
+      "confidence_a_to_b": 40.95,
+      "confidence_b_to_a": 5.86,
+      "lift": 0.5,
+      "pair_median_salary": 436704.0,
+      "pair_mean_salary": 607859.4
+    },
+    {
+      "skill_a": "Data Analysis",
+      "skill_b": "REST APIs",
+      "pair_count": 1220,
+      "support_pct": 4.816,
+      "confidence_a_to_b": 52.23,
+      "confidence_b_to_a": 5.84,
+      "lift": 0.63,
+      "pair_median_salary": 2091980.135,
+      "pair_mean_salary": 2011479.51
+    },
+    {
+      "skill_a": "Pandas",
+      "skill_b": "REST APIs",
+      "pair_count": 1220,
+      "support_pct": 4.816,
+      "confidence_a_to_b": 39.67,
+      "confidence_b_to_a": 5.84,
+      "lift": 0.48,
+      "pair_median_salary": 2091980.135,
+      "pair_mean_salary": 2011479.51
+    },
+    {
+      "skill_a": "Machine Learning",
+      "skill_b": "Pandas",
+      "pair_count": 1193,
+      "support_pct": 4.709,
+      "confidence_a_to_b": 81.94,
+      "confidence_b_to_a": 38.8,
+      "lift": 6.75,
+      "pair_median_salary": 1978398.16,
+      "pair_mean_salary": 1856213.16
+    },
+    {
+      "skill_a": "Pandas",
+      "skill_b": "Scikit-learn",
+      "pair_count": 1193,
+      "support_pct": 4.709,
+      "confidence_a_to_b": 38.8,
+      "confidence_b_to_a": 81.94,
+      "lift": 6.75,
+      "pair_median_salary": 1978398.16,
+      "pair_mean_salary": 1856213.16
+    },
+    {
+      "skill_a": "CI/CD",
+      "skill_b": "Python",
+      "pair_count": 1190,
+      "support_pct": 4.698,
+      "confidence_a_to_b": 26.63,
+      "confidence_b_to_a": 11.75,
+      "lift": 0.67,
+      "pair_median_salary": 700000.0,
+      "pair_mean_salary": 973126.81
+    },
+    {
+      "skill_a": "Java",
+      "skill_b": "Microservices",
+      "pair_count": 1174,
+      "support_pct": 4.634,
+      "confidence_a_to_b": 21.03,
+      "confidence_b_to_a": 25.02,
+      "lift": 1.14,
+      "pair_median_salary": 600000.0,
+      "pair_mean_salary": 764500.55
+    },
+    {
+      "skill_a": "PostgreSQL",
+      "skill_b": "Spring Boot",
+      "pair_count": 1172,
+      "support_pct": 4.627,
+      "confidence_a_to_b": 15.01,
+      "confidence_b_to_a": 28.07,
+      "lift": 0.91,
+      "pair_median_salary": 684000.0,
+      "pair_mean_salary": 877420.2
+    },
+    {
+      "skill_a": "Java",
+      "skill_b": "Spring Boot",
+      "pair_count": 1170,
+      "support_pct": 4.619,
+      "confidence_a_to_b": 20.96,
+      "confidence_b_to_a": 28.02,
+      "lift": 1.27,
+      "pair_median_salary": 576000.0,
+      "pair_mean_salary": 737893.25
+    },
+    {
+      "skill_a": "Machine Learning",
+      "skill_b": "NumPy",
+      "pair_count": 1162,
+      "support_pct": 4.587,
+      "confidence_a_to_b": 79.81,
+      "confidence_b_to_a": 49.57,
+      "lift": 8.62,
+      "pair_median_salary": 1983221.625,
+      "pair_mean_salary": 1859619.15
+    },
+    {
+      "skill_a": "NumPy",
+      "skill_b": "Scikit-learn",
+      "pair_count": 1162,
+      "support_pct": 4.587,
+      "confidence_a_to_b": 49.57,
+      "confidence_b_to_a": 79.81,
+      "lift": 8.62,
+      "pair_median_salary": 1983221.625,
+      "pair_mean_salary": 1859619.15
+    },
+    {
+      "skill_a": "Docker",
+      "skill_b": "Java",
+      "pair_count": 1138,
+      "support_pct": 4.492,
+      "confidence_a_to_b": 19.62,
+      "confidence_b_to_a": 20.39,
+      "lift": 0.89,
+      "pair_median_salary": 600000.0,
+      "pair_mean_salary": 765947.47
+    },
+    {
+      "skill_a": "Go",
+      "skill_b": "Java",
+      "pair_count": 1080,
+      "support_pct": 4.263,
+      "confidence_a_to_b": 27.28,
+      "confidence_b_to_a": 19.35,
+      "lift": 1.24,
+      "pair_median_salary": 582000.0,
+      "pair_mean_salary": 755980.8
+    }
+  ],
+  "generated_timestamp": "2026-11-23T14:17:54.282666"
+}

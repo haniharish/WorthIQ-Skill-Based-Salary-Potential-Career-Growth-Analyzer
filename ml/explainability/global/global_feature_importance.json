@@ -1,0 +1,652 @@
+{
+  "sample_size": 800,
+  "expected_value_log": 13.368040558384532,
+  "expected_value_inr": 639242.3935331183,
+  "feature_rankings": [
+    {
+      "feature": "num__years_of_experience",
+      "clean_name": "Years of Experience",
+      "display_name": "Experience Tenure",
+      "category": "Experience",
+      "mean_abs_shap": 0.1978,
+      "rank": 1
+    },
+    {
+      "feature": "skill__pandas",
+      "clean_name": "Skill: Pandas",
+      "display_name": "Pandas",
+      "category": "Technical Skill",
+      "mean_abs_shap": 0.1489,
+      "rank": 2
+    },
+    {
+      "feature": "num__company_rating",
+      "clean_name": "Company Tier / Rating",
+      "display_name": "Company Rating",
+      "category": "Company Quality",
+      "mean_abs_shap": 0.04731,
+      "rank": 3
+    },
+    {
+      "feature": "job_role_Software Developer",
+      "clean_name": "Role: Software Developer",
+      "display_name": "Software Developer",
+      "category": "Job Role",
+      "mean_abs_shap": 0.04205,
+      "rank": 4
+    },
+    {
+      "feature": "location_Bengaluru",
+      "clean_name": "Location: Bengaluru",
+      "display_name": "Bengaluru",
+      "category": "Location",
+      "mean_abs_shap": 0.03862,
+      "rank": 5
+    },
+    {
+      "feature": "skill__react_js",
+      "clean_name": "Skill: React.js",
+      "display_name": "React.js",
+      "category": "Technical Skill",
+      "mean_abs_shap": 0.02976,
+      "rank": 6
+    },
+    {
+      "feature": "location_Chennai",
+      "clean_name": "Location: Chennai",
+      "display_name": "Chennai",
+      "category": "Location",
+      "mean_abs_shap": 0.02209,
+      "rank": 7
+    },
+    {
+      "feature": "skill__rest_apis",
+      "clean_name": "Skill: REST APIs",
+      "display_name": "REST APIs",
+      "category": "Technical Skill",
+      "mean_abs_shap": 0.02112,
+      "rank": 8
+    },
+    {
+      "feature": "skill__javascript",
+      "clean_name": "Skill: JavaScript",
+      "display_name": "JavaScript",
+      "category": "Technical Skill",
+      "mean_abs_shap": 0.0208,
+      "rank": 9
+    },
+    {
+      "feature": "skill__java",
+      "clean_name": "Skill: Java",
+      "display_name": "Java",
+      "category": "Technical Skill",
+      "mean_abs_shap": 0.01932,
+      "rank": 10
+    },
+    {
+      "feature": "skill__python",
+      "clean_name": "Skill: Python",
+      "display_name": "Python",
+      "category": "Technical Skill",
+      "mean_abs_shap": 0.01662,
+      "rank": 11
+    },
+    {
+      "feature": "location_Mumbai",
+      "clean_name": "Location: Mumbai",
+      "display_name": "Mumbai",
+      "category": "Location",
+      "mean_abs_shap": 0.01613,
+      "rank": 12
+    },
+    {
+      "feature": "skill__docker",
+      "clean_name": "Skill: Docker",
+      "display_name": "Docker",
+      "category": "Technical Skill",
+      "mean_abs_shap": 0.00963,
+      "rank": 13
+    },
+    {
+      "feature": "location_Hyderabad",
+      "clean_name": "Location: Hyderabad",
+      "display_name": "Hyderabad",
+      "category": "Location",
+      "mean_abs_shap": 0.00915,
+      "rank": 14
+    },
+    {
+      "feature": "skill__linux",
+      "clean_name": "Skill: Linux",
+      "display_name": "Linux",
+      "category": "Technical Skill",
+      "mean_abs_shap": 0.00796,
+      "rank": 15
+    },
+    {
+      "feature": "job_role_DevOps Engineer",
+      "clean_name": "Role: DevOps Engineer",
+      "display_name": "DevOps Engineer",
+      "category": "Job Role",
+      "mean_abs_shap": 0.0072,
+      "rank": 16
+    },
+    {
+      "feature": "skill__kubernetes",
+      "clean_name": "Skill: Kubernetes",
+      "display_name": "Kubernetes",
+      "category": "Technical Skill",
+      "mean_abs_shap": 0.00711,
+      "rank": 17
+    },
+    {
+      "feature": "skill__sql",
+      "clean_name": "Skill: SQL",
+      "display_name": "SQL",
+      "category": "Technical Skill",
+      "mean_abs_shap": 0.00546,
+      "rank": 18
+    },
+    {
+      "feature": "job_role_Frontend Developer",
+      "clean_name": "Role: Frontend Developer",
+      "display_name": "Frontend Developer",
+      "category": "Job Role",
+      "mean_abs_shap": 0.00475,
+      "rank": 19
+    },
+    {
+      "feature": "location_Delhi NCR",
+      "clean_name": "Location: Delhi NCR",
+      "display_name": "Delhi NCR",
+      "category": "Location",
+      "mean_abs_shap": 0.00473,
+      "rank": 20
+    },
+    {
+      "feature": "skill__css3",
+      "clean_name": "Skill: CSS3",
+      "display_name": "CSS3",
+      "category": "Technical Skill",
+      "mean_abs_shap": 0.0043,
+      "rank": 21
+    },
+    {
+      "feature": "skill__ci/cd",
+      "clean_name": "Skill: CI/CD",
+      "display_name": "CI/CD",
+      "category": "Technical Skill",
+      "mean_abs_shap": 0.00401,
+      "rank": 22
+    },
+    {
+      "feature": "skill__microservices",
+      "clean_name": "Skill: Microservices",
+      "display_name": "Microservices",
+      "category": "Technical Skill",
+      "mean_abs_shap": 0.00386,
+      "rank": 23
+    },
+    {
+      "feature": "education_Master's Degree",
+      "clean_name": "Education: Master's Degree",
+      "display_name": "Master's Degree",
+      "category": "Education",
+      "mean_abs_shap": 0.00375,
+      "rank": 24
+    },
+    {
+      "feature": "skill__postgresql",
+      "clean_name": "Skill: Postgresql",
+      "display_name": "Postgresql",
+      "category": "Technical Skill",
+      "mean_abs_shap": 0.00352,
+      "rank": 25
+    },
+    {
+      "feature": "skill__spring_boot",
+      "clean_name": "Skill: Spring Boot",
+      "display_name": "Spring Boot",
+      "category": "Technical Skill",
+      "mean_abs_shap": 0.00352,
+      "rank": 26
+    },
+    {
+      "feature": "skill__cpp",
+      "clean_name": "Skill: C++",
+      "display_name": "C++",
+      "category": "Technical Skill",
+      "mean_abs_shap": 0.00347,
+      "rank": 27
+    },
+    {
+      "feature": "skill__scikit-learn",
+      "clean_name": "Skill: Scikit-Learn",
+      "display_name": "Scikit-Learn",
+      "category": "Technical Skill",
+      "mean_abs_shap": 0.00326,
+      "rank": 28
+    },
+    {
+      "feature": "skill__html5",
+      "clean_name": "Skill: HTML5",
+      "display_name": "HTML5",
+      "category": "Technical Skill",
+      "mean_abs_shap": 0.00324,
+      "rank": 29
+    },
+    {
+      "feature": "skill__django",
+      "clean_name": "Skill: Django",
+      "display_name": "Django",
+      "category": "Technical Skill",
+      "mean_abs_shap": 0.00318,
+      "rank": 30
+    },
+    {
+      "feature": "education_Bachelor's Degree",
+      "clean_name": "Education: Bachelor's Degree",
+      "display_name": "Bachelor's Degree",
+      "category": "Education",
+      "mean_abs_shap": 0.00297,
+      "rank": 31
+    },
+    {
+      "feature": "skill__go",
+      "clean_name": "Skill: Go",
+      "display_name": "Go",
+      "category": "Technical Skill",
+      "mean_abs_shap": 0.00283,
+      "rank": 32
+    },
+    {
+      "feature": "skill__machine_learning",
+      "clean_name": "Skill: Machine Learning",
+      "display_name": "Machine Learning",
+      "category": "Technical Skill",
+      "mean_abs_shap": 0.00283,
+      "rank": 33
+    },
+    {
+      "feature": "location_Pune",
+      "clean_name": "Location: Pune",
+      "display_name": "Pune",
+      "category": "Location",
+      "mean_abs_shap": 0.0026,
+      "rank": 34
+    },
+    {
+      "feature": "skill__graphql",
+      "clean_name": "Skill: Graphql",
+      "display_name": "Graphql",
+      "category": "Technical Skill",
+      "mean_abs_shap": 0.00217,
+      "rank": 35
+    },
+    {
+      "feature": "job_role_Backend Developer",
+      "clean_name": "Role: Backend Developer",
+      "display_name": "Backend Developer",
+      "category": "Job Role",
+      "mean_abs_shap": 0.00207,
+      "rank": 36
+    },
+    {
+      "feature": "skill__tailwind_css",
+      "clean_name": "Skill: Tailwind Css",
+      "display_name": "Tailwind Css",
+      "category": "Technical Skill",
+      "mean_abs_shap": 0.00197,
+      "rank": 37
+    },
+    {
+      "feature": "skill__typescript",
+      "clean_name": "Skill: TypeScript",
+      "display_name": "TypeScript",
+      "category": "Technical Skill",
+      "mean_abs_shap": 0.00192,
+      "rank": 38
+    },
+    {
+      "feature": "job_role_Machine Learning Engineer",
+      "clean_name": "Role: Machine Learning Engineer",
+      "display_name": "Machine Learning Engineer",
+      "category": "Job Role",
+      "mean_abs_shap": 0.00182,
+      "rank": 39
+    },
+    {
+      "feature": "skill__fastapi",
+      "clean_name": "Skill: Fastapi",
+      "display_name": "Fastapi",
+      "category": "Technical Skill",
+      "mean_abs_shap": 0.00149,
+      "rank": 40
+    },
+    {
+      "feature": "skill__next_js",
+      "clean_name": "Skill: Next.js",
+      "display_name": "Next.js",
+      "category": "Technical Skill",
+      "mean_abs_shap": 0.00137,
+      "rank": 41
+    },
+    {
+      "feature": "skill__mongodb",
+      "clean_name": "Skill: Mongodb",
+      "display_name": "Mongodb",
+      "category": "Technical Skill",
+      "mean_abs_shap": 0.00107,
+      "rank": 42
+    },
+    {
+      "feature": "education_Diploma",
+      "clean_name": "Education: Diploma",
+      "display_name": "Diploma",
+      "category": "Education",
+      "mean_abs_shap": 0.0009,
+      "rank": 43
+    },
+    {
+      "feature": "skill__express_js",
+      "clean_name": "Skill: Express.js",
+      "display_name": "Express.js",
+      "category": "Technical Skill",
+      "mean_abs_shap": 0.00075,
+      "rank": 44
+    },
+    {
+      "feature": "education_PhD",
+      "clean_name": "Education: PhD",
+      "display_name": "PhD",
+      "category": "Education",
+      "mean_abs_shap": 0.00061,
+      "rank": 45
+    },
+    {
+      "feature": "skill__node_js",
+      "clean_name": "Skill: Node.js",
+      "display_name": "Node.js",
+      "category": "Technical Skill",
+      "mean_abs_shap": 0.00058,
+      "rank": 46
+    },
+    {
+      "feature": "skill__numpy",
+      "clean_name": "Skill: Numpy",
+      "display_name": "Numpy",
+      "category": "Technical Skill",
+      "mean_abs_shap": 0.00049,
+      "rank": 47
+    },
+    {
+      "feature": "skill__git",
+      "clean_name": "Skill: Git",
+      "display_name": "Git",
+      "category": "Technical Skill",
+      "mean_abs_shap": 0.00035,
+      "rank": 48
+    },
+    {
+      "feature": "skill__redis",
+      "clean_name": "Skill: Redis",
+      "display_name": "Redis",
+      "category": "Technical Skill",
+      "mean_abs_shap": 0.00035,
+      "rank": 49
+    },
+    {
+      "feature": "job_role_Data Scientist",
+      "clean_name": "Role: Data Scientist",
+      "display_name": "Data Scientist",
+      "category": "Job Role",
+      "mean_abs_shap": 0.00015,
+      "rank": 50
+    },
+    {
+      "feature": "skill__data_analysis",
+      "clean_name": "Skill: Data Analysis",
+      "display_name": "Data Analysis",
+      "category": "Technical Skill",
+      "mean_abs_shap": 0.00014,
+      "rank": 51
+    },
+    {
+      "feature": "skill__aws",
+      "clean_name": "Skill: AWS",
+      "display_name": "AWS",
+      "category": "Technical Skill",
+      "mean_abs_shap": 0.00012,
+      "rank": 52
+    },
+    {
+      "feature": "job_role_Data Analyst",
+      "clean_name": "Role: Data Analyst",
+      "display_name": "Data Analyst",
+      "category": "Job Role",
+      "mean_abs_shap": 8e-05,
+      "rank": 53
+    },
+    {
+      "feature": "job_role_Full Stack Developer",
+      "clean_name": "Role: Full Stack Developer",
+      "display_name": "Full Stack Developer",
+      "category": "Job Role",
+      "mean_abs_shap": 2e-05,
+      "rank": 54
+    },
+    {
+      "feature": "skill__flutter",
+      "clean_name": "Skill: Flutter",
+      "display_name": "Flutter",
+      "category": "Technical Skill",
+      "mean_abs_shap": 0.0,
+      "rank": 55
+    }
+  ],
+  "top_skills": [
+    {
+      "feature": "skill__pandas",
+      "clean_name": "Skill: Pandas",
+      "display_name": "Pandas",
+      "category": "Technical Skill",
+      "mean_abs_shap": 0.1489,
+      "rank": 2
+    },
+    {
+      "feature": "skill__react_js",
+      "clean_name": "Skill: React.js",
+      "display_name": "React.js",
+      "category": "Technical Skill",
+      "mean_abs_shap": 0.02976,
+      "rank": 6
+    },
+    {
+      "feature": "skill__rest_apis",
+      "clean_name": "Skill: REST APIs",
+      "display_name": "REST APIs",
+      "category": "Technical Skill",
+      "mean_abs_shap": 0.02112,
+      "rank": 8
+    },
+    {
+      "feature": "skill__javascript",
+      "clean_name": "Skill: JavaScript",
+      "display_name": "JavaScript",
+      "category": "Technical Skill",
+      "mean_abs_shap": 0.0208,
+      "rank": 9
+    },
+    {
+      "feature": "skill__java",
+      "clean_name": "Skill: Java",
+      "display_name": "Java",
+      "category": "Technical Skill",
+      "mean_abs_shap": 0.01932,
+      "rank": 10
+    },
+    {
+      "feature": "skill__python",
+      "clean_name": "Skill: Python",
+      "display_name": "Python",
+      "category": "Technical Skill",
+      "mean_abs_shap": 0.01662,
+      "rank": 11
+    },
+    {
+      "feature": "skill__docker",
+      "clean_name": "Skill: Docker",
+      "display_name": "Docker",
+      "category": "Technical Skill",
+      "mean_abs_shap": 0.00963,
+      "rank": 13
+    },
+    {
+      "feature": "skill__linux",
+      "clean_name": "Skill: Linux",
+      "display_name": "Linux",
+      "category": "Technical Skill",
+      "mean_abs_shap": 0.00796,
+      "rank": 15
+    },
+    {
+      "feature": "skill__kubernetes",
+      "clean_name": "Skill: Kubernetes",
+      "display_name": "Kubernetes",
+      "category": "Technical Skill",
+      "mean_abs_shap": 0.00711,
+      "rank": 17
+    },
+    {
+      "feature": "skill__sql",
+      "clean_name": "Skill: SQL",
+      "display_name": "SQL",
+      "category": "Technical Skill",
+      "mean_abs_shap": 0.00546,
+      "rank": 18
+    },
+    {
+      "feature": "skill__css3",
+      "clean_name": "Skill: CSS3",
+      "display_name": "CSS3",
+      "category": "Technical Skill",
+      "mean_abs_shap": 0.0043,
+      "rank": 21
+    },
+    {
+      "feature": "skill__ci/cd",
+      "clean_name": "Skill: CI/CD",
+      "display_name": "CI/CD",
+      "category": "Technical Skill",
+      "mean_abs_shap": 0.00401,
+      "rank": 22
+    },
+    {
+      "feature": "skill__microservices",
+      "clean_name": "Skill: Microservices",
+      "display_name": "Microservices",
+      "category": "Technical Skill",
+      "mean_abs_shap": 0.00386,
+      "rank": 23
+    },
+    {
+      "feature": "skill__postgresql",
+      "clean_name": "Skill: Postgresql",
+      "display_name": "Postgresql",
+      "category": "Technical Skill",
+      "mean_abs_shap": 0.00352,
+      "rank": 25
+    },
+    {
+      "feature": "skill__spring_boot",
+      "clean_name": "Skill: Spring Boot",
+      "display_name": "Spring Boot",
+      "category": "Technical Skill",
+      "mean_abs_shap": 0.00352,
+      "rank": 26
+    }
+  ],
+  "top_categories": [
+    {
+      "feature": "num__years_of_experience",
+      "clean_name": "Years of Experience",
+      "display_name": "Experience Tenure",
+      "category": "Experience",
+      "mean_abs_shap": 0.1978,
+      "rank": 1
+    },
+    {
+      "feature": "num__company_rating",
+      "clean_name": "Company Tier / Rating",
+      "display_name": "Company Rating",
+      "category": "Company Quality",
+      "mean_abs_shap": 0.04731,
+      "rank": 3
+    },
+    {
+      "feature": "job_role_Software Developer",
+      "clean_name": "Role: Software Developer",
+      "display_name": "Software Developer",
+      "category": "Job Role",
+      "mean_abs_shap": 0.04205,
+      "rank": 4
+    },
+    {
+      "feature": "location_Bengaluru",
+      "clean_name": "Location: Bengaluru",
+      "display_name": "Bengaluru",
+      "category": "Location",
+      "mean_abs_shap": 0.03862,
+      "rank": 5
+    },
+    {
+      "feature": "location_Chennai",
+      "clean_name": "Location: Chennai",
+      "display_name": "Chennai",
+      "category": "Location",
+      "mean_abs_shap": 0.02209,
+      "rank": 7
+    },
+    {
+      "feature": "location_Mumbai",
+      "clean_name": "Location: Mumbai",
+      "display_name": "Mumbai",
+      "category": "Location",
+      "mean_abs_shap": 0.01613,
+      "rank": 12
+    },
+    {
+      "feature": "location_Hyderabad",
+      "clean_name": "Location: Hyderabad",
+      "display_name": "Hyderabad",
+      "category": "Location",
+      "mean_abs_shap": 0.00915,
+      "rank": 14
+    },
+    {
+      "feature": "job_role_DevOps Engineer",
+      "clean_name": "Role: DevOps Engineer",
+      "display_name": "DevOps Engineer",
+      "category": "Job Role",
+      "mean_abs_shap": 0.0072,
+      "rank": 16
+    },
+    {
+      "feature": "job_role_Frontend Developer",
+      "clean_name": "Role: Frontend Developer",
+      "display_name": "Frontend Developer",
+      "category": "Job Role",
+      "mean_abs_shap": 0.00475,
+      "rank": 19
+    },
+    {
+      "feature": "location_Delhi NCR",
+      "clean_name": "Location: Delhi NCR",
+      "display_name": "Delhi NCR",
+      "category": "Location",
+      "mean_abs_shap": 0.00473,
+      "rank": 20
+    }
+  ],
+  "generated_at": "2026-11-23T14:16:23.136645"
+}
