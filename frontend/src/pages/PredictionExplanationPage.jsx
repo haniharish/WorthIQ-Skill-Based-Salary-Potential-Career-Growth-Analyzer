@@ -91,15 +91,16 @@ export const PredictionExplanationPage = () => {
 
   // Prepare chart data for SHAP waterfall / bar view
   const chartData = (explanation.feature_attributions || []).slice(0, 10).map((attr) => ({
-    name: attr.display_name || attr.clean_name,
-    shap_value: attr.shap_value,
-    inr_impact: Math.round(attr.inr_impact),
-    direction: attr.direction,
-    percentage: attr.percentage_impact,
-    fill: attr.direction === 'positive' ? '#10b981' : '#f59e0b',
+    name: attr.display_name || attr.clean_name || 'Feature',
+    shap_value: Number(attr.shap_value) || 0,
+    inr_impact: Math.round(Number(attr.inr_impact) || 0),
+    direction: attr.direction || (Number(attr.shap_value) >= 0 ? 'positive' : 'negative'),
+    percentage: Number(attr.percentage_impact) || 0,
+    fill: (attr.direction === 'positive' || Number(attr.shap_value) >= 0) ? '#10b981' : '#f59e0b',
   })).reverse();
 
-  const deltaSign = explanation.total_delta_inr >= 0 ? '+' : '';
+  const totalDelta = Number(explanation.total_delta_inr) || 0;
+  const deltaSign = totalDelta >= 0 ? '+' : '';
 
   return (
     <div className="space-y-8 max-w-5xl mx-auto pb-12">
@@ -210,10 +211,18 @@ export const PredictionExplanationPage = () => {
                 width={130}
               />
               <Tooltip
-                formatter={(val, name, item) => [
-                  `SHAP: ${val >= 0 ? '+' : ''}${val} (${item.payload.percentage >= 0 ? '+' : ''}${item.payload.percentage}% effect, ${item.payload.inr_impact >= 0 ? '+' : ''}₹${Number(item.payload.inr_impact).toLocaleString('en-IN')})`,
-                  'Attribution',
-                ]}
+                formatter={(val, name, item) => {
+                  const p = item?.payload || {};
+                  const pct = p.percentage != null ? p.percentage : 0;
+                  const inr = p.inr_impact != null ? p.inr_impact : 0;
+                  const signVal = val >= 0 ? '+' : '';
+                  const signPct = pct >= 0 ? '+' : '';
+                  const signInr = inr >= 0 ? '+' : '';
+                  return [
+                    `SHAP: ${signVal}${val} (${signPct}${pct}% effect, ${signInr}₹${Math.abs(inr).toLocaleString('en-IN')})`,
+                    'Attribution',
+                  ];
+                }}
                 contentStyle={{
                   backgroundColor: '#1e293b',
                   borderRadius: '8px',
@@ -367,8 +376,8 @@ export const PredictionExplanationPage = () => {
         </div>
         <p className="text-[11px] leading-relaxed text-slate-500">
           WorthIQ utilizes exact tree-traversal algorithms via Lundberg et al.'s TreeSHAP algorithm to compute local
-          feature attributions ($\phi_i$) satisfy efficiency, symmetry, and additivity:
-          $\ln(1 + \hat{y}) = E[\ln(1 + y)] + \sum \phi_i$.
+          feature attributions (φᵢ) that satisfy efficiency, symmetry, and additivity:
+          {'ln(1 + ŷ) = E[ln(1 + y)] + ∑ φᵢ.'}
           The estimated rupee (₹) contributions represent proportional redistributions of the total salary variance
           and reflect statistical associations from the training dataset.
         </p>
