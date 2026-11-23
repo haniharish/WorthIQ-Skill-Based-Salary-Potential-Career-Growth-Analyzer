@@ -51,3 +51,11 @@ Thumbs.db
 .pytest_cache/
 
 .docker/
+
+# Markdown documentation, phase reports, guides, audits, and handoff files (keep only root README.md)
+PHASE_*.md
+docs/
+*.md
+!README.md
+
+
