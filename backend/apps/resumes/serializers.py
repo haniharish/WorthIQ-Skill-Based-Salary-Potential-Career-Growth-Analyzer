@@ -8,6 +8,8 @@ from .models import ResumeDocument, ResumeExtraction
 class ResumeDocumentSerializer(serializers.ModelSerializer):
     has_extraction = serializers.SerializerMethodField()
     file_size_formatted = serializers.SerializerMethodField()
+    extracted_skills_count = serializers.SerializerMethodField()
+    uploaded_at = serializers.DateTimeField(source='created_at', read_only=True)
 
     class Meta:
         model = ResumeDocument
@@ -20,8 +22,10 @@ class ResumeDocumentSerializer(serializers.ModelSerializer):
             'processing_status',
             'error_message',
             'created_at',
+            'uploaded_at',
             'processed_at',
             'has_extraction',
+            'extracted_skills_count',
         ]
         read_only_fields = fields
 
@@ -33,6 +37,11 @@ class ResumeDocumentSerializer(serializers.ModelSerializer):
         if size_kb >= 1024:
             return f"{round(size_kb / 1024.0, 2)} MB"
         return f"{round(size_kb, 1)} KB"
+
+    def get_extracted_skills_count(self, obj):
+        if hasattr(obj, 'extraction') and obj.extraction and obj.extraction.extracted_skills:
+            return len(obj.extraction.extracted_skills)
+        return 0
 
 
 class ResumeExtractionSerializer(serializers.ModelSerializer):
@@ -52,10 +61,21 @@ class ResumeExtractionSerializer(serializers.ModelSerializer):
 class ApplyToProfileInputSerializer(serializers.Serializer):
     confirmed_skills = serializers.ListField(
         child=serializers.CharField(max_length=100),
-        required=True,
-        min_length=1,
-        error_messages={"min_length": "At least one skill must be confirmed to sync with profile."}
+        required=False,
+        default=list
+    )
+    skills = serializers.ListField(
+        child=serializers.CharField(max_length=100),
+        required=False,
+        default=list
     )
     apply_job_role = serializers.BooleanField(default=False)
     apply_experience = serializers.BooleanField(default=False)
     apply_education = serializers.BooleanField(default=False)
+
+    def validate(self, attrs):
+        confirmed = attrs.get('confirmed_skills') or attrs.get('skills') or []
+        if not confirmed:
+            raise serializers.ValidationError({"confirmed_skills": "At least one skill must be confirmed to sync with profile."})
+        attrs['confirmed_skills'] = confirmed
+        return attrs

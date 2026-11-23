@@ -6,7 +6,6 @@ import { resumeService } from '../services/resumeService';
 import { Card, CardHeader } from '../components/ui/Card';
 import { Button } from '../components/ui/Button';
 import { Badge } from '../components/ui/Badge';
-import { StatCard } from '../components/ui/StatCard';
 import {
   FileText,
   UploadCloud,
@@ -52,6 +51,7 @@ export const ResumeAnalysisPage = () => {
   const [selectedSkillsToApply, setSelectedSkillsToApply] = useState([]);
   const [applyExp, setApplyExp] = useState(false);
   const [applyEdu, setApplyEdu] = useState(false);
+  const [applyRole, setApplyRole] = useState(false);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [applying, setApplying] = useState(false);
 
@@ -60,10 +60,11 @@ export const ResumeAnalysisPage = () => {
     setLoadingResumes(true);
     try {
       const data = await resumeService.getResumes();
-      setResumes(data || []);
-      if (data && data.length > 0 && !activeResumeId) {
+      const resumeList = Array.isArray(data) ? data : (data?.results || []);
+      setResumes(resumeList);
+      if (resumeList.length > 0 && !activeResumeId) {
         // Load the most recent one
-        loadResumeResults(data[0].id);
+        loadResumeResults(resumeList[0].id);
       }
     } catch (err) {
       console.warn('Could not load resumes', err);
@@ -83,14 +84,19 @@ export const ResumeAnalysisPage = () => {
     try {
       const data = await resumeService.getResumeResults(id);
       setActiveResults(data);
+
       // Pre-select new skills by default
-      if (data.comparison && data.comparison.new_skills) {
-        setSelectedSkillsToApply(data.comparison.new_skills);
-      } else {
-        setSelectedSkillsToApply([]);
-      }
+      const comparisonData = data?.comparison || {};
+      const newSkills = Array.isArray(comparisonData.new_skills)
+        ? comparisonData.new_skills
+        : Array.isArray(comparisonData.new_skills_detected)
+          ? comparisonData.new_skills_detected.map((s) => (typeof s === 'string' ? s : (s.canonical_name || s.name)))
+          : [];
+
+      setSelectedSkillsToApply(newSkills);
       setApplyExp(false);
       setApplyEdu(false);
+      setApplyRole(false);
     } catch (err) {
       console.error('Failed to load resume results:', err);
       toast.error('Failed to load extraction details for this resume.');
@@ -142,18 +148,22 @@ export const ResumeAnalysisPage = () => {
   const handleUpload = async () => {
     if (!selectedFile) return;
     setUploading(true);
-    setUploadProgress(10);
+    setUploadProgress(15);
     try {
       const result = await resumeService.uploadResume(selectedFile, (progressEvent) => {
-        const percent = Math.round((progressEvent.loaded * 100) / progressEvent.total);
-        setUploadProgress(percent);
+        if (progressEvent.total) {
+          const percent = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+          setUploadProgress(Math.min(percent, 95));
+        }
       });
       toast.success('Resume parsed and skills extracted successfully!');
       setSelectedFile(null);
       if (fileInputRef.current) fileInputRef.current.value = '';
       await fetchResumesList();
-      if (result.resume && result.resume.id) {
-        loadResumeResults(result.resume.id);
+
+      const docId = result?.document?.id || result?.resume?.id || result?.id;
+      if (docId) {
+        loadResumeResults(docId);
       }
     } catch (err) {
       console.error('Upload error:', err);
@@ -193,12 +203,11 @@ export const ResumeAnalysisPage = () => {
 
   // Select/Deselect all new skills
   const handleSelectAllNew = () => {
-    if (!activeResults?.comparison?.new_skills) return;
-    const allNew = activeResults.comparison.new_skills;
-    if (selectedSkillsToApply.length === allNew.length) {
+    if (newSkillsList.length === 0) return;
+    if (selectedSkillsToApply.length === newSkillsList.length) {
       setSelectedSkillsToApply([]);
     } else {
-      setSelectedSkillsToApply(allNew);
+      setSelectedSkillsToApply([...newSkillsList]);
     }
   };
 
@@ -208,9 +217,11 @@ export const ResumeAnalysisPage = () => {
     setApplying(true);
     try {
       const payload = {
+        confirmed_skills: selectedSkillsToApply,
         skills: selectedSkillsToApply,
         apply_experience: applyExp,
         apply_education: applyEdu,
+        apply_job_role: applyRole,
       };
       const res = await resumeService.applyToProfile(activeResumeId, payload);
       toast.success(res.message || 'Profile successfully updated with verified skills!');
@@ -226,10 +237,47 @@ export const ResumeAnalysisPage = () => {
     }
   };
 
-  const extraction = activeResults?.extraction;
+  // Safely extract active document & extraction attributes
+  const activeDoc = activeResults?.document || activeResults?.resume || {};
+  const extraction = activeResults?.extraction || {};
   const candidateInfo = extraction?.candidate_info || {};
-  const extractedSkills = extraction?.extracted_skills || [];
-  const comparison = activeResults?.comparison || { new_skills: [], existing_skills: [] };
+
+  const rawExtractedSkills = Array.isArray(extraction?.extracted_skills)
+    ? extraction.extracted_skills
+    : [];
+
+  const extractedSkills = rawExtractedSkills.map((s) => ({
+    name: s.canonical_name || s.name || (typeof s === 'string' ? s : 'Skill'),
+    confidence: s.confidence != null ? Math.round(s.confidence <= 1 ? s.confidence * 100 : s.confidence) : 90,
+    snippet: s.evidence_snippet || s.snippet || '',
+    category: s.category || 'Technical Skill',
+  }));
+
+  const comparisonRaw = activeResults?.comparison || {};
+
+  const newSkillsList = Array.isArray(comparisonRaw.new_skills)
+    ? comparisonRaw.new_skills
+    : Array.isArray(comparisonRaw.new_skills_detected)
+      ? comparisonRaw.new_skills_detected.map((s) => (typeof s === 'string' ? s : (s.canonical_name || s.name)))
+      : [];
+
+  const existingSkillsList = Array.isArray(comparisonRaw.existing_skills)
+    ? comparisonRaw.existing_skills
+    : Array.isArray(comparisonRaw.existing_profile_skills)
+      ? comparisonRaw.existing_profile_skills
+      : Array.isArray(comparisonRaw.already_in_profile)
+        ? comparisonRaw.already_in_profile.map((s) => (typeof s === 'string' ? s : (s.canonical_name || s.name)))
+        : [];
+
+  const expValue = candidateInfo.detected_experience_years != null
+    ? candidateInfo.detected_experience_years
+    : candidateInfo.years_of_experience;
+
+  const expDisplay = expValue != null ? `${expValue} yrs` : 'Not detected';
+  const eduDisplay = candidateInfo.education || candidateInfo.education_level || 'Not detected';
+  const roleDisplay = candidateInfo.detected_role || candidateInfo.job_role || candidateInfo.role || 'Not detected';
+  const emailDisplay = candidateInfo.email || 'Not detected';
+  const phoneDisplay = candidateInfo.phone || 'Not detected';
 
   return (
     <div className="space-y-6 max-w-7xl mx-auto pb-16">
@@ -252,7 +300,7 @@ export const ResumeAnalysisPage = () => {
             variant="outline"
             size="sm"
             icon={Briefcase}
-            onClick={() => navigate('/job-matching')}
+            onClick={() => navigate('/role-matching')}
           >
             Check Role Fit
           </Button>
@@ -366,6 +414,13 @@ export const ResumeAnalysisPage = () => {
               ) : (
                 resumes.map((r) => {
                   const isActive = activeResumeId === r.id;
+                  const dateStr = r.uploaded_at || r.created_at
+                    ? new Date(r.uploaded_at || r.created_at).toLocaleDateString()
+                    : 'Recent';
+                  const fileType = (r.file_type || 'PDF').toUpperCase();
+                  const fileSize = r.file_size_formatted || (r.file_size ? `${(r.file_size / 1024).toFixed(0)} KB` : 'N/A');
+                  const countDisplay = r.extracted_skills_count != null ? `${r.extracted_skills_count} skills` : 'Analyzed';
+
                   return (
                     <div
                       key={r.id}
@@ -384,14 +439,14 @@ export const ResumeAnalysisPage = () => {
                               {r.original_filename}
                             </div>
                             <div className="text-[11px] text-slate-500">
-                              {new Date(r.uploaded_at).toLocaleDateString()} • {r.file_type.toUpperCase()} • {(r.file_size / 1024).toFixed(0)} KB
+                              {dateStr} • {fileType} • {fileSize}
                             </div>
                           </div>
                         </div>
 
                         <div className="flex items-center gap-1 shrink-0">
-                          <Badge variant={r.processing_status === 'completed' ? 'success' : 'neutral'} size="sm">
-                            {r.extracted_skills_count} skills
+                          <Badge variant={r.processing_status === 'applied' || r.processing_status === 'extracted' ? 'success' : 'neutral'} size="sm">
+                            {countDisplay}
                           </Badge>
                           <button
                             type="button"
@@ -442,7 +497,7 @@ export const ResumeAnalysisPage = () => {
               <Card>
                 <CardHeader
                   title="Candidate Metadata Extracted"
-                  subtitle={`Derived from ${activeResults.resume.original_filename}`}
+                  subtitle={`Derived from ${activeDoc.original_filename || 'Uploaded Document'}`}
                   icon={User}
                 />
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2 text-xs">
@@ -451,7 +506,7 @@ export const ResumeAnalysisPage = () => {
                       <User className="w-3 h-3" /> Candidate Name
                     </span>
                     <span className="font-bold text-slate-800 truncate block">
-                      {candidateInfo.name || 'Not detected'}
+                      {candidateInfo.name || candidateInfo.full_name || 'Not detected'}
                     </span>
                   </div>
                   <div className="p-2.5 bg-slate-50 rounded-lg">
@@ -459,7 +514,7 @@ export const ResumeAnalysisPage = () => {
                       <Mail className="w-3 h-3" /> Email
                     </span>
                     <span className="font-bold text-slate-800 truncate block">
-                      {candidateInfo.email || 'Not detected'}
+                      {emailDisplay}
                     </span>
                   </div>
                   <div className="p-2.5 bg-slate-50 rounded-lg">
@@ -467,7 +522,7 @@ export const ResumeAnalysisPage = () => {
                       <Briefcase className="w-3 h-3" /> Detected Exp
                     </span>
                     <span className="font-bold text-slate-800 truncate block">
-                      {candidateInfo.years_of_experience ? `${candidateInfo.years_of_experience} yrs` : 'Not detected'}
+                      {expDisplay}
                     </span>
                   </div>
                   <div className="p-2.5 bg-slate-50 rounded-lg">
@@ -475,10 +530,22 @@ export const ResumeAnalysisPage = () => {
                       <GraduationCap className="w-3 h-3" /> Education
                     </span>
                     <span className="font-bold text-slate-800 truncate block">
-                      {candidateInfo.education_level || 'Not detected'}
+                      {eduDisplay}
                     </span>
                   </div>
                 </div>
+
+                {roleDisplay !== 'Not detected' && (
+                  <div className="mt-3 p-2 bg-indigo-50/50 rounded-lg border border-indigo-100 flex items-center justify-between text-xs">
+                    <span className="text-slate-600 flex items-center gap-1.5">
+                      <Briefcase className="w-3.5 h-3.5 text-indigo-600" />
+                      Detected Target Role: <strong className="text-slate-900">{roleDisplay}</strong>
+                    </span>
+                    <span className="text-[10px] text-indigo-600 font-semibold bg-indigo-100/70 px-2 py-0.5 rounded">
+                      Identified from experience
+                    </span>
+                  </div>
+                )}
               </Card>
 
               {/* Skills Extraction & Profile Comparison Card */}
@@ -489,18 +556,18 @@ export const ResumeAnalysisPage = () => {
                       Discovered Technical Skills ({extractedSkills.length})
                     </h3>
                     <p className="text-xs text-slate-500">
-                      {comparison.new_skills.length} new skills discovered • {comparison.existing_skills.length} already in profile
+                      {newSkillsList.length} new skills discovered • {existingSkillsList.length} already in profile
                     </p>
                   </div>
 
                   <div className="flex items-center gap-2">
-                    {comparison.new_skills.length > 0 && (
+                    {newSkillsList.length > 0 && (
                       <Button
                         variant="outline"
                         size="xs"
                         onClick={handleSelectAllNew}
                       >
-                        {selectedSkillsToApply.length === comparison.new_skills.length
+                        {selectedSkillsToApply.length === newSkillsList.length
                           ? 'Deselect All'
                           : 'Select All New'}
                       </Button>
@@ -524,16 +591,16 @@ export const ResumeAnalysisPage = () => {
                     <div className="flex items-center gap-2 mb-2">
                       <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
                       <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider">
-                        New Skills Discovered ({comparison.new_skills.length})
+                        New Skills Discovered ({newSkillsList.length})
                       </h4>
                     </div>
 
-                    {comparison.new_skills.length === 0 ? (
+                    {newSkillsList.length === 0 ? (
                       <p className="text-xs text-slate-400 italic">All skills in this resume are already added to your profile.</p>
                     ) : (
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                         {extractedSkills
-                          .filter((s) => comparison.new_skills.includes(s.name))
+                          .filter((s) => newSkillsList.includes(s.name))
                           .map((skill) => {
                             const isSelected = selectedSkillsToApply.includes(skill.name);
                             return (
@@ -573,16 +640,16 @@ export const ResumeAnalysisPage = () => {
                   </div>
 
                   {/* Section 2: Already in Profile */}
-                  {comparison.existing_skills.length > 0 && (
+                  {existingSkillsList.length > 0 && (
                     <div className="pt-2 border-t border-slate-100">
                       <div className="flex items-center gap-2 mb-2">
                         <span className="w-2 h-2 rounded-full bg-slate-400"></span>
                         <h4 className="text-xs font-bold text-slate-500 uppercase tracking-wider">
-                          Already in Profile ({comparison.existing_skills.length})
+                          Already in Profile ({existingSkillsList.length})
                         </h4>
                       </div>
                       <div className="flex flex-wrap gap-1.5">
-                        {comparison.existing_skills.map((name) => (
+                        {existingSkillsList.map((name) => (
                           <span
                             key={name}
                             className="text-xs px-2.5 py-1 bg-slate-100 text-slate-600 rounded-full border border-slate-200"
@@ -614,7 +681,7 @@ export const ResumeAnalysisPage = () => {
                     variant="primary"
                     size="sm"
                     icon={ArrowRight}
-                    onClick={() => navigate('/job-matching')}
+                    onClick={() => navigate('/role-matching')}
                   >
                     View Matching Roles
                   </Button>
@@ -656,7 +723,7 @@ export const ResumeAnalysisPage = () => {
                 Additional Profile Sync Options:
               </span>
 
-              {candidateInfo.years_of_experience && (
+              {expValue != null && (
                 <label className="flex items-center gap-2 text-xs text-slate-700 cursor-pointer">
                   <input
                     type="checkbox"
@@ -665,12 +732,12 @@ export const ResumeAnalysisPage = () => {
                     className="rounded border-slate-300 text-indigo-600"
                   />
                   <span>
-                    Update years of experience to <strong className="text-indigo-600">{candidateInfo.years_of_experience} yrs</strong> (current: {profile?.years_of_experience || '0'} yrs)
+                    Update years of experience to <strong className="text-indigo-600">{expValue} yrs</strong> (current: {profile?.years_of_experience || '0'} yrs)
                   </span>
                 </label>
               )}
 
-              {candidateInfo.education_level && (
+              {candidateInfo.education && (
                 <label className="flex items-center gap-2 text-xs text-slate-700 cursor-pointer">
                   <input
                     type="checkbox"
@@ -679,7 +746,21 @@ export const ResumeAnalysisPage = () => {
                     className="rounded border-slate-300 text-indigo-600"
                   />
                   <span>
-                    Update education level to <strong className="text-indigo-600">{candidateInfo.education_level}</strong>
+                    Update education level to <strong className="text-indigo-600">{candidateInfo.education}</strong>
+                  </span>
+                </label>
+              )}
+
+              {candidateInfo.detected_role && (
+                <label className="flex items-center gap-2 text-xs text-slate-700 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={applyRole}
+                    onChange={(e) => setApplyRole(e.target.checked)}
+                    className="rounded border-slate-300 text-indigo-600"
+                  />
+                  <span>
+                    Update primary role to <strong className="text-indigo-600">{candidateInfo.detected_role}</strong>
                   </span>
                 </label>
               )}

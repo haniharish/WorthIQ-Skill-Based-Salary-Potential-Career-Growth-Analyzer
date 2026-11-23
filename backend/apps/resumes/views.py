@@ -81,8 +81,10 @@ class ResumeUploadView(APIView):
             resume_doc.processed_at = timezone.now()
             resume_doc.save(update_fields=['processing_status', 'processed_at'])
 
+            doc_data = ResumeDocumentSerializer(resume_doc).data
             return Response({
-                "document": ResumeDocumentSerializer(resume_doc).data,
+                "document": doc_data,
+                "resume": doc_data,
                 "extraction": ResumeExtractionSerializer(extraction).data,
                 "message": "Resume uploaded and skills extracted successfully."
             }, status=status.HTTP_201_CREATED)
@@ -177,13 +179,18 @@ class ResumeResultsView(APIView):
             else:
                 new_skills.append(item)
 
+        doc_data = ResumeDocumentSerializer(resume).data
         return Response({
-            "document": ResumeDocumentSerializer(resume).data,
+            "document": doc_data,
+            "resume": doc_data,
             "extraction": ResumeExtractionSerializer(extraction).data,
             "comparison": {
                 "existing_profile_skills": existing_skills,
+                "existing_skills": existing_skills,
                 "new_skills_detected": new_skills,
+                "new_skills": [s.get("canonical_name", s.get("name", "")) for s in new_skills],
                 "already_in_profile": already_possessed,
+                "already_possessed": [s.get("canonical_name", s.get("name", "")) for s in already_possessed],
                 "total_extracted": len(extracted_skills),
                 "total_new": len(new_skills)
             }
