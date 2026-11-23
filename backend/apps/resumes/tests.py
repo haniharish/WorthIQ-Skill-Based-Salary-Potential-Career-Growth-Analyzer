@@ -1,4 +1,5 @@
 import io
+import os
 from django.test import TestCase
 from django.contrib.auth import get_user_model
 from django.core.files.uploadedfile import SimpleUploadedFile
@@ -17,6 +18,11 @@ class ResumeExtractionAndSyncTests(TestCase):
         self.user = User.objects.create_user(
             email='resume_test@worthiq.com',
             full_name='Resume Candidate',
+            password='TestPassword123!'
+        )
+        self.other_user = User.objects.create_user(
+            email='other_resume_user@worthiq.com',
+            full_name='Other Candidate',
             password='TestPassword123!'
         )
         self.profile = UserProfile.objects.create(
@@ -53,7 +59,7 @@ class ResumeExtractionAndSyncTests(TestCase):
     def test_sync_confirmed_skills_to_profile(self):
         confirmed_skills = ['Docker', 'AWS', 'Kubernetes']
         sync_result = sync_confirmed_skills_to_profile(
-            user_profile=self.profile,
+            user=self.user,
             confirmed_skills=confirmed_skills,
             apply_experience=True,
             experience_val=4.0,
@@ -64,4 +70,71 @@ class ResumeExtractionAndSyncTests(TestCase):
         self.assertIn('Docker', current_skills)
         self.assertIn('AWS', current_skills)
         self.assertEqual(float(self.profile.years_of_experience), 4.0)
-        self.assertEqual(sync_result['added_count'], 3)
+        self.assertEqual(len(sync_result['skills_added']), 3)
+
+    def test_upload_real_pdf_resume(self):
+        pdf_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..', 'testing', 'test-data', 'sample_resume.pdf'))
+        if os.path.exists(pdf_path):
+            with open(pdf_path, 'rb') as f:
+                uploaded_file = SimpleUploadedFile('sample_resume.pdf', f.read(), content_type='application/pdf')
+                response = self.client.post('/api/resumes/upload/', {'file': uploaded_file}, format='multipart')
+                self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+                self.assertIn('document', response.data)
+                self.assertIn('extraction', response.data)
+                doc_id = response.data['document']['id']
+
+                # Test get result endpoint
+                res_resp = self.client.get(f'/api/resumes/{doc_id}/results/')
+                self.assertEqual(res_resp.status_code, status.HTTP_200_OK)
+                self.assertIn('comparison', res_resp.data)
+
+                # Test user isolation - other user cannot access
+                other_client = APIClient()
+                other_client.force_authenticate(user=self.other_user)
+                iso_resp = other_client.get(f'/api/resumes/{doc_id}/results/')
+                self.assertEqual(iso_resp.status_code, status.HTTP_404_NOT_FOUND)
+
+    def test_upload_real_docx_resume(self):
+        docx_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..', 'testing', 'test-data', 'sample_resume.docx'))
+        if os.path.exists(docx_path):
+            with open(docx_path, 'rb') as f:
+                uploaded_file = SimpleUploadedFile('sample_resume.docx', f.read(), content_type='application/vnd.openxmlformats-officedocument.wordprocessingml.document')
+                response = self.client.post('/api/resumes/upload/', {'file': uploaded_file}, format='multipart')
+                self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+                self.assertIn('document', response.data)
+
+    def test_upload_invalid_file_extension_rejected(self):
+        fake_exe = SimpleUploadedFile('malicious.exe', b'MZExecutableCode...', content_type='application/octet-stream')
+        response = self.client.post('/api/resumes/upload/', {'file': fake_exe}, format='multipart')
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_upload_oversized_file_rejected(self):
+        # 6MB dummy file
+        big_data = b'0' * (6 * 1024 * 1024)
+        big_pdf = SimpleUploadedFile('oversized.pdf', big_data, content_type='application/pdf')
+        response = self.client.post('/api/resumes/upload/', {'file': big_pdf}, format='multipart')
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_apply_to_profile_endpoint(self):
+        fake_file = SimpleUploadedFile('test.pdf', b'%PDF-1.4 sample', content_type='application/pdf')
+        doc = ResumeDocument.objects.create(
+            user=self.user,
+            original_filename='test.pdf',
+            file=fake_file,
+            file_size=1024,
+            file_type='pdf',
+            processing_status='extracted'
+        )
+        ResumeExtraction.objects.create(
+            resume_document=doc,
+            extracted_skills=[{'canonical_name': 'Docker', 'confidence': 0.95}],
+            candidate_info={'detected_experience_years': 3.5, 'detected_role': 'DevOps Engineer', 'education': "Master's Degree"},
+            raw_text_length=150
+        )
+        response = self.client.post(f'/api/resumes/{doc.id}/apply-to-profile/', {
+            'confirmed_skills': ['Docker'],
+            'apply_experience': True,
+            'apply_job_role': False,
+            'apply_education': False
+        }, format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)

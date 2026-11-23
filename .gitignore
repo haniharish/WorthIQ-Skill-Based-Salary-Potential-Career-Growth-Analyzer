@@ -47,17 +47,19 @@ database/.env
 .DS_Store
 Thumbs.db
 
-# Docker
-.pytest_cache/
+# Backups and SQL dumps
+*.sql
+database/backups/
+
 
 .docker/
 
-# Markdown documentation, phase reports, guides, audits, and handoff files (keep only root README.md)
-PHASE_*.md
-docs/
+# Markdown documentation, phase reports, guides, audits, and handoff files (keep ONLY root README.md)
+**/*.md
 *.md
-!README.md
+!/README.md
 testing/reports/
+testing/test-plan/
 EXTENDED_*.md
 PRE_DEPLOYMENT_*.md
 RELEASE_*.md

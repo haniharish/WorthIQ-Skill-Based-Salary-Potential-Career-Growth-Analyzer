@@ -75,17 +75,18 @@ def get_or_create_explanation(prediction_id, user=None):
 
 def get_global_explanations():
     """Returns precomputed global feature importance statistics."""
-    global_json_path = (
-        Path(__file__).resolve().parent.parent.parent.parent
-        / "ml"
-        / "explainability"
-        / "global"
-        / "global_feature_importance.json"
-    )
+    from django.conf import settings
+    candidate_paths = [
+        getattr(settings, 'BASE_DIR').parent / "ml" / "explainability" / "global" / "global_feature_importance.json",
+        getattr(settings, 'BASE_DIR') / "ml" / "explainability" / "global" / "global_feature_importance.json",
+        Path(__file__).resolve().parents[4] / "ml" / "explainability" / "global" / "global_feature_importance.json",
+        Path(__file__).resolve().parent.parent.parent.parent / "ml" / "explainability" / "global" / "global_feature_importance.json",
+    ]
 
-    if global_json_path.exists():
-        with open(global_json_path, "r", encoding="utf-8") as f:
-            return json.load(f)
+    for global_json_path in candidate_paths:
+        if global_json_path.exists():
+            with open(global_json_path, "r", encoding="utf-8") as f:
+                return json.load(f)
 
     # If not yet generated, compute on the fly
     explainer = WorthIQShapExplainer()

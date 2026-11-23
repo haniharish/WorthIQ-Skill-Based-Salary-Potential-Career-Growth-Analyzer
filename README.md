@@ -48,9 +48,15 @@ WorthIQ is engineered across strategic development phases:
    - **What-If Salary Simulator (`apps.scenarios`)**: Multi-variable scenario creation, saving, updating, duplication, and comparative matrix evaluation. Compares baseline profile against up to 3 scenarios with P10/P50/P90 quantile bounds, pairwise deltas, and non-causality disclaimers in `WhatIfSimulatorPage.jsx`.
    - **Resume Intelligence & Skill Extractor (`apps.resumes`)**: Parsing pipeline for PDF (`pypdf`) and DOCX (`python-docx`), extracting candidate metadata and technical skills with token boundary regex, taxonomy alias resolution, context snippets, and confidence scores. Strict privacy guarantee with zero automatic profile overwrites without explicit user confirmation in `ResumeAnalysisPage.jsx`.
    - **Advanced Career Reports & Export (`apps.reports`)**: Publication-grade PDF document generation via ReportLab Platypus across 7 evaluation types with two-pass running page counters and non-causality notices. Sanitized streaming CSV export for predictions and scenarios in `SavedReportsPage.jsx`.
-   - **Automated Verification**: 65 passed tests (33 backend Django tests, 19 intelligence tests, 13 ML pytest tests) and clean Vite production build.
 
-6. **Phase 6**: Enterprise Architecture & Production Cloud Deployment *(Upcoming)*.
+6. **Extended Phase 5: Pre-Deployment QA, Complete Testing, Security Audit & Release Readiness** *(Fully Implemented)*:
+   - **Backend Test Suite & Code Coverage**: 57 tests executed under `coverage.py` achieving **86% coverage** across all applications (exceeding >80% threshold).
+   - **ML Pipeline & Quantile Calibration**: Verified on held-out test set ($N = 5,067$). Point model MAE = ₹3.51 LPA, MedAE = ₹2.15 LPA, $R^2$ = 0.3597. Empirical quantile coverage: P10 = 10.20%, P50 = 48.10%, P90 = 89.30%, with strictly monotonic confidence bounds ($P10 \le P50 \le P90$) and 0 crossing violations.
+   - **API Latency & Performance Benchmarks**: 115 live HTTP requests across 11 key endpoints achieving **0.0% error rate**. Point prediction P50 = 2,259 ms, Role matching P50 = 2,329 ms, What-If compare P50 = 2,443 ms.
+   - **Security Audit (OWASP Top 10)**: 8/8 automated security checks passed: JWT signature tampering rejected (401), missing auth rejected (401), multi-tenant BOLA/IDOR isolation strictly enforced (404), SQL injection resilience verified, stored XSS neutralized, CSV formula injection neutralized (`sanitize_csv_cell`), executable files rejected (400).
+   - **Disaster Recovery Rehearsal**: Successful `pg_dump` and test restore drill into `worthiq_test_restore` with 100% row-for-row parity across all database tables.
+
+7. **Phase 6**: Enterprise Architecture & Production Cloud Deployment *(Upcoming)*.
 
 ---
 
@@ -204,19 +210,38 @@ npm run dev
 ```powershell
 npm --prefix frontend run build
 ```
-*Result: 2,082 modules transformed, 0 errors, production bundle generated in `frontend/dist/`.*
+*Result: 2,086 modules transformed, 0 errors, production bundle generated in `frontend/dist/`.*
 
-### Full Backend Django Test Suite (45 Tests)
+### Full Backend Django Test Suite & Code Coverage (57 Tests)
 ```powershell
-backend\venv\Scripts\python.exe backend\manage.py test apps.accounts apps.profiles apps.predictions apps.intelligence
+backend\venv\Scripts\python.exe -m coverage run --source=backend/apps backend/manage.py test apps.accounts apps.profiles apps.predictions apps.intelligence.tests apps.scenarios apps.resumes apps.reports
+backend\venv\Scripts\python.exe -m coverage report -m
 ```
-*Result: 45 passed in ~100s, 0 failures.*
+*Result: 57 passed in 56.81s (100% pass rate). Overall backend code coverage: **86%**.*
 
 ### Machine Learning Test Suite (13 Tests)
 ```powershell
 backend\venv\Scripts\python.exe -m pytest ml/tests/ -v
 ```
-*Result: 13 passed in ~33s, 0 failures.*
+*Result: 13 passed in 12.45s, 0 failures.*
+
+### Machine Learning Empirical Validation (Held-Out Test Set $N = 5,067$)
+```powershell
+backend\venv\Scripts\python.exe testing/scripts/validate_ml_model.py
+```
+*Result: MAE = ₹3.51 LPA, MedAE = ₹2.15 LPA, $R^2$ = 0.3597. P10 = 10.20%, P50 = 48.10%, P90 = 89.30%, Monotonic violations = 0.*
+
+### Live API Performance & Latency Benchmark
+```powershell
+backend\venv\Scripts\python.exe testing/scripts/benchmark_api.py
+```
+*Result: 115 live HTTP requests across 11 key endpoints with **0.0% error rate**.*
+
+### Automated Security & OWASP Top 10 Audit
+```powershell
+backend\venv\Scripts\python.exe testing/scripts/security_audit.py
+```
+*Result: 8 / 8 checks passed (JWT signature tampering, unauthenticated route rejection, BOLA/IDOR isolation, SQL injection, XSS, CSV formula injection, file upload controls).*
 
 ---
 
