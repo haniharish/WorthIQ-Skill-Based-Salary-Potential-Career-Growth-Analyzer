@@ -15,19 +15,60 @@ export const Navbar = () => {
     navigate('/');
   };
 
+  const handleNavClick = (e, sectionId) => {
+    e.preventDefault();
+    if (window.location.pathname !== '/') {
+      navigate(`/#${sectionId}`);
+      return;
+    }
+    const el = document.getElementById(sectionId);
+    if (el) {
+      const yOffset = -80;
+      const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+    if (mobileMenuOpen) {
+      setMobileMenuOpen(false);
+    }
+  };
+
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-slate-200/80 bg-white/80 backdrop-blur-md">
+    <header className="sticky top-0 z-40 w-full border-b border-slate-200/80 bg-white/90 backdrop-blur-md">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Logo size="md" showBadge={true} />
+          <Logo size="md" showBadge={true} badgeText="AI 2.0" />
 
           {/* Desktop Navigation Links */}
           <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600">
-            <a href="#features" className="hover:text-indigo-600 transition-colors">Features</a>
-            <a href="#how-it-works" className="hover:text-indigo-600 transition-colors">How It Works</a>
-            <a href="#tech-stack" className="hover:text-indigo-600 transition-colors">Technology</a>
-            <a href="#about" className="hover:text-indigo-600 transition-colors">About</a>
+            <a
+              href="#features"
+              onClick={(e) => handleNavClick(e, 'features')}
+              className="hover:text-indigo-600 transition-colors"
+            >
+              Features
+            </a>
+            <a
+              href="#how-it-works"
+              onClick={(e) => handleNavClick(e, 'how-it-works')}
+              className="hover:text-indigo-600 transition-colors"
+            >
+              How It Works
+            </a>
+            <a
+              href="#technology"
+              onClick={(e) => handleNavClick(e, 'technology')}
+              className="hover:text-indigo-600 transition-colors"
+            >
+              Technology
+            </a>
+            <a
+              href="#about"
+              onClick={(e) => handleNavClick(e, 'about')}
+              className="hover:text-indigo-600 transition-colors"
+            >
+              About
+            </a>
           </nav>
 
           {/* Auth Actions */}
@@ -65,6 +106,7 @@ export const Navbar = () => {
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="p-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 focus:outline-none"
+              aria-label="Toggle navigation menu"
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -78,24 +120,31 @@ export const Navbar = () => {
           <nav className="flex flex-col space-y-3 pt-2 text-sm font-medium text-slate-700">
             <a
               href="#features"
-              onClick={() => setMobileMenuOpen(false)}
+              onClick={(e) => handleNavClick(e, 'features')}
               className="px-2 py-1.5 rounded-lg hover:bg-slate-100"
             >
               Features
             </a>
             <a
               href="#how-it-works"
-              onClick={() => setMobileMenuOpen(false)}
+              onClick={(e) => handleNavClick(e, 'how-it-works')}
               className="px-2 py-1.5 rounded-lg hover:bg-slate-100"
             >
               How It Works
             </a>
             <a
-              href="#tech-stack"
-              onClick={() => setMobileMenuOpen(false)}
+              href="#technology"
+              onClick={(e) => handleNavClick(e, 'technology')}
               className="px-2 py-1.5 rounded-lg hover:bg-slate-100"
             >
               Technology
+            </a>
+            <a
+              href="#about"
+              onClick={(e) => handleNavClick(e, 'about')}
+              className="px-2 py-1.5 rounded-lg hover:bg-slate-100"
+            >
+              About
             </a>
           </nav>
           <div className="pt-3 border-t border-slate-200 flex flex-col gap-2">

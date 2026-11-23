@@ -7,6 +7,7 @@ export const Logo = ({
   size = 'md',
   to = '/',
   showBadge = false,
+  badgeText = 'AI Intelligence',
 }) => {
   const iconSizes = {
     sm: 'w-6 h-6',
@@ -35,7 +36,7 @@ export const Logo = ({
         </span>
         {showBadge && (
           <span className="ml-2 text-[10px] font-semibold tracking-wider uppercase px-1.5 py-0.5 rounded bg-indigo-50 text-indigo-700 border border-indigo-200/60">
-            Phase 1
+            {badgeText}
           </span>
         )}
       </div>
