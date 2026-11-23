@@ -1,21 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { Logo } from '../common/Logo';
+import { Button } from '../ui/Button';
 import { useAuth } from '../../context/AuthContext';
-import { Menu, X, ArrowRight, LayoutDashboard, LogOut, Sparkles } from 'lucide-react';
+import { Menu, X, ArrowRight, LayoutDashboard, LogOut } from 'lucide-react';
 
 export const Navbar = () => {
   const { isAuthenticated, user, logout } = useAuth();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   const handleLogout = async () => {
     await logout();
@@ -30,7 +23,7 @@ export const Navbar = () => {
     }
     const el = document.getElementById(sectionId);
     if (el) {
-      const yOffset = -90;
+      const yOffset = -80;
       const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
       window.scrollTo({ top: y, behavior: 'smooth' });
     }
@@ -40,187 +33,143 @@ export const Navbar = () => {
   };
 
   return (
-    <header className="sticky top-3 sm:top-5 z-50 px-3 sm:px-6 lg:px-8 w-full max-w-7xl mx-auto transition-all duration-300 font-sans">
-      {/* Floating Island Pill Container */}
-      <div
-        className={`rounded-full px-4 sm:px-7 py-3 transition-all duration-300 flex items-center justify-between border ${
-          isScrolled
-            ? 'bg-black/95 backdrop-blur-xl border-slate-800 shadow-2xl shadow-black/50'
-            : 'bg-black/90 backdrop-blur-lg border-slate-800/90 shadow-2xl shadow-black/30'
-        }`}
-      >
-        {/* Left: Circular Logo Badge & Brand Name */}
-        <Link to="/" className="flex items-center gap-3 group shrink-0">
-          <div className="w-8 h-8 rounded-full bg-white text-black flex items-center justify-center font-black text-sm shadow-md group-hover:scale-105 transition-transform">
-            W
-          </div>
-          <span className="text-base sm:text-lg font-black tracking-tight text-white flex items-center">
-            Worth<span className="text-indigo-400">IQ</span>
-          </span>
-        </Link>
+    <header className="sticky top-0 z-40 w-full border-b border-slate-200/80 bg-white/90 backdrop-blur-md">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
+          {/* Logo */}
+          <Logo size="md" showBadge={false} />
 
-        {/* Center: Sleek Desktop Navigation Links */}
-        <nav className="hidden md:flex items-center gap-2 lg:gap-4">
-          <a
-            href="#features"
-            onClick={(e) => handleNavClick(e, 'features')}
-            className="px-4 py-1.5 rounded-full text-xs font-semibold text-slate-300 hover:text-white hover:bg-white/10 transition-all"
-          >
-            Features
-          </a>
-          <a
-            href="#how-it-works"
-            onClick={(e) => handleNavClick(e, 'how-it-works')}
-            className="px-4 py-1.5 rounded-full text-xs font-semibold text-slate-300 hover:text-white hover:bg-white/10 transition-all"
-          >
-            How It Works
-          </a>
-          <a
-            href="#technology"
-            onClick={(e) => handleNavClick(e, 'technology')}
-            className="px-4 py-1.5 rounded-full text-xs font-semibold text-slate-300 hover:text-white hover:bg-white/10 transition-all"
-          >
-            Technology
-          </a>
-          <a
-            href="#about"
-            onClick={(e) => handleNavClick(e, 'about')}
-            className="px-4 py-1.5 rounded-full text-xs font-semibold text-slate-300 hover:text-white hover:bg-white/10 transition-all"
-          >
-            About
-          </a>
-        </nav>
-
-        {/* Right: High-Contrast Pill CTA */}
-        <div className="hidden sm:flex items-center gap-3 shrink-0">
-          {isAuthenticated ? (
-            <div className="flex items-center gap-2.5">
-              <Link
-                to="/dashboard"
-                className="bg-white hover:bg-slate-100 text-black px-5 py-2 rounded-full text-xs font-bold shadow-md transition-all flex items-center gap-1.5 group"
-              >
-                <LayoutDashboard className="w-3.5 h-3.5 text-indigo-600" />
-                <span>Dashboard</span>
-                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
-              </Link>
-              <button
-                type="button"
-                onClick={handleLogout}
-                title="Sign Out"
-                className="p-2 rounded-full text-slate-400 hover:text-rose-400 hover:bg-white/10 transition-colors"
-              >
-                <LogOut className="w-3.5 h-3.5" />
-              </button>
-            </div>
-          ) : (
-            <div className="flex items-center gap-3">
-              <Link
-                to="/login"
-                className="px-3.5 py-1.5 rounded-full text-xs font-semibold text-slate-300 hover:text-white transition-colors"
-              >
-                Sign In
-              </Link>
-              <Link
-                to="/register"
-                className="bg-white hover:bg-slate-100 text-black px-5 py-2 rounded-full text-xs font-bold shadow-md transition-all flex items-center gap-1.5 group hover:scale-[1.02]"
-              >
-                <span>Get Started Free</span>
-                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
-              </Link>
-            </div>
-          )}
-        </div>
-
-        {/* Mobile Hamburger Toggle */}
-        <div className="flex sm:hidden items-center gap-2">
-          {!isAuthenticated && (
-            <Link
-              to="/login"
-              className="px-2.5 py-1 text-[11px] font-semibold text-slate-300 hover:text-white"
-            >
-              Sign In
-            </Link>
-          )}
-          <button
-            type="button"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-1.5 rounded-full text-slate-300 hover:text-white bg-slate-800/60 hover:bg-slate-800 transition-colors focus:outline-none"
-            aria-label="Toggle navigation menu"
-          >
-            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile Floating Dropdown Menu Card */}
-      {mobileMenuOpen && (
-        <div className="sm:hidden mt-2 bg-slate-950/95 backdrop-blur-2xl border border-slate-800/90 rounded-3xl p-4 shadow-2xl space-y-3 animate-in fade-in slide-in-from-top-2 duration-200">
-          <nav className="flex flex-col space-y-1 text-xs font-medium text-slate-300">
+          {/* Desktop Navigation Links */}
+          <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600">
             <a
               href="#features"
               onClick={(e) => handleNavClick(e, 'features')}
-              className="px-3 py-2 rounded-xl hover:bg-slate-800/80 hover:text-white transition-colors"
+              className="hover:text-indigo-600 transition-colors"
             >
               Features
             </a>
             <a
               href="#how-it-works"
               onClick={(e) => handleNavClick(e, 'how-it-works')}
-              className="px-3 py-2 rounded-xl hover:bg-slate-800/80 hover:text-white transition-colors"
+              className="hover:text-indigo-600 transition-colors"
             >
               How It Works
             </a>
             <a
               href="#technology"
               onClick={(e) => handleNavClick(e, 'technology')}
-              className="px-3 py-2 rounded-xl hover:bg-slate-800/80 hover:text-white transition-colors"
+              className="hover:text-indigo-600 transition-colors"
             >
               Technology
             </a>
             <a
               href="#about"
               onClick={(e) => handleNavClick(e, 'about')}
-              className="px-3 py-2 rounded-xl hover:bg-slate-800/80 hover:text-white transition-colors"
+              className="hover:text-indigo-600 transition-colors"
             >
               About
             </a>
           </nav>
 
-          <div className="pt-2 border-t border-slate-800/80 flex flex-col gap-2">
+          {/* Auth Actions */}
+          <div className="hidden md:flex items-center gap-3">
+            {isAuthenticated ? (
+              <div className="flex items-center gap-3">
+                <Link to="/dashboard">
+                  <Button variant="secondary" size="sm" icon={LayoutDashboard}>
+                    Dashboard
+                  </Button>
+                </Link>
+                <Button variant="ghost" size="sm" icon={LogOut} onClick={handleLogout}>
+                  Sign Out
+                </Button>
+              </div>
+            ) : (
+              <>
+                <Link to="/login">
+                  <Button variant="ghost" size="sm">
+                    Sign In
+                  </Button>
+                </Link>
+                <Link to="/register">
+                  <Button variant="primary" size="sm" iconRight={ArrowRight}>
+                    Get Started Free
+                  </Button>
+                </Link>
+              </>
+            )}
+          </div>
+
+          {/* Mobile menu button */}
+          <div className="flex md:hidden">
+            <button
+              type="button"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="p-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 focus:outline-none"
+              aria-label="Toggle navigation menu"
+            >
+              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile menu */}
+      {mobileMenuOpen && (
+        <div className="md:hidden border-b border-slate-200 bg-white px-4 pt-2 pb-6 space-y-4">
+          <nav className="flex flex-col space-y-3 pt-2 text-sm font-medium text-slate-700">
+            <a
+              href="#features"
+              onClick={(e) => handleNavClick(e, 'features')}
+              className="px-2 py-1.5 rounded-lg hover:bg-slate-100"
+            >
+              Features
+            </a>
+            <a
+              href="#how-it-works"
+              onClick={(e) => handleNavClick(e, 'how-it-works')}
+              className="px-2 py-1.5 rounded-lg hover:bg-slate-100"
+            >
+              How It Works
+            </a>
+            <a
+              href="#technology"
+              onClick={(e) => handleNavClick(e, 'technology')}
+              className="px-2 py-1.5 rounded-lg hover:bg-slate-100"
+            >
+              Technology
+            </a>
+            <a
+              href="#about"
+              onClick={(e) => handleNavClick(e, 'about')}
+              className="px-2 py-1.5 rounded-lg hover:bg-slate-100"
+            >
+              About
+            </a>
+          </nav>
+          <div className="pt-3 border-t border-slate-200 flex flex-col gap-2">
             {isAuthenticated ? (
               <>
-                <Link
-                  to="/dashboard"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="bg-white text-slate-950 text-center py-2.5 rounded-full text-xs font-bold shadow-md flex items-center justify-center gap-1.5"
-                >
-                  <LayoutDashboard className="w-3.5 h-3.5 text-indigo-600" />
-                  <span>Go to Dashboard</span>
+                <Link to="/dashboard" onClick={() => setMobileMenuOpen(false)}>
+                  <Button variant="primary" size="md" className="w-full" icon={LayoutDashboard}>
+                    Go to Dashboard
+                  </Button>
                 </Link>
-                <button
-                  type="button"
-                  onClick={handleLogout}
-                  className="py-2 rounded-full text-xs text-rose-400 hover:bg-slate-900 border border-slate-800 text-center font-medium"
-                >
+                <Button variant="outline" size="md" className="w-full" onClick={handleLogout}>
                   Sign Out
-                </button>
+                </Button>
               </>
             ) : (
               <>
-                <Link
-                  to="/register"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="bg-white text-slate-950 text-center py-2.5 rounded-full text-xs font-bold shadow-md flex items-center justify-center gap-1.5"
-                >
-                  <span>Get Started Free</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
+                <Link to="/login" onClick={() => setMobileMenuOpen(false)}>
+                  <Button variant="outline" size="md" className="w-full">
+                    Sign In
+                  </Button>
                 </Link>
-                <Link
-                  to="/login"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="text-center py-2 text-xs text-slate-300 hover:text-white font-medium"
-                >
-                  Sign In to Account
+                <Link to="/register" onClick={() => setMobileMenuOpen(false)}>
+                  <Button variant="primary" size="md" className="w-full" iconRight={ArrowRight}>
+                    Get Started Free
+                  </Button>
                 </Link>
               </>
             )}

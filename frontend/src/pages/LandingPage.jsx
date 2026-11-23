@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '../components/layout/Navbar';
-import Footer from '../components/layout/Footer';
 import Button from '../components/ui/Button';
 import Card from '../components/ui/Card';
 import Badge from '../components/ui/Badge';
@@ -506,8 +505,53 @@ export const LandingPage = () => {
         </div>
       </section>
 
-      {/* 7. Enhanced Multi-Column Aesthetic Footer */}
-      <Footer />
+      {/* 7. Footer */}
+      <footer className="bg-slate-900 text-white py-12 border-t border-slate-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+          <div>
+            <span className="text-lg font-black tracking-tight text-white">WorthIQ</span>
+            <p className="text-xs text-slate-400 mt-1">
+              Skill-Based Salary Potential &amp; Career Growth Analyzer &middot; Final-Year B.Tech Project
+            </p>
+          </div>
+          <div className="flex flex-wrap items-center gap-6 text-xs text-slate-400">
+            <Link to="/login" className="hover:text-white transition-colors">
+              Sign In
+            </Link>
+            <Link to="/register" className="hover:text-white transition-colors">
+              Register Free
+            </Link>
+            <a
+              href="#features"
+              onClick={(e) => handleSmoothScroll(e, 'features')}
+              className="hover:text-white transition-colors"
+            >
+              Features
+            </a>
+            <a
+              href="#how-it-works"
+              onClick={(e) => handleSmoothScroll(e, 'how-it-works')}
+              className="hover:text-white transition-colors"
+            >
+              How It Works
+            </a>
+            <a
+              href="#technology"
+              onClick={(e) => handleSmoothScroll(e, 'technology')}
+              className="hover:text-white transition-colors"
+            >
+              Technology
+            </a>
+            <a
+              href="#about"
+              onClick={(e) => handleSmoothScroll(e, 'about')}
+              className="hover:text-white transition-colors"
+            >
+              About
+            </a>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };
