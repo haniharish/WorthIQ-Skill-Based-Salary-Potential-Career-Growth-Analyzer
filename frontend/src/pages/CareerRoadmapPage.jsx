@@ -161,14 +161,9 @@ export const CareerRoadmapPage = () => {
       {/* Header Banner */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-2 border-b border-slate-200">
         <div>
-          <div className="flex items-center gap-2 mb-1">
-            <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">
-              Personalized Career Growth Roadmaps
-            </h1>
-            <Badge variant="indigo" size="xs" dot>
-              DAG Learning Engine
-            </Badge>
-          </div>
+          <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 mb-1">
+            Personalized Career Growth Roadmaps
+          </h1>
           <p className="text-sm text-slate-600">
             Acyclic milestone learning paths, real-world project portfolios, and persistent skill mastery tracking.
           </p>

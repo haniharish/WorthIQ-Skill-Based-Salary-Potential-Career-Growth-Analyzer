@@ -26,16 +26,16 @@ const navigationGroups = [
     group: 'Main',
     items: [
       { name: 'Overview', path: '/dashboard', icon: LayoutDashboard },
-      { name: 'Salary Analysis', path: '/salary-analysis', icon: TrendingUp, badge: 'ML' },
+      { name: 'Salary Analysis', path: '/salary-analysis', icon: TrendingUp },
       { name: 'Saved Reports', path: '/saved-reports', icon: BookmarkCheck },
     ],
   },
   {
     group: 'Intelligence Engine',
     items: [
-      { name: 'Skill Intelligence', path: '/skill-impact', icon: Sparkles, badge: 'AI' },
-      { name: 'Job Role Matching', path: '/job-matching', icon: Briefcase, badge: 'AI' },
-      { name: 'Career Roadmap', path: '/career-roadmap', icon: Compass, badge: 'AI' },
+      { name: 'Skill Intelligence', path: '/skill-impact', icon: Sparkles },
+      { name: 'Job Role Matching', path: '/job-matching', icon: Briefcase },
+      { name: 'Career Roadmap', path: '/career-roadmap', icon: Compass },
       { name: 'What-If Simulator', path: '/what-if-simulator', icon: Sliders },
     ],
   },

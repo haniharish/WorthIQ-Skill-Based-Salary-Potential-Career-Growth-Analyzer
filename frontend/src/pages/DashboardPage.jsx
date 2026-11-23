@@ -178,19 +178,14 @@ export const DashboardPage = () => {
 
   return (
     <div className="space-y-6 sm:space-y-8 max-w-7xl mx-auto pb-12">
-      {/* 1. Page Header (Positioned, oriented and sized per SaaS template) */}
+      {/* 1. Page Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 border-b border-slate-200/80">
         <div>
-          <div className="flex items-center gap-2 mb-1">
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
-              Dashboard Overview
-            </h1>
-            <Badge variant="indigo" size="xs">
-              AI 2.0
-            </Badge>
-          </div>
-          <p className="text-xs sm:text-sm text-slate-500">
-            Real-time compensation analytics, market valuation bounds, and AI career guidance.
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+            Dashboard Overview
+          </h1>
+          <p className="text-xs sm:text-sm text-slate-500 mt-1">
+            Real-time compensation analytics, market valuation bounds, and career guidance.
           </p>
         </div>
 
@@ -206,14 +201,9 @@ export const DashboardPage = () => {
       {/* 2. Welcome Banner Card */}
       <div className="bg-white rounded-2xl border border-slate-200/90 p-6 sm:p-8 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div>
-          <div className="flex flex-wrap items-center gap-2.5 mb-2">
-            <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
-              Welcome back, {user?.full_name || 'Engineer'}
-            </h2>
-            <Badge variant="indigo" dot={true}>
-              AI Engine Active
-            </Badge>
-          </div>
+          <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight mb-2">
+            Welcome back, {user?.full_name || 'Engineer'}
+          </h2>
           <p className="text-xs sm:text-sm text-slate-500 flex flex-wrap items-center gap-3">
             <span className="flex items-center gap-1.5 font-medium text-slate-700">
               <Briefcase className="w-3.5 h-3.5 text-indigo-600" />
@@ -339,7 +329,7 @@ export const DashboardPage = () => {
                 : 'Catalog available'
             }
             icon={Briefcase}
-            badgeText="AI Matched"
+            badgeText="Matched"
             badgeVariant="indigo"
             onClick={() => navigate('/job-matching')}
           />

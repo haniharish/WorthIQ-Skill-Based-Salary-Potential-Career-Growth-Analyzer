@@ -164,14 +164,9 @@ export const WhatIfSimulatorPage = () => {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 border-b border-slate-200">
         <div>
-          <div className="flex items-center gap-2 mb-1">
-            <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900">
-              What-If Salary Simulation Lab
-            </h1>
-            <Badge variant="indigo" size="xs">
-              Live Counterfactual Engine
-            </Badge>
-          </div>
+          <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900 mb-1">
+            What-If Salary Simulation Lab
+          </h1>
           <p className="text-xs sm:text-sm text-slate-600">
             Simulate the market compensation impact of acquiring new technical skills or modifying experience holding all other factors constant.
           </p>

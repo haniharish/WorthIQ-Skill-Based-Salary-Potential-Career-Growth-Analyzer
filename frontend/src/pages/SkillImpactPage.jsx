@@ -116,14 +116,9 @@ export const SkillImpactPage = () => {
       {/* Header Banner */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-2 border-b border-slate-200">
         <div>
-          <div className="flex items-center gap-2 mb-1">
-            <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">
-              Skill Impact & Valuation Intelligence
-            </h1>
-            <Badge variant="indigo" size="xs" dot>
-              AI Skill Engine
-            </Badge>
-          </div>
+          <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 mb-1">
+            Skill Impact &amp; Valuation Intelligence
+          </h1>
           <p className="text-sm text-slate-600">
             Deconstruct your technical portfolio to discover individual skill premiums, pairwise co-occurrence lift, and counterfactual ROI.
           </p>

@@ -112,15 +112,10 @@ export const PredictionExplanationPage = () => {
           >
             <ArrowLeft className="w-3.5 h-3.5" /> Back to History & Reports
           </Link>
-          <div className="flex items-center gap-2">
-            <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
-              SHAP Prediction Explainability
-            </h1>
-            <Badge variant="emerald" size="xs" dot>
-              Model v{explanation.model_version || '2.0.0'}
-            </Badge>
-          </div>
-          <p className="text-sm text-slate-600 mt-1">
+          <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight mb-1">
+            SHAP Prediction Explainability
+          </h1>
+          <p className="text-sm text-slate-600">
             Mathematical feature attribution breaking down how each parameter shifted your compensation from baseline.
           </p>
         </div>

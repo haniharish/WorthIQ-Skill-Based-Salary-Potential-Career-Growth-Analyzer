@@ -35,10 +35,11 @@ export const JobMatchingPage = () => {
     setLoading(true);
     setError(null);
     try {
-      const skills = profile?.skills
+      const userSkills = profile?.skills
         ? profile.skills.map((s) => (typeof s === 'string' ? s : s.name))
-        : ['JavaScript', 'React.js', 'Node.js', 'PostgreSQL', 'Git'];
-      const exp = profile?.years_of_experience ? float(profile.years_of_experience) : 2.5;
+        : [];
+      const skills = userSkills.length > 0 ? userSkills : ['Python', 'SQL', 'Git', 'REST APIs'];
+      const exp = profile?.years_of_experience ? parseFloat(profile.years_of_experience) : 2.0;
 
       const data = await intelligenceService.matchJobRoles(skills, exp);
       setMatches(data.matches || []);
@@ -66,7 +67,7 @@ export const JobMatchingPage = () => {
   };
 
   const filteredMatches = matches.filter((m) => {
-    const matchesCat = filterCategory === 'All' || m.match_category === filterCategory;
+    const matchesCat = filterCategory === 'All Roles' || filterCategory === 'All' || m.match_category === filterCategory;
     const matchesSearch =
       !searchQuery ||
       m.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -79,14 +80,9 @@ export const JobMatchingPage = () => {
       {/* Header Banner */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-2 border-b border-slate-200">
         <div>
-          <div className="flex items-center gap-2 mb-1">
-            <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">
-              AI Job Role Matching & Fit Engine
-            </h1>
-            <Badge variant="indigo" size="xs" dot>
-              TF-IDF + Cosine AI
-            </Badge>
-          </div>
+          <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 mb-1">
+            Job Role Matching &amp; Fit Engine
+          </h1>
           <p className="text-sm text-slate-600">
             Compare your profile against verified technology tracks. Discover matching roles, skill gaps, and transition roadmaps.
           </p>
@@ -135,13 +131,13 @@ export const JobMatchingPage = () => {
         </div>
 
         <div className="flex items-center gap-1.5 overflow-x-auto w-full sm:w-auto">
-          {['All', 'Strong Match', 'Good Match', 'Moderate Match', 'Low Match'].map((cat) => (
+          {['All Roles', 'Strong Match', 'Good Match', 'Moderate Match', 'Low Match'].map((cat) => (
             <button
               key={cat}
               type="button"
               onClick={() => setFilterCategory(cat)}
-              className={`px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors cursor-pointer ${
-                filterCategory === cat
+              className={`text-xs px-3 py-1.5 rounded-lg font-medium transition-colors cursor-pointer ${
+                filterCategory === cat || (cat === 'All Roles' && filterCategory === 'All')
                   ? 'bg-indigo-600 text-white shadow-2xs'
                   : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-100'
               }`}

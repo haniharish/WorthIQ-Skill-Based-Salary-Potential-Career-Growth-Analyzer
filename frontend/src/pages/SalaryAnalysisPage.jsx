@@ -196,8 +196,58 @@ export const SalaryAnalysisPage = () => {
         skills: formData.skills,
       };
 
-      const result = await predictionService.createSalaryPrediction(payload);
-      setPredictionResult(result);
+      const rawResult = await predictionService.createSalaryPrediction(payload);
+
+      const medianAnnual = Number(
+        rawResult.salary_range?.median ??
+        rawResult.predicted_median_salary ??
+        rawResult.predicted_salary ??
+        0
+      );
+      const lowAnnual = Number(
+        rawResult.salary_range?.low ??
+        rawResult.predicted_low_salary ??
+        (medianAnnual > 0 ? Math.round(medianAnnual * 0.7) : 0)
+      );
+      const highAnnual = Number(
+        rawResult.salary_range?.high ??
+        rawResult.predicted_high_salary ??
+        (medianAnnual > 0 ? Math.round(medianAnnual * 1.35) : 0)
+      );
+
+      const medianLpa = rawResult.salary_lpa ?? rawResult.predicted_salary_lpa ?? (medianAnnual > 0 ? Number((medianAnnual / 100000).toFixed(1)) : 0);
+      const lowLpa = rawResult.salary_range?.p10_lpa ?? (lowAnnual > 0 ? Number((lowAnnual / 100000).toFixed(1)) : 0);
+      const highLpa = rawResult.salary_range?.p90_lpa ?? (highAnnual > 0 ? Number((highAnnual / 100000).toFixed(1)) : 0);
+
+      const confLevel = typeof rawResult.confidence === 'string'
+        ? rawResult.confidence
+        : rawResult.confidence?.confidence_tier || rawResult.confidence_level || 'High';
+      const confScore = rawResult.confidence_details?.confidence_score || rawResult.confidence_score || 85;
+
+      const normalized = {
+        ...rawResult,
+        id: rawResult.prediction_id || rawResult.id,
+        prediction_id: rawResult.prediction_id || rawResult.id,
+        predicted_salary_annual: medianAnnual,
+        predicted_salary_lpa: medianLpa,
+        predicted_salary_formatted: `₹${medianLpa} LPA`,
+        confidence_level: confLevel,
+        confidence_score: confScore,
+        confidence_factors: rawResult.confidence_details?.factors || rawResult.confidence_factors || null,
+        salary_range: {
+          low: lowAnnual,
+          median: medianAnnual,
+          high: highAnnual,
+          p10_annual: lowAnnual,
+          p10_lpa: lowLpa,
+          p10_formatted: `₹${lowLpa} LPA`,
+          p90_annual: highAnnual,
+          p90_lpa: highLpa,
+          p90_formatted: `₹${highLpa} LPA`,
+        },
+      };
+
+      setPredictionResult(normalized);
 
       // Scroll to results
       setTimeout(() => {
@@ -222,20 +272,20 @@ export const SalaryAnalysisPage = () => {
     ? [
         {
           name: 'Conservative (P10)',
-          salary: Math.round(predictionResult.salary_range.p10_annual / 1000) * 1000,
-          lpa: predictionResult.salary_range.p10_lpa,
+          salary: Math.round((predictionResult.salary_range?.p10_annual || 0) / 1000) * 1000,
+          lpa: predictionResult.salary_range?.p10_lpa || 0,
           fill: '#94a3b8',
         },
         {
           name: 'Target Median (P50)',
-          salary: Math.round(predictionResult.predicted_salary_annual / 1000) * 1000,
-          lpa: predictionResult.predicted_salary_lpa,
+          salary: Math.round((predictionResult.predicted_salary_annual || 0) / 1000) * 1000,
+          lpa: predictionResult.predicted_salary_lpa || 0,
           fill: '#4f46e5',
         },
         {
           name: 'Top Tier (P90)',
-          salary: Math.round(predictionResult.salary_range.p90_annual / 1000) * 1000,
-          lpa: predictionResult.salary_range.p90_lpa,
+          salary: Math.round((predictionResult.salary_range?.p90_annual || 0) / 1000) * 1000,
+          lpa: predictionResult.salary_range?.p90_lpa || 0,
           fill: '#10b981',
         },
       ]
@@ -258,14 +308,9 @@ export const SalaryAnalysisPage = () => {
       {/* Header Banner */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-2 border-b border-slate-200">
         <div>
-          <div className="flex items-center gap-2 mb-1">
-            <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">
-              Salary Potential Prediction Engine
-            </h1>
-            <Badge variant="emerald" size="xs" dot>
-              ML Model v2.0
-            </Badge>
-          </div>
+          <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 mb-1">
+            Salary Potential Prediction Engine
+          </h1>
           <p className="text-sm text-slate-600">
             Multi-variable quantile regression trained on 20,265 verified Indian technology compensation records.
           </p>
