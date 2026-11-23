@@ -1,8 +1,8 @@
 # WorthIQ — Skill-Based Salary Potential & Career Growth Analyzer
 
-> **Final-Year B.Tech Project** &middot; **Phase 1, Phase 2, Phase 3 & Phase 4: Complete Implementation**
+> **Final-Year B.Tech Project** &middot; **Phase 1, Phase 2, Phase 3, Phase 4 & Phase 5: Complete Implementation**
 
-WorthIQ is a full-stack, data-driven web application designed to help students, freshers, and working professionals understand their estimated market salary, analyze the valuation and ROI of their skill stack, discover matching roles, and plan their career trajectory.
+WorthIQ is a full-stack, data-driven web application designed to help students, freshers, and working professionals understand their estimated market salary, analyze the valuation and ROI of their skill stack, discover matching roles, simulate counterfactual career moves, extract skills from resumes, and generate comprehensive career reports.
 
 ---
 
@@ -39,15 +39,17 @@ WorthIQ is engineered across strategic development phases:
    - **Module D: Personalized Career Growth Roadmaps**: Non-circular DAG prerequisite milestones, practical software capstone project briefs, PostgreSQL relational persistence, and interactive completion tracking in `CareerRoadmapPage.jsx`.
 
 4. **Phase 4: Complete Frontend Dashboard, UI/UX Integration & Design System** *(Fully Implemented)*:
-   - **Centralized Dashboard Overhaul**: Replaced Phase 1 heuristic calculations with live data aggregations from `dashboardService.js`. Implemented Welcome Banner with profile completeness %, real KPI StatCards (P50 Salary, P10–P90 Range, Role Matches, Roadmap Progress), Salary Valuation Distribution Chart (Recharts), Evaluation History Timeline, Compatible Roles Shortlist with gap badges, and Active Career Roadmap Progress.
+   - **Centralized Dashboard Overhaul**: Live data aggregations from `dashboardService.js`, Welcome Banner with profile completeness %, real KPI StatCards (P50 Salary, P10–P90 Range, Role Matches, Roadmap Progress), Salary Valuation Distribution Chart (Recharts), Evaluation History Timeline, Compatible Roles Shortlist with gap badges, and Active Career Roadmap Progress.
    - **Production Design System**: Comprehensive UI component primitives in `frontend/src/components/ui/` (`StatCard`, `EmptyState`, `ErrorState`, `LoadingSkeleton`, `Modal`, `ConfidenceIndicator`, `Breadcrumbs`, `Tabs`, `SelectInput`, `SkillTagInput`) and accessible global `ToastContext` (`useToast`).
    - **Application Layout & Navigation**: Categorized sidebar navigation in `DashboardLayout.jsx` (Main, Intelligence Engine, Account & Settings), topbar with dynamic route breadcrumbs, quick action CTA, user profile summary pill with logout dropdown, and mobile navigation drawer with backdrop overlay.
-   - **What-If Counterfactual Simulator**: Live interactive simulation lab connected to `POST /api/intelligence/skills/compare/` calculating net salary impact in INR and LPA with comparison bar charts.
-   - **Saved Reports & Explainability Integration**: Filterable historical prediction catalog with direct "Explain with SHAP" transitions connecting predictions to `PredictionExplanationPage.jsx`.
-   - **Accessibility & Responsive Polish**: WCAG 2.1 AA compliant color contrast, ARIA landmarks, mobile collapse, and smooth dark SaaS aesthetics.
-   - **Verification**: 45 passed Django backend tests, 13 passed ML pytest tests, and clean Vite production build (2,082 modules, 0 errors).
+   - **Accessibility & Responsive Polish**: WCAG 2.1 AA compliant color contrast, ARIA landmarks, mobile collapse, and clean SaaS aesthetics.
 
-5. **Phase 5**: Real-Time Industry Trends & Benchmark Aggregation *(Upcoming)*.
+5. **Phase 5: Advanced Features, What-If Simulator, Resume Intelligence & Advanced Reports** *(Fully Implemented)*:
+   - **What-If Salary Simulator (`apps.scenarios`)**: Multi-variable scenario creation, saving, updating, duplication, and comparative matrix evaluation. Compares baseline profile against up to 3 scenarios with P10/P50/P90 quantile bounds, pairwise deltas, and non-causality disclaimers in `WhatIfSimulatorPage.jsx`.
+   - **Resume Intelligence & Skill Extractor (`apps.resumes`)**: Parsing pipeline for PDF (`pypdf`) and DOCX (`python-docx`), extracting candidate metadata and technical skills with token boundary regex, taxonomy alias resolution, context snippets, and confidence scores. Strict privacy guarantee with zero automatic profile overwrites without explicit user confirmation in `ResumeAnalysisPage.jsx`.
+   - **Advanced Career Reports & Export (`apps.reports`)**: Publication-grade PDF document generation via ReportLab Platypus across 7 evaluation types with two-pass running page counters and non-causality notices. Sanitized streaming CSV export for predictions and scenarios in `SavedReportsPage.jsx`.
+   - **Automated Verification**: 65 passed tests (33 backend Django tests, 19 intelligence tests, 13 ML pytest tests) and clean Vite production build.
+
 6. **Phase 6**: Enterprise Architecture & Production Cloud Deployment *(Upcoming)*.
 
 ---

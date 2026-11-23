@@ -17,6 +17,7 @@ import SkillImpactPage from './pages/SkillImpactPage';
 import JobMatchingPage from './pages/JobMatchingPage';
 import CareerRoadmapPage from './pages/CareerRoadmapPage';
 import WhatIfSimulatorPage from './pages/WhatIfSimulatorPage';
+import ResumeAnalysisPage from './pages/ResumeAnalysisPage';
 import SavedReportsPage from './pages/SavedReportsPage';
 import PredictionExplanationPage from './pages/PredictionExplanationPage';
 import ProfilePage from './pages/ProfilePage';
@@ -85,6 +86,11 @@ export function App() {
 
             {/* What-If Simulation Sandbox */}
             <Route path="/what-if-simulator" element={<WhatIfSimulatorPage />} />
+            <Route path="/what-if" element={<Navigate to="/what-if-simulator" replace />} />
+
+            {/* Resume Intelligence & Skill Extraction */}
+            <Route path="/resume-analysis" element={<ResumeAnalysisPage />} />
+            <Route path="/resume" element={<Navigate to="/resume-analysis" replace />} />
 
             {/* Saved Reports with canonical route and alias */}
             <Route path="/saved-reports" element={<SavedReportsPage />} />

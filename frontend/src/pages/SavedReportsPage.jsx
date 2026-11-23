@@ -8,564 +8,392 @@ import {
   TrendingUp,
   Eye,
   X,
-  ChevronLeft,
-  ChevronRight,
-  AlertCircle,
+  Download,
+  Trash2,
+  Filter,
+  FileText,
   Clock,
   Sparkles,
   ArrowRight,
   Layers,
   Award,
   RefreshCw,
+  FileSpreadsheet,
+  AlertCircle,
+  ShieldCheck,
 } from 'lucide-react';
 import { Card, CardHeader } from '../components/ui/Card';
 import { Button } from '../components/ui/Button';
 import { Badge } from '../components/ui/Badge';
+import { reportService } from '../services/reportService';
 import { predictionService } from '../services/predictionService';
+import { useToast } from '../context/ToastContext';
+
+const REPORT_TABS = [
+  { id: 'all', label: 'All Reports' },
+  { id: 'salary_prediction', label: 'Salary Predictions' },
+  { id: 'scenario_comparison', label: 'Scenario Comparisons' },
+  { id: 'resume_analysis', label: 'Resume Intelligence' },
+  { id: 'job_role_matching', label: 'Role Matches' },
+  { id: 'career_roadmap', label: 'Career Roadmaps' },
+];
 
 export const SavedReportsPage = () => {
-  const [historyData, setHistoryData] = useState({
-    count: 0,
-    next: null,
-    previous: null,
-    results: [],
-  });
-  const [currentPage, setCurrentPage] = useState(1);
+  const toast = useToast();
+  const [activeTab, setActiveTab] = useState('all');
+  const [reports, setReports] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedReport, setSelectedReport] = useState(null);
-  const [modalLoading, setModalLoading] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [downloadingId, setDownloadingId] = useState(null);
+  const [exportingCsv, setExportingCsv] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
 
-  const fetchHistory = async (page = 1) => {
+  // Fetch reports from backend
+  const fetchReports = async (type = null) => {
     setLoading(true);
     setError(null);
     try {
-      const data = await predictionService.getPredictionHistory(page);
-      setHistoryData(data);
-      setCurrentPage(page);
+      const filterType = type && type !== 'all' ? type : null;
+      const data = await reportService.getReports(filterType);
+      setReports(data || []);
     } catch (err) {
-      console.error('Failed to fetch prediction history:', err);
-      setError('Unable to load prediction history. Please verify your connection and try again.');
+      console.error('Failed to fetch reports:', err);
+      setError('Unable to load saved reports. Please verify your connection.');
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchHistory(1);
-  }, []);
+    fetchReports(activeTab);
+  }, [activeTab]);
 
-  const handleOpenDetail = async (reportId) => {
-    setModalLoading(true);
+  // Download PDF
+  const handleDownloadPdf = async (report) => {
+    setDownloadingId(report.id);
     try {
-      const detail = await predictionService.getPredictionDetail(reportId);
-      setSelectedReport(detail);
+      await reportService.downloadReportPdf(report.id, report.title);
+      toast.success(`Downloaded "${report.title}.pdf"`);
     } catch (err) {
-      console.error('Failed to load prediction details:', err);
-      // Fallback to item in results if detail fails
-      const fallback = historyData.results.find((r) => r.id === reportId);
-      setSelectedReport(fallback || null);
+      console.error('Download error:', err);
+      toast.error('Failed to download PDF report.');
     } finally {
-      setModalLoading(false);
+      setDownloadingId(null);
     }
   };
 
-  const getConfidenceBadgeColor = (level) => {
-    switch (level?.toLowerCase()) {
-      case 'high':
-        return 'emerald';
-      case 'medium':
-        return 'indigo';
-      case 'low':
+  // Export CSV
+  const handleExportCsv = async (type) => {
+    setExportingCsv(true);
+    try {
+      await reportService.exportCsv(type);
+      toast.success(`Exported ${type} to CSV successfully.`);
+    } catch (err) {
+      console.error('Export CSV error:', err);
+      toast.error(`Failed to export ${type} to CSV.`);
+    } finally {
+      setExportingCsv(false);
+    }
+  };
+
+  // Delete Report
+  const handleDeleteReport = async (id, title) => {
+    if (!window.confirm(`Delete report "${title}"?`)) return;
+    try {
+      await reportService.deleteReport(id);
+      toast.success('Report deleted.');
+      setReports((prev) => prev.filter((r) => r.id !== id));
+      if (selectedReport?.id === id) setModalOpen(false);
+    } catch (err) {
+      toast.error('Failed to delete report.');
+    }
+  };
+
+  // Open inspection modal
+  const handleViewReport = (report) => {
+    setSelectedReport(report);
+    setModalOpen(true);
+  };
+
+  // Filtered reports
+  const filteredReports = reports.filter((r) => {
+    const term = searchTerm.toLowerCase();
+    const titleMatch = (r.title || '').toLowerCase().includes(term);
+    const summaryMatch = (r.summary || '').toLowerCase().includes(term);
+    return titleMatch || summaryMatch;
+  });
+
+  const getReportTypeBadge = (type) => {
+    switch (type) {
+      case 'salary_prediction':
+        return <Badge variant="primary" size="sm">Salary Prediction</Badge>;
+      case 'scenario_comparison':
+        return <Badge variant="indigo" size="sm">What-If Comparison</Badge>;
+      case 'resume_analysis':
+        return <Badge variant="emerald" size="sm">Resume Intelligence</Badge>;
+      case 'job_role_matching':
+        return <Badge variant="violet" size="sm">Role Match</Badge>;
+      case 'career_roadmap':
+        return <Badge variant="amber" size="sm">Roadmap</Badge>;
       default:
-        return 'amber';
+        return <Badge variant="neutral" size="sm">{type}</Badge>;
     }
   };
-
-  const totalPages = Math.ceil((historyData.count || 0) / 10) || 1;
-
-  const filteredResults = (historyData.results || []).filter(
-    (item) =>
-      (item.job_role || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
-      (item.location || '').toLowerCase().includes(searchTerm.toLowerCase())
-  );
 
   return (
-    <div className="space-y-6 max-w-6xl mx-auto pb-12">
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-2 border-b border-slate-200">
+    <div className="space-y-6 max-w-7xl mx-auto pb-16">
+      {/* Page Header */}
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-slate-200">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">
-              Saved Reports & History
+            <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900">
+              Advanced Career Reports & Archive
             </h1>
-            <Badge variant="indigo" size="xs">
-              {historyData.count} Evaluations
-            </Badge>
+            <Badge variant="primary" size="sm">PDF & CSV</Badge>
           </div>
-          <p className="text-sm text-slate-600">
-            Historical log of your salary predictions, quantile spreads, and career milestone assessments.
+          <p className="text-xs sm:text-sm text-slate-600">
+            Access, inspect, and export your formal salary assessments, scenario models, resume extractions, and career roadmaps.
           </p>
         </div>
 
-        <div className="flex items-center gap-3">
+        {/* CSV Export Quick Actions */}
+        <div className="flex flex-wrap items-center gap-2">
           <Button
             variant="outline"
             size="sm"
+            icon={FileSpreadsheet}
+            onClick={() => handleExportCsv('predictions')}
+            disabled={exportingCsv}
+          >
+            Export Predictions (CSV)
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            icon={FileSpreadsheet}
+            onClick={() => handleExportCsv('scenarios')}
+            disabled={exportingCsv}
+          >
+            Export Scenarios (CSV)
+          </Button>
+          <Button
+            variant="primary"
+            size="sm"
             icon={RefreshCw}
-            onClick={() => fetchHistory(currentPage)}
-            disabled={loading}
-            className="text-xs"
+            onClick={() => fetchReports(activeTab)}
           >
             Refresh
           </Button>
-          <Link to="/salary-analysis">
-            <Button variant="primary" size="sm" icon={TrendingUp} className="text-xs">
-              New Prediction
-            </Button>
-          </Link>
         </div>
       </div>
 
-      {/* Error Notice */}
-      {error && (
-        <div className="p-4 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 text-sm flex items-start justify-between gap-3">
-          <div className="flex items-start gap-2.5">
-            <AlertCircle className="w-5 h-5 text-rose-600 shrink-0 mt-0.5" />
-            <div>
-              <p className="font-semibold">Failed to Load Reports</p>
-              <p className="text-rose-700 text-xs mt-0.5">{error}</p>
-            </div>
-          </div>
-          <Button variant="outline" size="sm" onClick={() => fetchHistory(currentPage)}>
-            Retry
-          </Button>
-        </div>
-      )}
-
-      {/* Main Content Area */}
-      {loading ? (
-        // Loading Skeletons
-        <div className="space-y-3">
-          {[1, 2, 3, 4].map((i) => (
-            <div
-              key={i}
-              className="p-5 rounded-xl border border-slate-200 bg-white animate-pulse flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+      {/* Tabs & Search Filter Bar */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        {/* Filter Tabs */}
+        <div className="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0 scrollbar-none">
+          {REPORT_TABS.map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              className={`text-xs px-3 py-1.5 rounded-lg font-medium whitespace-nowrap transition-all ${
+                activeTab === tab.id
+                  ? 'bg-indigo-600 text-white shadow-sm'
+                  : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+              }`}
             >
-              <div className="space-y-2 flex-1">
-                <div className="h-4 bg-slate-200 rounded w-1/4" />
-                <div className="h-3 bg-slate-100 rounded w-1/2" />
-                <div className="h-3 bg-slate-100 rounded w-1/3" />
-              </div>
-              <div className="h-8 bg-slate-200 rounded w-24" />
-            </div>
+              {tab.label}
+            </button>
           ))}
         </div>
-      ) : historyData.results.length === 0 ? (
-        // Empty State
-        <Card className="p-12 text-center border-dashed border-2 border-slate-200 bg-slate-50/50">
-          <div className="w-14 h-14 rounded-2xl bg-indigo-100 text-indigo-600 flex items-center justify-center mx-auto mb-4 shadow-xs">
-            <BookmarkCheck className="w-7 h-7" />
+
+        {/* Search Bar */}
+        <div className="w-full sm:w-64">
+          <input
+            type="text"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            placeholder="Search reports..."
+            className="w-full text-xs px-3 py-1.5 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          />
+        </div>
+      </div>
+
+      {/* Reports Grid */}
+      {loading ? (
+        <Card className="p-12 text-center text-slate-500 text-xs">
+          <RefreshCw className="w-6 h-6 animate-spin mx-auto mb-2 text-indigo-600" />
+          Loading reports archive...
+        </Card>
+      ) : error ? (
+        <Card className="p-8 text-center text-rose-600 text-xs">
+          <AlertCircle className="w-6 h-6 mx-auto mb-2" />
+          {error}
+        </Card>
+      ) : filteredReports.length === 0 ? (
+        <Card className="p-12 text-center text-slate-400 space-y-3">
+          <FileText className="w-12 h-12 mx-auto text-slate-300" />
+          <div className="space-y-1">
+            <h3 className="text-sm font-bold text-slate-700">No reports found</h3>
+            <p className="text-xs text-slate-500 max-w-sm mx-auto">
+              Run a salary analysis, create a What-If scenario, or upload your resume to generate archived reports.
+            </p>
           </div>
-          <h3 className="text-lg font-bold text-slate-900 mb-1">
-            No Salary Predictions Yet
-          </h3>
-          <p className="text-sm text-slate-500 max-w-md mx-auto mb-6">
-            Run a salary evaluation on your technical skills and experience to save benchmark reports, track salary milestones, and compare market percentiles.
-          </p>
-          <Link to="/salary-analysis">
-            <Button variant="primary" size="md" icon={TrendingUp}>
-              Evaluate Salary Potential Now
-            </Button>
-          </Link>
+          <div className="pt-2 flex justify-center gap-3">
+            <Link to="/salary-analysis">
+              <Button variant="primary" size="sm">
+                Run Salary Analysis
+              </Button>
+            </Link>
+            <Link to="/what-if-simulator">
+              <Button variant="outline" size="sm">
+                Open Simulator
+              </Button>
+            </Link>
+          </div>
         </Card>
       ) : (
-        // History List / Table
-        <div className="space-y-4">
-          {/* Search Filter Bar */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3 bg-white rounded-xl border border-slate-200 shadow-2xs">
-            <div className="relative flex-1 max-w-sm">
-              <input
-                type="text"
-                placeholder="Filter by role or location..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-3 pr-8 py-1.5 text-xs bg-slate-50 border border-slate-200 rounded-lg focus:bg-white focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/10 outline-none transition-all placeholder:text-slate-400"
-              />
-              {searchTerm && (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {filteredReports.map((report) => (
+            <Card
+              key={report.id}
+              className="hover:shadow-md transition-all border-slate-200 flex flex-col justify-between"
+            >
+              <div className="space-y-3">
+                <div className="flex items-start justify-between gap-2">
+                  <div className="space-y-1">
+                    {getReportTypeBadge(report.report_type)}
+                    <h3 className="text-sm font-bold text-slate-900 line-clamp-1 mt-1">
+                      {report.title}
+                    </h3>
+                  </div>
+                  <span className="text-[10px] text-slate-400 font-mono whitespace-nowrap">
+                    #{report.id}
+                  </span>
+                </div>
+
+                <p className="text-xs text-slate-600 line-clamp-2">
+                  {report.summary || 'Comprehensive evaluation snapshot archived.'}
+                </p>
+
+                <div className="flex items-center gap-1.5 text-[11px] text-slate-400 pt-1 border-t border-slate-100">
+                  <Clock className="w-3.5 h-3.5" />
+                  <span>{new Date(report.created_at).toLocaleString()}</span>
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="pt-4 mt-3 border-t border-slate-100 flex items-center justify-between gap-2">
                 <button
                   type="button"
-                  onClick={() => setSearchTerm('')}
-                  className="absolute inset-y-0 right-0 pr-2.5 flex items-center text-slate-400 hover:text-slate-600"
+                  onClick={() => handleViewReport(report)}
+                  className="inline-flex items-center gap-1 text-xs text-indigo-600 hover:text-indigo-800 font-medium"
                 >
-                  <X className="w-3.5 h-3.5" />
+                  <Eye className="w-3.5 h-3.5" />
+                  Inspect Snapshot
                 </button>
-              )}
-            </div>
-            <span className="text-[11px] text-slate-500">
-              Showing {filteredResults.length} of {historyData.count} reports
-            </span>
-          </div>
 
-          <div className="overflow-hidden bg-white rounded-xl border border-slate-200/90 shadow-xs">
-            <div className="overflow-x-auto">
-              <table className="w-full text-left text-sm">
-                <thead className="bg-slate-50/75 border-b border-slate-200 text-xs font-semibold uppercase tracking-wider text-slate-500">
-                  <tr>
-                    <th scope="col" className="px-5 py-3.5">
-                      Date & Evaluation
-                    </th>
-                    <th scope="col" className="px-5 py-3.5">
-                      Role & Exp
-                    </th>
-                    <th scope="col" className="px-5 py-3.5">
-                      Location
-                    </th>
-                    <th scope="col" className="px-5 py-3.5">
-                      Median Salary
-                    </th>
-                    <th scope="col" className="px-5 py-3.5">
-                      P10–P90 Range
-                    </th>
-                    <th scope="col" className="px-5 py-3.5">
-                      Confidence
-                    </th>
-                    <th scope="col" className="px-5 py-3.5 text-right">
-                      Actions
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-slate-100 text-slate-700">
-                  {filteredResults.map((item) => (
-                    <tr
-                      key={item.id}
-                      className="hover:bg-slate-50/80 transition-colors"
-                    >
-                      {/* Date */}
-                      <td className="px-5 py-4 whitespace-nowrap">
-                        <div className="font-semibold text-slate-900">
-                          {new Date(item.created_at).toLocaleDateString('en-IN', {
-                            day: 'numeric',
-                            month: 'short',
-                            year: 'numeric',
-                          })}
-                        </div>
-                        <div className="text-xs text-slate-400">
-                          {new Date(item.created_at).toLocaleTimeString('en-IN', {
-                            hour: '2-digit',
-                            minute: '2-digit',
-                          })}
-                        </div>
-                      </td>
-
-                      {/* Role & Experience */}
-                      <td className="px-5 py-4">
-                        <div className="font-semibold text-slate-900">{item.job_role}</div>
-                        <div className="text-xs text-slate-500 flex items-center gap-1 mt-0.5">
-                          <Clock className="w-3 h-3 text-slate-400" />
-                          {item.years_of_experience} yrs exp
-                        </div>
-                      </td>
-
-                      {/* Location */}
-                      <td className="px-5 py-4 whitespace-nowrap">
-                        <div className="text-slate-800 flex items-center gap-1.5 text-xs font-medium">
-                          <MapPin className="w-3.5 h-3.5 text-slate-400" />
-                          {item.location}
-                        </div>
-                        <div className="text-[11px] text-slate-400 mt-0.5">
-                          {item.education || "Bachelor's Degree"}
-                        </div>
-                      </td>
-
-                      {/* Median Salary */}
-                      <td className="px-5 py-4 whitespace-nowrap">
-                        <div className="font-bold text-slate-900 text-base">
-                          {item.predicted_salary_formatted}
-                        </div>
-                        <div className="text-xs font-semibold text-indigo-600">
-                          {item.predicted_salary_lpa} LPA
-                        </div>
-                      </td>
-
-                      {/* P10 - P90 Range */}
-                      <td className="px-5 py-4 whitespace-nowrap">
-                        <div className="text-xs text-slate-600 font-medium">
-                          {item.salary_range?.p10_lpa}L – {item.salary_range?.p90_lpa}L
-                        </div>
-                        <div className="text-[10px] text-slate-400">
-                          Conservative to Top Tier
-                        </div>
-                      </td>
-
-                      {/* Confidence */}
-                      <td className="px-5 py-4 whitespace-nowrap">
-                        <Badge variant={getConfidenceBadgeColor(item.confidence_level)} size="xs" dot>
-                          {item.confidence_level} ({item.confidence_score}%)
-                        </Badge>
-                      </td>
-
-                      {/* Actions */}
-                      <td className="px-5 py-4 whitespace-nowrap text-right">
-                        <div className="flex items-center justify-end gap-1.5">
-                          <Link
-                            to={`/explanations/${item.id}`}
-                            className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-medium text-indigo-700 bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 transition-colors"
-                            title="View SHAP Explainability"
-                          >
-                            <Sparkles className="w-3.5 h-3.5 text-indigo-600" />
-                            SHAP
-                          </Link>
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            icon={Eye}
-                            onClick={() => handleOpenDetail(item.id)}
-                            className="text-xs"
-                          >
-                            Details
-                          </Button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-
-            {/* Pagination Toolbar */}
-            <div className="px-5 py-3.5 border-t border-slate-200 bg-slate-50/50 flex items-center justify-between text-xs text-slate-600">
-              <div>
-                Showing{' '}
-                <span className="font-semibold text-slate-800">
-                  {(currentPage - 1) * 10 + 1}
-                </span>{' '}
-                to{' '}
-                <span className="font-semibold text-slate-800">
-                  {Math.min(currentPage * 10, historyData.count)}
-                </span>{' '}
-                of <span className="font-semibold text-slate-800">{historyData.count}</span> evaluations
+                <div className="flex items-center gap-1">
+                  <Button
+                    variant="outline"
+                    size="xs"
+                    icon={Download}
+                    isLoading={downloadingId === report.id}
+                    onClick={() => handleDownloadPdf(report)}
+                    title="Download Official PDF Report"
+                  >
+                    PDF
+                  </Button>
+                  <button
+                    type="button"
+                    onClick={() => handleDeleteReport(report.id, report.title)}
+                    className="p-1.5 text-slate-400 hover:text-rose-600 rounded"
+                    title="Delete report"
+                  >
+                    <Trash2 className="w-3.5 h-3.5" />
+                  </button>
+                </div>
               </div>
-
-              <div className="flex items-center gap-2">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  icon={ChevronLeft}
-                  onClick={() => fetchHistory(currentPage - 1)}
-                  disabled={!historyData.previous || loading}
-                  className="px-2 py-1"
-                >
-                  Prev
-                </Button>
-                <span className="px-2 text-xs font-medium text-slate-700">
-                  Page {currentPage} of {totalPages}
-                </span>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  iconRight={ChevronRight}
-                  onClick={() => fetchHistory(currentPage + 1)}
-                  disabled={!historyData.next || loading}
-                  className="px-2 py-1"
-                >
-                  Next
-                </Button>
-              </div>
-            </div>
-          </div>
+            </Card>
+          ))}
         </div>
       )}
 
-      {/* Detail Modal */}
-      {selectedReport && (
-        <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="relative bg-white rounded-2xl max-w-2xl w-full p-6 sm:p-8 shadow-xl border border-slate-200 animate-in fade-in zoom-in-95 duration-150">
+      {/* Snapshot Inspection Modal */}
+      {modalOpen && selectedReport && (
+        <div className="fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl max-w-2xl w-full max-h-[85vh] flex flex-col shadow-2xl overflow-hidden">
             {/* Modal Header */}
-            <div className="flex items-start justify-between pb-4 border-b border-slate-200">
+            <div className="p-4 border-b border-slate-100 flex items-center justify-between">
               <div>
-                <div className="flex items-center gap-2 mb-1">
-                  <h3 className="text-xl font-bold text-slate-900">
-                    Evaluation Details #{selectedReport.id}
+                <div className="flex items-center gap-2">
+                  {getReportTypeBadge(selectedReport.report_type)}
+                  <h3 className="text-base font-bold text-slate-900">
+                    {selectedReport.title}
                   </h3>
-                  <Badge variant={getConfidenceBadgeColor(selectedReport.confidence_level)} dot>
-                    {selectedReport.confidence_level} Confidence
-                  </Badge>
                 </div>
-                <p className="text-xs text-slate-500">
-                  Recorded on{' '}
-                  {new Date(selectedReport.created_at).toLocaleString('en-IN', {
-                    dateStyle: 'medium',
-                    timeStyle: 'short',
-                  })}
+                <p className="text-xs text-slate-500 mt-0.5">
+                  Archived on {new Date(selectedReport.created_at).toLocaleString()}
                 </p>
               </div>
-
               <button
                 type="button"
-                onClick={() => setSelectedReport(null)}
-                className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors"
+                onClick={() => setModalOpen(false)}
+                className="p-1 text-slate-400 hover:text-slate-600 rounded-lg"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
-            {/* Modal Body */}
-            <div className="py-6 space-y-6">
-              {/* Primary Output Display */}
-              <div className="p-5 rounded-xl bg-gradient-to-r from-indigo-50 to-slate-50 border border-indigo-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                <div>
-                  <span className="text-xs font-bold text-indigo-600 uppercase tracking-wider block">
-                    Median Market Prediction (P50)
-                  </span>
-                  <div className="text-3xl font-extrabold text-slate-900 mt-1">
-                    {selectedReport.predicted_salary_formatted}
-                  </div>
-                  <div className="text-sm font-semibold text-indigo-700 mt-0.5">
-                    {selectedReport.predicted_salary_lpa} LPA
-                  </div>
-                </div>
-
-                <div className="text-right sm:border-l sm:border-indigo-200 sm:pl-6">
-                  <span className="text-xs text-slate-500 block">Monthly Equivalent</span>
-                  <div className="text-lg font-bold text-slate-800 mt-1">
-                    ₹{Math.round(selectedReport.predicted_salary_annual / 12).toLocaleString('en-IN')}{' '}
-                    / mo
-                  </div>
-                  <span className="text-[11px] text-slate-400">Pre-tax gross estimate</span>
-                </div>
+            {/* Modal Content */}
+            <div className="p-5 overflow-y-auto space-y-4 text-xs">
+              <div className="p-3 bg-slate-50 rounded-lg border border-slate-200">
+                <span className="font-bold text-slate-700 block mb-1">Executive Summary</span>
+                <p className="text-slate-600 leading-relaxed">{selectedReport.summary}</p>
               </div>
 
-              {/* Quantile Breakdown */}
               <div>
-                <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">
-                  Quantile Spread (P10 - P50 - P90)
-                </h4>
-                <div className="grid grid-cols-3 gap-3">
-                  <div className="p-3 rounded-lg bg-slate-50 border border-slate-200">
-                    <span className="text-[11px] text-slate-400 block uppercase">10th Percentile</span>
-                    <span className="text-sm font-bold text-slate-800 mt-0.5 block">
-                      {selectedReport.salary_range?.p10_formatted}
-                    </span>
-                    <span className="text-xs text-slate-500 font-medium">
-                      {selectedReport.salary_range?.p10_lpa} LPA
-                    </span>
-                  </div>
-
-                  <div className="p-3 rounded-lg bg-indigo-50/50 border border-indigo-200">
-                    <span className="text-[11px] text-indigo-500 block uppercase font-medium">Median Target</span>
-                    <span className="text-sm font-bold text-indigo-900 mt-0.5 block">
-                      {selectedReport.predicted_salary_formatted}
-                    </span>
-                    <span className="text-xs text-indigo-600 font-medium">
-                      {selectedReport.predicted_salary_lpa} LPA
-                    </span>
-                  </div>
-
-                  <div className="p-3 rounded-lg bg-emerald-50/50 border border-emerald-200">
-                    <span className="text-[11px] text-emerald-600 block uppercase">90th Percentile</span>
-                    <span className="text-sm font-bold text-emerald-950 mt-0.5 block">
-                      {selectedReport.salary_range?.p90_formatted}
-                    </span>
-                    <span className="text-xs text-emerald-700 font-medium">
-                      {selectedReport.salary_range?.p90_lpa} LPA
-                    </span>
-                  </div>
+                <span className="font-bold text-slate-800 block mb-2">Evaluated Data Snapshot</span>
+                <div className="p-3 bg-slate-900 text-slate-200 rounded-lg font-mono text-[11px] overflow-x-auto max-h-60">
+                  <pre>{JSON.stringify(selectedReport.data_snapshot, null, 2)}</pre>
                 </div>
               </div>
 
-              {/* Profile Inputs Evaluated */}
-              <div>
-                <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">
-                  Candidate Parameters Evaluated
-                </h4>
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
-                  <div className="p-3 rounded-lg bg-slate-50 border border-slate-200">
-                    <span className="text-slate-400 block text-[11px]">Role</span>
-                    <span className="font-semibold text-slate-900 mt-0.5 block">
-                      {selectedReport.job_role}
-                    </span>
-                  </div>
-                  <div className="p-3 rounded-lg bg-slate-50 border border-slate-200">
-                    <span className="text-slate-400 block text-[11px]">Experience</span>
-                    <span className="font-semibold text-slate-900 mt-0.5 block">
-                      {selectedReport.years_of_experience} Years
-                    </span>
-                  </div>
-                  <div className="p-3 rounded-lg bg-slate-50 border border-slate-200">
-                    <span className="text-slate-400 block text-[11px]">Location</span>
-                    <span className="font-semibold text-slate-900 mt-0.5 block">
-                      {selectedReport.location}
-                    </span>
-                  </div>
-                  <div className="p-3 rounded-lg bg-slate-50 border border-slate-200">
-                    <span className="text-slate-400 block text-[11px]">Education</span>
-                    <span className="font-semibold text-slate-900 mt-0.5 block">
-                      {selectedReport.education || "Bachelor's Degree"}
-                    </span>
-                  </div>
-                </div>
+              <div className="p-3 bg-amber-50/70 border border-amber-200 rounded-lg flex items-start gap-2 text-amber-800 text-[11px]">
+                <ShieldCheck className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+                <p>
+                  Official reports generated by WorthIQ are computed using Random Forest ML 2.0 based on market correlation benchmarks. Download the official PDF document for a formatted presentation.
+                </p>
               </div>
-
-              {/* Evaluated Skills */}
-              <div>
-                <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">
-                  Technical Skills Evaluated ({selectedReport.skills?.length || 0})
-                </h4>
-                <div className="flex flex-wrap gap-1.5 p-3 rounded-lg bg-slate-50 border border-slate-200">
-                  {selectedReport.skills && selectedReport.skills.length > 0 ? (
-                    selectedReport.skills.map((skill) => (
-                      <span
-                        key={skill}
-                        className="px-2.5 py-1 rounded-md text-xs font-medium bg-white text-slate-700 border border-slate-200 shadow-2xs"
-                      >
-                        {skill}
-                      </span>
-                    ))
-                  ) : (
-                    <span className="text-xs text-slate-400 italic">No specific skills listed.</span>
-                  )}
-                </div>
-              </div>
-
-              {/* Confidence Factors */}
-              {selectedReport.confidence_factors && (
-                <div>
-                  <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">
-                    Confidence Factor Scores
-                  </h4>
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
-                    {Object.entries(selectedReport.confidence_factors).map(([factor, score]) => (
-                      <div key={factor} className="p-2.5 rounded bg-slate-50 border border-slate-200 text-center">
-                        <span className="text-[10px] text-slate-400 uppercase block">
-                          {factor.replace(/_/g, ' ')}
-                        </span>
-                        <span className="font-semibold text-slate-800 text-xs mt-0.5 block">
-                          {String(score)}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
             </div>
 
             {/* Modal Footer */}
-            <div className="pt-4 border-t border-slate-200 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-              <span className="text-[11px] text-slate-400">
-                Model: {selectedReport.model_version || '2.0.0 (Random Forest)'}
-              </span>
+            <div className="p-4 border-t border-slate-100 flex items-center justify-between">
+              <button
+                type="button"
+                onClick={() => handleDeleteReport(selectedReport.id, selectedReport.title)}
+                className="text-xs text-rose-600 hover:text-rose-800 font-medium inline-flex items-center gap-1"
+              >
+                <Trash2 className="w-3.5 h-3.5" /> Delete Report
+              </button>
+
               <div className="flex items-center gap-2">
-                <Link
-                  to={`/explanations/${selectedReport.id}`}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-white bg-indigo-600 hover:bg-indigo-700 shadow-2xs transition-colors"
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setModalOpen(false)}
                 >
-                  <Sparkles className="w-3.5 h-3.5" />
-                  View SHAP Explanation
-                </Link>
-                <Button variant="secondary" size="sm" onClick={() => setSelectedReport(null)}>
                   Close
+                </Button>
+                <Button
+                  variant="primary"
+                  size="sm"
+                  icon={Download}
+                  isLoading={downloadingId === selectedReport.id}
+                  onClick={() => handleDownloadPdf(selectedReport)}
+                >
+                  Download PDF Report
                 </Button>
               </div>
             </div>

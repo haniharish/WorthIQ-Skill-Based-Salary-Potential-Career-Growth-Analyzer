@@ -39,6 +39,9 @@ INSTALLED_APPS = [
     'apps.profiles.apps.ProfilesConfig',
     'apps.predictions.apps.PredictionsConfig',
     'apps.intelligence.apps.IntelligenceConfig',
+    'apps.scenarios.apps.ScenariosConfig',
+    'apps.resumes.apps.ResumesConfig',
+    'apps.reports.apps.ReportsConfig',
 ]
 
 MIDDLEWARE = [
@@ -168,3 +171,9 @@ CORS_ALLOW_HEADERS = [
     'x-csrftoken',
     'x-requested-with',
 ]
+
+# Media Files (Private User Uploads)
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+MAX_UPLOAD_SIZE = 5 * 1024 * 1024  # 5 MB
+

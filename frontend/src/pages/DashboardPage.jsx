@@ -547,34 +547,48 @@ export const DashboardPage = () => {
               <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-2">
                 Quick Shortcuts
               </span>
-              <div className="grid grid-cols-2 gap-2">
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                 <Link
                   to="/skill-impact"
-                  className="flex items-center gap-2 p-2.5 rounded-xl bg-slate-50 hover:bg-indigo-50/70 border border-slate-100 text-xs font-semibold text-slate-700 hover:text-indigo-700 transition-colors"
+                  className="flex items-center gap-2 p-2 rounded-xl bg-slate-50 hover:bg-indigo-50/70 border border-slate-100 text-xs font-semibold text-slate-700 hover:text-indigo-700 transition-colors"
                 >
                   <Sparkles className="w-3.5 h-3.5 text-indigo-600 shrink-0" />
                   <span>Skill Intelligence</span>
                 </Link>
                 <Link
                   to="/job-matching"
-                  className="flex items-center gap-2 p-2.5 rounded-xl bg-slate-50 hover:bg-indigo-50/70 border border-slate-100 text-xs font-semibold text-slate-700 hover:text-indigo-700 transition-colors"
+                  className="flex items-center gap-2 p-2 rounded-xl bg-slate-50 hover:bg-indigo-50/70 border border-slate-100 text-xs font-semibold text-slate-700 hover:text-indigo-700 transition-colors"
                 >
                   <Briefcase className="w-3.5 h-3.5 text-indigo-600 shrink-0" />
                   <span>Role Matching</span>
                 </Link>
                 <Link
                   to="/career-roadmap"
-                  className="flex items-center gap-2 p-2.5 rounded-xl bg-slate-50 hover:bg-indigo-50/70 border border-slate-100 text-xs font-semibold text-slate-700 hover:text-indigo-700 transition-colors"
+                  className="flex items-center gap-2 p-2 rounded-xl bg-slate-50 hover:bg-indigo-50/70 border border-slate-100 text-xs font-semibold text-slate-700 hover:text-indigo-700 transition-colors"
                 >
                   <Compass className="w-3.5 h-3.5 text-indigo-600 shrink-0" />
-                  <span>Career Roadmap</span>
+                  <span>Roadmaps</span>
                 </Link>
                 <Link
                   to="/what-if-simulator"
-                  className="flex items-center gap-2 p-2.5 rounded-xl bg-slate-50 hover:bg-indigo-50/70 border border-slate-100 text-xs font-semibold text-slate-700 hover:text-indigo-700 transition-colors"
+                  className="flex items-center gap-2 p-2 rounded-xl bg-slate-50 hover:bg-indigo-50/70 border border-slate-100 text-xs font-semibold text-slate-700 hover:text-indigo-700 transition-colors"
                 >
                   <Sliders className="w-3.5 h-3.5 text-indigo-600 shrink-0" />
                   <span>What-If Lab</span>
+                </Link>
+                <Link
+                  to="/resume-analysis"
+                  className="flex items-center gap-2 p-2 rounded-xl bg-slate-50 hover:bg-indigo-50/70 border border-slate-100 text-xs font-semibold text-slate-700 hover:text-indigo-700 transition-colors"
+                >
+                  <BookmarkCheck className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                  <span>Resume Intel</span>
+                </Link>
+                <Link
+                  to="/saved-reports"
+                  className="flex items-center gap-2 p-2 rounded-xl bg-slate-50 hover:bg-indigo-50/70 border border-slate-100 text-xs font-semibold text-slate-700 hover:text-indigo-700 transition-colors"
+                >
+                  <Calendar className="w-3.5 h-3.5 text-indigo-600 shrink-0" />
+                  <span>All Reports</span>
                 </Link>
               </div>
             </div>

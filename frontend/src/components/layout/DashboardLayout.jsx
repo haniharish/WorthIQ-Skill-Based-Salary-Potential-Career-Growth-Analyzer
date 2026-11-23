@@ -11,6 +11,7 @@ import {
   Compass,
   Sliders,
   BookmarkCheck,
+  FileText,
   User,
   Settings,
   LogOut,
@@ -37,6 +38,7 @@ const navigationGroups = [
       { name: 'Job Role Matching', path: '/job-matching', icon: Briefcase },
       { name: 'Career Roadmap', path: '/career-roadmap', icon: Compass },
       { name: 'What-If Simulator', path: '/what-if-simulator', icon: Sliders },
+      { name: 'Resume Intelligence', path: '/resume-analysis', icon: FileText },
     ],
   },
   {
