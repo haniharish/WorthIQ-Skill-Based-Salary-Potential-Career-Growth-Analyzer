@@ -5,6 +5,15 @@ import sys
 
 def main():
     """Run administrative tasks."""
+    # Auto-switch to project virtual environment if executed with global Python
+    venv_py = os.path.abspath(os.path.join(os.path.dirname(__file__), 'venv', 'Scripts', 'python.exe'))
+    if os.path.exists(venv_py) and os.path.normcase(sys.executable) != os.path.normcase(venv_py):
+        import subprocess
+        try:
+            sys.exit(subprocess.call([venv_py] + sys.argv))
+        except Exception:
+            pass
+
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings')
     try:
         from django.core.management import execute_from_command_line
