@@ -1,6 +1,5 @@
 # WorthIQ — Skill-Based Salary Potential & Career Growth Analyzer
 
-> **Final-Year B.Tech Project** &middot; **Phase 1, Phase 2, Phase 3, Phase 4 & Phase 5: Complete Implementation**
 
 WorthIQ is a full-stack, data-driven web application designed to help students, freshers, and working professionals understand their estimated market salary, analyze the valuation and ROI of their skill stack, discover matching roles, simulate counterfactual career moves, extract skills from resumes, and generate comprehensive career reports.
 
