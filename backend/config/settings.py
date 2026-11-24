@@ -191,6 +191,10 @@ CORS_ALLOWED_ORIGINS = [
     for origin in cors_origins_raw.split(',') 
     if origin.strip()
 ]
+# Automatically allow all Vercel production and preview deployment URLs
+CORS_ALLOWED_ORIGIN_REGEXES = [
+    r"^https:\/\/.*\.vercel\.app$",
+]
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_HEADERS = [
     'accept',
@@ -214,6 +218,10 @@ CSRF_TRUSTED_ORIGINS = [
     for origin in csrf_origins_raw.split(',')
     if origin.strip()
 ]
+if 'https://*.vercel.app' not in CSRF_TRUSTED_ORIGINS:
+    CSRF_TRUSTED_ORIGINS.append('https://*.vercel.app')
+if 'https://*.onrender.com' not in CSRF_TRUSTED_ORIGINS:
+    CSRF_TRUSTED_ORIGINS.append('https://*.onrender.com')
 
 # Media Files (Private User Uploads & Persistent Storage)
 MEDIA_URL = '/media/'

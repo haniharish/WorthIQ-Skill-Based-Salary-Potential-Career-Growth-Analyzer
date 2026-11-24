@@ -85,7 +85,7 @@ export const LoginPage = () => {
           setServerError('Invalid email or password. Please try again.');
         }
       } else {
-        setServerError('Cannot connect to WorthIQ backend server. Ensure Django is running on port 8000.');
+        setServerError('Cannot connect to WorthIQ backend server. Please check your internet connection or verify the backend service is active.');
       }
     } finally {
       setIsLoading(false);
