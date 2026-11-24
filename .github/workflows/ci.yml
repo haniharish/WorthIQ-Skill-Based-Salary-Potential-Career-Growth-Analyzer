@@ -35,6 +35,9 @@ jobs:
   backend-ci:
     name: Backend System Checks & Automated Tests
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
     services:
       postgres:
         image: postgres:16-alpine
@@ -45,13 +48,16 @@ jobs:
         ports:
           - 5432:5432
         options: >-
-          --health-cmd pg_isready
+          --health-cmd "pg_isready -U worthiq_user -d worthiq_test_db"
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
+
+      - name: Stop Host PostgreSQL
+        run: sudo systemctl stop postgresql || true
 
       - name: Setup Python 3.11
         uses: actions/setup-python@v5
@@ -63,29 +69,25 @@ jobs:
       - name: Install Backend Dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r backend/requirements.txt
+          pip install -r requirements.txt
 
       - name: Django System Checks
-        run: python backend/manage.py check
+        run: python manage.py check
         env:
+          PYTHONPATH: ..
           SECRET_KEY: worthiq-ci-secret-key
           DEBUG: "True"
-          DB_NAME: worthiq_test_db
-          DB_USER: worthiq_user
-          DB_PASSWORD: worthiq_password
-          DB_HOST: localhost
-          DB_PORT: "5432"
+          DATABASE_URL: postgresql://worthiq_user:worthiq_password@localhost:5432/worthiq_test_db
+          ALLOWED_HOSTS: localhost,127.0.0.1
 
       - name: Execute Backend Test Suite
-        run: python backend/manage.py test apps
+        run: python manage.py test apps
         env:
+          PYTHONPATH: ..
           SECRET_KEY: worthiq-ci-secret-key
           DEBUG: "True"
-          DB_NAME: worthiq_test_db
-          DB_USER: worthiq_user
-          DB_PASSWORD: worthiq_password
-          DB_HOST: localhost
-          DB_PORT: "5432"
+          DATABASE_URL: postgresql://worthiq_user:worthiq_password@localhost:5432/worthiq_test_db
+          ALLOWED_HOSTS: localhost,127.0.0.1
 
   docker-build-check:
     name: Docker Production Image Build Verification
