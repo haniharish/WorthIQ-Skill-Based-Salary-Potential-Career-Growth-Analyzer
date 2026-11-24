@@ -17,7 +17,13 @@ load_dotenv(BASE_DIR / '.env')
 SECRET_KEY = os.getenv('SECRET_KEY', 'worthiq-dev-secret-key-fallback')
 DEBUG = os.getenv('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = [host.strip() for host in os.getenv('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',') if host.strip()]
+allowed_hosts_raw = os.getenv('ALLOWED_HOSTS', 'localhost,127.0.0.1')
+ALLOWED_HOSTS = [host.strip() for host in allowed_hosts_raw.split(',') if host.strip()]
+
+# Auto-allow Render web service external domain
+render_host = os.getenv('RENDER_EXTERNAL_HOSTNAME')
+if render_host and render_host not in ALLOWED_HOSTS:
+    ALLOWED_HOSTS.append(render_host)
 
 # Application definition
 INSTALLED_APPS = [
@@ -47,6 +53,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -75,18 +82,30 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
-# Database Configuration (PostgreSQL Docker container)
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('DB_NAME', 'worthiq_db'),
-        'USER': os.getenv('DB_USER', 'worthiq_user'),
-        'PASSWORD': os.getenv('DB_PASSWORD', 'worthiq_password'),
-        'HOST': os.getenv('DB_HOST', 'localhost'),
-        'PORT': os.getenv('DB_PORT', '5432'),
-        'CONN_MAX_AGE': 60,
+# Database Configuration (PostgreSQL Docker container locally or DATABASE_URL in cloud)
+DATABASE_URL = os.getenv('DATABASE_URL')
+if DATABASE_URL:
+    import dj_database_url
+    DATABASES = {
+        'default': dj_database_url.config(
+            default=DATABASE_URL,
+            conn_max_age=600,
+            conn_health_checks=True,
+            ssl_require=not DEBUG,
+        )
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': os.getenv('DB_NAME', 'worthiq_db'),
+            'USER': os.getenv('DB_USER', 'worthiq_user'),
+            'PASSWORD': os.getenv('DB_PASSWORD', 'worthiq_password'),
+            'HOST': os.getenv('DB_HOST', 'localhost'),
+            'PORT': os.getenv('DB_PORT', '5432'),
+            'CONN_MAX_AGE': 60,
+        }
+    }
 
 # Custom User Model
 AUTH_USER_MODEL = 'accounts.User'
@@ -117,6 +136,15 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
+    },
+}
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
@@ -154,9 +182,13 @@ SIMPLE_JWT = {
 }
 
 # CORS Configuration
+cors_origins_raw = os.getenv(
+    'CORS_ALLOWED_ORIGINS',
+    'http://localhost:5180,http://127.0.0.1:5180'
+)
 CORS_ALLOWED_ORIGINS = [
     origin.strip() 
-    for origin in os.getenv('CORS_ALLOWED_ORIGINS', 'http://localhost:5180,http://127.0.0.1:5180').split(',') 
+    for origin in cors_origins_raw.split(',') 
     if origin.strip()
 ]
 CORS_ALLOW_CREDENTIALS = True
@@ -172,8 +204,33 @@ CORS_ALLOW_HEADERS = [
     'x-requested-with',
 ]
 
-# Media Files (Private User Uploads)
+# CSRF Configuration
+csrf_origins_raw = os.getenv(
+    'CSRF_TRUSTED_ORIGINS',
+    'http://localhost:5180,http://127.0.0.1:5180'
+)
+CSRF_TRUSTED_ORIGINS = [
+    origin.strip()
+    for origin in csrf_origins_raw.split(',')
+    if origin.strip()
+]
+
+# Media Files (Private User Uploads & Persistent Storage)
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+media_root_env = os.getenv('MEDIA_ROOT')
+MEDIA_ROOT = Path(media_root_env) if media_root_env else (BASE_DIR / 'media')
 MAX_UPLOAD_SIZE = 5 * 1024 * 1024  # 5 MB
+
+# Production Security Enhancements (Enabled when DEBUG=False)
+if not DEBUG:
+    SECURE_SSL_REDIRECT = os.getenv('SECURE_SSL_REDIRECT', 'True') == 'True'
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_BROWSER_XSS_FILTER = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    X_FRAME_OPTIONS = 'DENY'
+    SECURE_HSTS_SECONDS = int(os.getenv('SECURE_HSTS_SECONDS', '31536000'))
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 

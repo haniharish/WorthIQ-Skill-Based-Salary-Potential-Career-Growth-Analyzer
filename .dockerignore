@@ -1,0 +1,20 @@
+# Docker ignore rules for WorthIQ production builds
+.git
+.gitignore
+.github
+*.md
+frontend/
+database/backups/
+backend/venv/
+backend/.env
+frontend/.env
+*.pyc
+__pycache__/
+.pytest_cache/
+.coverage
+htmlcov/
+node_modules/
+dist/
+start_worthiq.bat
+start_worthiq.ps1
+test_complete_integration.py
