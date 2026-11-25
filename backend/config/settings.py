@@ -182,6 +182,7 @@ SIMPLE_JWT = {
 }
 
 # CORS Configuration
+CORS_ALLOW_ALL_ORIGINS = True
 cors_origins_raw = os.getenv(
     'CORS_ALLOWED_ORIGINS',
     'http://localhost:5180,http://127.0.0.1:5180'
